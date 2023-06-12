@@ -1,13 +1,24 @@
-import Image from 'next/image'
-import {Inter} from 'next/font/google'
-import DatePicker from '@/components/DatePicker'
-
-const inter = Inter({subsets: ['latin']})
+import Image from "next/image";
+import { Inter } from "next/font/google";
+import UserName from "@/components/UserName";
+import BeginScrape from "@/components/BeginScrape";
+import DatePicker from "@/components/DatePicker";
+import AddKeyword from "@/components/AddKeyword";
 
 export default function Home() {
-    return (
-        <main>
-            <DatePicker/>
-        </main>
-    )
+  return (
+    <main>
+      <div>
+        <div>
+          <UserName/>
+          <BeginScrape/>
+        </div>
+        <div >
+          <AddKeyword/>
+          <DatePicker/>
+        </div>
+        
+      </div>
+    </main>
+  );
 }
