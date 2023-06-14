@@ -13,7 +13,7 @@ export default function Home() {
           <UserName/>
           <BeginScrape/>
         </div>
-        <div >
+        <div>
           <AddKeyword/>
           <DatePicker/>
         </div>
