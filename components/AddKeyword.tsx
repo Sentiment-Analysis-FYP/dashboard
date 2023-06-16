@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactDOM } from "react";
 import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const AddKeyword = () => {
   const [tasks, setTasks] = useState<any[]>([]);
@@ -21,11 +22,11 @@ const AddKeyword = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md m-2">
       <h1>Search keywords</h1>
-      <div>
+      <div className="flex justify-between">
         <input
-          className="bg-slate-200 rounded-md mx-3 mr-0 px-4 py-3"
+          className="w-72 rounded-md mx-3 mr-0 px-4 py-3"
           type="text"
           //   function
           value={task}
@@ -36,8 +37,11 @@ const AddKeyword = () => {
         />
         <button
           onClick={addTasks}
-          className="ml-4 bg-violet-500 p-3 m-3 to-white rounded-md font-bold hover:bg-blue-700"
+          className="w-40 flex gap-1 items-center justify-center bg-violet-500 py-3 to-white rounded-md font-bold hover:bg-blue-700"
         >
+          <span className="">
+            <AiOutlinePlus size={20} />
+          </span>
           Add keyword
         </button>
       </div>
@@ -60,15 +64,18 @@ const AddKeyword = () => {
                   | undefined,
                 index: React.Key | null | undefined
               ) => (
-                <div className="flex flex-1 mx-4 my-2  pr-4 rounded-md" key={index}>
-                  <li className="  bg-slate-100 self-center font-semibold mx-3 px-4  mr-0 py-3 pr-10 rounded-md  ">
+                <div
+                  className="flex gap-2 justify-between my-2 rounded-md"
+                  key={index}
+                >
+                  <li className="  bg-white w-72 font-semibold mx-3 px-4  mr-0 py-3 pr-10 rounded-md  ">
                     {task}
                   </li>
                   <button
                     onClick={() => {
                       deleteTask(index as number);
                     }}
-                    className="bg-violet-500 to-white p-2 mx-1 rounded-md font-bold hover:bg-blue-700"
+                    className="w-40 bg-violet-500 to-white p-2 px-4 rounded-md font-bold hover:bg-blue-700"
                   >
                     Delete
                   </button>
