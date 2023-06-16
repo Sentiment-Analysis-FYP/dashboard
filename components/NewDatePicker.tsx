@@ -7,7 +7,7 @@ const NewDatePicker = () => {
   const [endDate, setEndDate] = useState(new Date());
 
   return (
-    <div className="flex gap-8 px-4">
+    <div className="flex gap-8 px-4 py-4">
       <div className="flex justify-center gap-1">
         From
         <DatePicker

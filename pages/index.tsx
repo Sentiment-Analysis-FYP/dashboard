@@ -16,7 +16,7 @@ export default function Home() {
           <UserName />
           <BeginScrape />
         </div>
-        <div className="flex items-center">
+        <div className="flex">
           <AddKeyword />
           {/* <DatePicker /> */}
           <NewDatePicker />
