@@ -4,53 +4,60 @@ import { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const AddKeyword = () => {
-  const [tasks, setTasks] = useState<any[]>([]);
-  const [task, setTask] = useState("");
-  const addTasks = () => {
-    if (task !== "") {
-      setTasks([...tasks, task]);
-      setTask("");
-      console.log(task);
+  const [keywords, setKeywords] = useState<any[]>([]);
+  const [keyword, setKeyword] = useState("");
+  const addKeywords = () => {
+    if (keyword !== "") {
+      setKeywords([...keywords, keyword]);
+      setKeyword("");
+      console.log(keyword);
     }
   };
 
-  const deleteTask = (index: number) => {
-    const updateList = [...tasks];
+  const deleteKeyword = (index: number) => {
+    const updateList = [...keywords];
     // delete updateList[index];
     updateList.splice(index, 1);
-    setTasks(updateList);
+    setKeywords(updateList);
+  };
+
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      addKeywords();
+    }
   };
 
   return (
     <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md m-2">
-      <h1>Search keywords</h1>
+      <h1 className="my-2 m-4">Search keywords</h1>
       <div className="flex justify-between">
         <input
           className="w-72 rounded-md mx-3 mr-0 px-4 py-3"
           type="text"
           //   function
-          value={task}
+          value={keyword}
           onChange={(e) => {
-            setTask(e.target.value);
+            setKeyword(e.target.value);
           }}
           placeholder="Kwame Nkrumah University"
+          onKeyUp={handleKeyUp}
         />
         <button
-          onClick={addTasks}
+          onClick={addKeywords}
           className="w-40 flex gap-1 items-center justify-center bg-violet-500 py-3 to-white rounded-md font-bold hover:bg-blue-700"
         >
-          <span className="">
+          <span id="EnterButton">
             <AiOutlinePlus size={20} />
           </span>
           Add keyword
         </button>
       </div>
       <div>
-        {tasks?.length > 0 ? (
+        {keywords?.length > 0 ? (
           <ul>
-            {tasks.map(
+            {keywords.map(
               (
-                task:
+                keyword:
                   | string
                   | number
                   | boolean
@@ -69,11 +76,11 @@ const AddKeyword = () => {
                   key={index}
                 >
                   <li className="  bg-white w-72 font-semibold mx-3 px-4  mr-0 py-3 pr-10 rounded-md  ">
-                    {task}
+                    {keyword}
                   </li>
                   <button
                     onClick={() => {
-                      deleteTask(index as number);
+                      deleteKeyword(index as number);
                     }}
                     className="w-40 bg-violet-500 to-white p-2 px-4 rounded-md font-bold hover:bg-blue-700"
                   >
@@ -84,7 +91,7 @@ const AddKeyword = () => {
             )}
           </ul>
         ) : (
-          <div>
+          <div className="my-1 m-5">
             <p>No keyword available</p>
           </div>
         )}
