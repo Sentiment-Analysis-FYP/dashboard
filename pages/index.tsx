@@ -34,7 +34,7 @@ export default function Home() {
       {/* <NewDatePicker /> */}
       {/* </div> */}
       {/* </div> */}
-      <SignIn/>
+      <SignUp/>
       
     </main>
   );

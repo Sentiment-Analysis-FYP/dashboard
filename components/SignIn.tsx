@@ -50,7 +50,7 @@ export const SignIn = () => {
               <input
                 type="text"
                 name="email"
-                className="outline-none"
+                className="outline-none w-full"
                 placeholder="Enter your email address"
               />
             </div>
@@ -64,7 +64,7 @@ export const SignIn = () => {
               <input
                 type="password"
                 name="password"
-                className="outline-none"
+                className="outline-none w-full"
                 placeholder="Enter a strong password"
               />
             </div>
