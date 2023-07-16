@@ -40,7 +40,6 @@ export const SignIn = () => {
         </div>
 
         <div className="flex flex-col gap-3 w-96">
-          
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-sm">
               Email
