@@ -12,7 +12,8 @@ import {BiLock} from "react-icons/bi";
 import {motion} from "framer-motion";
 import {SignUp} from "@/components/SignUp";
 import {SignIn} from "@/components/SignIn";
-import {SideNavigation} from "@/components/SideNavigation";
+import Header from "@/components/Header";
+import {useAuth} from "@/hooks/auth";
 
 const nunito = Nunito({
     weight: ["400"],
@@ -20,6 +21,8 @@ const nunito = Nunito({
 });
 
 export default function Home() {
+    const [email, token] = useAuth()
+
     return (
         <main className={nunito.className}>
             {/* <div className="grid grid-cols-2 gap-1 m-1 p-20 h-screen place-items-center"> */}
@@ -36,7 +39,9 @@ export default function Home() {
             {/* </div> */}
             {/* </div> */}
             {/*<SignUp/>*/}
-            <SideNavigation/>
+            <Header/>
+
+            {email ? (<div></div>) : (<SignIn/>)}
         </main>
     );
 }
