@@ -12,6 +12,7 @@ import {BiLock} from "react-icons/bi";
 import {motion} from "framer-motion";
 import {SignUp} from "@/components/SignUp";
 import {SignIn} from "@/components/SignIn";
+import {SideNavigation} from "@/components/SideNavigation";
 
 const nunito = Nunito({
     weight: ["400"],
@@ -34,8 +35,8 @@ export default function Home() {
             {/* <NewDatePicker /> */}
             {/* </div> */}
             {/* </div> */}
-            <SignUp/>
-
+            {/*<SignUp/>*/}
+            <SideNavigation/>
         </main>
     );
 }

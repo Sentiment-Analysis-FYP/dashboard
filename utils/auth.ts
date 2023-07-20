@@ -1,10 +1,12 @@
+require("dotenv").config()
+
 export const storeUserLogin = (email: string, token: string) => {
     window.sessionStorage.setItem('email', email)
     window.sessionStorage.setItem('token', token)
 }
 export const signIn = async (email: string, password: string) => {
     let status = 400
-    await fetch(`${process.env.BASE_URL}/api/auth/signin`, {
+    await fetch(`${process.env.EXPRESS_BASE_URL}/auth/signin`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
