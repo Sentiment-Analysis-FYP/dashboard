@@ -17,5 +17,5 @@ export default function Home() {
 
             {email ? (<div></div>) : (<SignUp/>)}
         </main>
-    );
+    )
 }
