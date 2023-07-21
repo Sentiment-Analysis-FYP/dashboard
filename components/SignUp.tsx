@@ -14,13 +14,16 @@ import {motion} from "framer-motion";
 
 export const SignUp = () => {
     return (
-        <div className="absolute top-0 left-0 right-0 bottom-0 m-auto w-full">
-            <div className="h-screen w-screen overflow-hidden flex justify-center items-center">
+        <div className="absolute top-0 left-0 right-0 bottom-0 m-auto pattern">
+            <div className='pattern fixed top-0 left-0 right-0 bottom-0 opacity-[10%] bg-black'/>
+            <div
+                className="absolute top-0 left-0 right-0 bottom-0 m-auto overflow-hidden flex justify-center
+                items-center opacity-50">
                 <Image
                     src={"/../public/loginimg.png"}
-                    fill
-                    // width={900}
-                    // height={900}
+                    // fill
+                    width={1200}
+                    height={1200}
                     alt="loginimg"
                     style={{objectFit: "cover"}}
                 />
