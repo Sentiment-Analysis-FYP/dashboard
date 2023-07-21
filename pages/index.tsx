@@ -31,11 +31,3 @@ export default function Home() {
         </main>
     );
 }
-
-// flex items-center justify-center h-screen
-// style={{
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'center',
-//   height: '100vh',
-// }
