@@ -15,12 +15,12 @@ import {motion} from "framer-motion";
 export const SignIn = () => {
     return (
         <div className="flex w-full">
-            <div className="h-screen bg-blue-500 overflow-hidden">
+            <div className="bg-blue-500 overflow-hidden w-1/2 h-full relative">
                 <Image
                     src={"/../public/loginimg.png"}
-                    // fill
-                    width={900}
-                    height={900}
+                    fill
+                    // width={900}
+                    // height={900}
                     alt="loginimg"
                     style={{objectFit: "contain"}}
                 />
