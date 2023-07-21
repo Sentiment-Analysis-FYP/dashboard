@@ -15,18 +15,19 @@ import {motion} from "framer-motion";
 export const SignUp = () => {
     return (
         <div className="absolute top-0 left-0 right-0 bottom-0 m-auto w-full">
-            {/*<div className="h-screen bg-blue-500 overflow-hidden flex justify-center items-center">*/}
-            {/*    <Image*/}
-            {/*        src={"/../public/loginimg.png"}*/}
-            {/*        // fill*/}
-            {/*        width={900}*/}
-            {/*        height={900}*/}
-            {/*        alt="loginimg"*/}
-            {/*        style={{objectFit: "contain"}}*/}
-            {/*    />*/}
-            {/*</div>*/}
-            <div className='w-[500px] h-1/3 absolute top-0 left-0 right-0 bottom-0 m-auto'>
-                <div className="flex flex-col justify-center items-center gap-8 bg-white rounded-md">
+            <div className="h-screen w-screen overflow-hidden flex justify-center items-center">
+                <Image
+                    src={"/../public/loginimg.png"}
+                    fill
+                    // width={900}
+                    // height={900}
+                    alt="loginimg"
+                    style={{objectFit: "cover"}}
+                />
+            </div>
+            <div className='w-[500px] h-[550px] flex justify-center items-center absolute top-0 left-0 right-0 bottom-0
+                            m-auto bg-white rounded-xl'>
+                <div className="flex flex-col justify-center items-center gap-8">
                     <div className="flex flex-col text-sm w-96">
                         <span className="text-gray-900 text-2xl pb-4">Sign Up</span>
                         <span className="text-sm pb-2">If you already have an account</span>
