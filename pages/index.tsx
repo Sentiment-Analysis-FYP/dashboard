@@ -25,23 +25,9 @@ export default function Home() {
 
     return (
         <main className={nunito.className}>
-            {/* <div className="grid grid-cols-2 gap-1 m-1 p-20 h-screen place-items-center"> */}
-            {/* <div className="flex w-full flex-col gap-1 m-1 p-20"> */}
-            {/* <h1>SCRAPER</h1> top container */}
-            {/* <div className="flex items-center"> */}
-            {/* <UserName /> */}
-            {/* <BeginScrape /> */}
-            {/* </div> */}
-            {/* <div className="flex"> */}
-            {/* <AddKeyword /> */}
-            {/* <DatePicker /> */}
-            {/* <NewDatePicker /> */}
-            {/* </div> */}
-            {/* </div> */}
-            {/*<SignUp/>*/}
             <Header/>
 
-            {email ? (<div></div>) : (<SignIn/>)}
+            {email ? (<div></div>) : (<SignUp/>)}
         </main>
     );
 }
