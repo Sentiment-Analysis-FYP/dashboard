@@ -1,4 +1,3 @@
-import {Nunito} from "next/font/google";
 import {SignUp} from "@/components/SignUp";
 import Header from "@/components/Header";
 import {useAuth} from "@/hooks/auth";
