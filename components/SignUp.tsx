@@ -28,7 +28,7 @@ export const SignUp = () => {
                     style={{objectFit: "cover"}}
                 />
             </div>
-            <div className='w-[500px] h-[550px] flex justify-center items-center absolute top-0 left-0 right-0 bottom-0
+            <div className='w-[500px] h-[600px] flex justify-center items-center absolute top-0 left-0 right-0 bottom-0
                             m-auto bg-white rounded-xl'>
                 <div className="flex flex-col justify-center items-center gap-8">
                     <div className="flex flex-col text-sm w-96">
@@ -46,22 +46,37 @@ export const SignUp = () => {
                     </div>
 
                     <div className="flex flex-col gap-3 w-96">
-                        <div className="flex flex-col gap-1">
-                            <label htmlFor="name" className="text-sm">
-                                Name
-                            </label>
-                            <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
-                                <CgRename size={14}/>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    className="outline-none w-full"
-                                    placeholder="Enter your full name..."
-                                />
-                            </div>
-                        </div>
-
                         <div className="flex flex-col gap-3 w-96">
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="firstName" className="text-sm">
+                                    First Name
+                                </label>
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                    <CgRename size={14}/>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        className="outline-none w-full"
+                                        placeholder="Enter your first name..."
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-1">
+                                <label htmlFor="lastName" className="text-sm">
+                                    Last Name
+                                </label>
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                    <CgRename size={14}/>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        className="outline-none w-full"
+                                        placeholder="Enter your first name..."
+                                    />
+                                </div>
+                            </div>
+
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="name" className="text-sm">
                                     Email
@@ -76,6 +91,7 @@ export const SignUp = () => {
                                     />
                                 </div>
                             </div>
+
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="password" className="text-sm">
                                     Password
@@ -90,6 +106,7 @@ export const SignUp = () => {
                                     />
                                 </div>
                             </div>
+
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="password" className="text-sm">
                                     Password
@@ -104,6 +121,7 @@ export const SignUp = () => {
                                     />
                                 </div>
                             </div>
+
                             {" "}
                             <div className="flex justify-between text-xs w-96">
                                 <div className="flex gap-1">
