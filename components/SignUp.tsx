@@ -194,7 +194,6 @@ export const SignUp = () => {
                         onClick={handleSignUp}>
                         Register
                     </motion.button>
-
                 </div>
             </div>
         </div>
