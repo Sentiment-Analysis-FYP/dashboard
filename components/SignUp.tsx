@@ -18,7 +18,7 @@ export const SignUp = () => {
             <div className='pattern fixed top-0 left-0 right-0 bottom-0 opacity-[10%] bg-black'/>
             <div
                 className="absolute top-0 left-0 right-0 bottom-0 m-auto overflow-hidden flex justify-center
-                items-center opacity-50">
+                items-center opacity-100">
                 <Image
                     src={"/../public/loginimg.png"}
                     // fill

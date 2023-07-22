@@ -29,3 +29,31 @@ export const signIn = async (email: string, password: string) => {
     })
     return status
 }
+
+export const signUp = async (firstName: string, lastName: string, email: string, password: string) => {
+    let status = 400
+    await fetch(`${process.env.EXPRESS_BASE_URL}/auth/register`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        mode: 'cors',
+        body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
+        })
+    }).then(response => {
+        status = response.status
+        console.log(status)
+        return response.json()
+    }).then(data => {
+        console.log(data)
+        storeUserLogin(email, data.accessToken)
+    }).catch(err => {
+        console.log(err)
+    })
+    return status
+}
