@@ -1,6 +1,6 @@
 require("dotenv").config()
 
-const EXPRESS_BASE_URL = process.env.EXPRESS_BASE_URL
+const EXPRESS_BASE_URL = process.env.NEXT_PUBLIC_EXPRESS_BASE_URL
 export const storeUserLogin = (email: string, token: string) => {
     window.sessionStorage.setItem('email', email)
     window.sessionStorage.setItem('token', token)

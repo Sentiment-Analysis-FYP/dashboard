@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     env: {
-        EXPRESS_BASE_URL: process.env.EXPRESS_BASE_URL
+        NEXT_PUBLIC_EXPRESS_BASE_URL: process.env.NEXT_PUBLIC_EXPRESS_BASE_URL
     }
 }
 

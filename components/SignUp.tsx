@@ -47,7 +47,7 @@ export const SignUp = () => {
     }
     useEffect(() => {
         if (loginStatus == 201) {
-            router.push('/home')
+            router.push('/')
             return
         }
     }, [loginStatus]);

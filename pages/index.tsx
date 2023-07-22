@@ -5,10 +5,18 @@ import {useAuth} from "@/hooks/auth";
 export default function Home() {
     const [email, token] = useAuth()
 
+    const HomePage = () => {
+        return (
+            <div>
+                Home Page
+            </div>
+        )
+    }
+
     return (
         <main>
             <Header/>
-            {email ? (<div></div>) : (<SignUp/>)}
+            {email ? (<HomePage/>) : (<SignUp/>)}
         </main>
     )
 }

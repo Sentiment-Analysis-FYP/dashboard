@@ -31,12 +31,12 @@ export const SignIn = () => {
                     <span className="text-gray-900 text-2xl pb-4">Sign In</span>
                     <span className="text-sm pb-2">If you don&apos;t have an account</span>
                     <span className="">
-            You can
-            <Link href={"/register"} className="text-indigo-600 font-semibold">
-              {" "}
-                Register here.
-            </Link>
-          </span>
+                        You can
+                        <Link href={"/register"} className="text-indigo-600 font-semibold">
+                          {" "}
+                            Register here.
+                        </Link>
+                      </span>
                 </div>
 
                 <div className="flex flex-col gap-3 w-96">
