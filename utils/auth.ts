@@ -1,12 +1,13 @@
 require("dotenv").config()
 
+const EXPRESS_BASE_URL = process.env.EXPRESS_BASE_URL
 export const storeUserLogin = (email: string, token: string) => {
     window.sessionStorage.setItem('email', email)
     window.sessionStorage.setItem('token', token)
 }
 export const signIn = async (email: string, password: string) => {
     let status = 400
-    await fetch(`${process.env.EXPRESS_BASE_URL}/auth/signin`, {
+    await fetch(`${EXPRESS_BASE_URL}/auth/signin`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -32,7 +33,8 @@ export const signIn = async (email: string, password: string) => {
 
 export const signUp = async (firstName: string, lastName: string, email: string, password: string) => {
     let status = 400
-    await fetch(`${process.env.EXPRESS_BASE_URL}/auth/register`, {
+    console.log(EXPRESS_BASE_URL)
+    await fetch(`${EXPRESS_BASE_URL}/auth/register`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -46,6 +48,7 @@ export const signUp = async (firstName: string, lastName: string, email: string,
             password: password
         })
     }).then(response => {
+        console.log(response)
         status = response.status
         console.log(status)
         return response.json()

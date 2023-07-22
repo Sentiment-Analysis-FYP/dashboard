@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import Image from "next/image";
 import Link from "next/link";
 import {CgRename} from "react-icons/cg";
@@ -6,17 +6,52 @@ import {AiOutlineMail} from "react-icons/ai";
 import {BiLock} from "react-icons/bi";
 import {motion} from "framer-motion";
 import {signUp} from "@/utils/auth";
+import {useRouter} from "next/router";
+
+require('dotenv').config()
 
 export const SignUp = () => {
     const [loginStatus, setLoginStatus] = useState(0)
     const signUpRef = useRef(null)
+    const router = useRouter()
 
     const handleSignUp = async () => {
         if (!signUpRef.current) return
 
         const firstName: string = signUpRef.current['firstName']['value']
-        console.log(firstName)
+        const lastName: string = signUpRef.current['lastName']['value']
+        const email: string = signUpRef.current['email']['value']
+        const password: string = signUpRef.current['password']['value']
+        const confirmPassword: string = signUpRef.current['cpassword']['value']
+
+        // console.log(password)
+
+        if (firstName.length < 1 || lastName.length < 1 || email.length < 1) {
+            alert("Please fill all fields.")
+            return
+        }
+
+        if (password != confirmPassword) {
+            alert("Passwords do not match.")
+            return
+        }
+
+        if (password.length < 8) {
+            alert('Password should be at least 8 characters')
+            return
+        }
+
+        const status = await signUp(firstName, lastName, email, password)
+        console.log(status)
+        setLoginStatus(status)
     }
+    useEffect(() => {
+        if (loginStatus == 201) {
+            router.push('/home')
+            return
+        }
+    }, [loginStatus]);
+
 
     return (
         <div className="absolute top-0 left-0 right-0 bottom-0 m-auto pattern">
@@ -50,7 +85,7 @@ export const SignUp = () => {
                         </span>
                     </div>
 
-                    <form onSubmit={handleSignUp} className="flex flex-col gap-3 w-96">
+                    <form ref={signUpRef} onSubmit={handleSignUp} className="flex flex-col gap-3 w-96">
                         <div className="flex flex-col gap-4 w-96">
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="firstName" className="text-sm">
@@ -150,7 +185,6 @@ export const SignUp = () => {
                     </form>
 
                     <motion.button
-                        type='submit'
                         value='Register'
                         className="bg-indigo-500 h-12 w-96 flex justify-center items-center rounded-full text-white
                         cursor-pointer"
