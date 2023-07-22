@@ -1,18 +1,23 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import Image from "next/image";
-import {Nunito} from "next/font/google";
-import UserName from "@/components/UserName";
-import BeginScrape from "@/components/BeginScrape";
-import DatePicker from "@/components/DatePicker";
-import AddKeyword from "@/components/AddKeyword";
-import NewDatePicker from "@/components/NewDatePicker";
 import Link from "next/link";
 import {CgRename} from "react-icons/cg";
 import {AiOutlineMail} from "react-icons/ai";
 import {BiLock} from "react-icons/bi";
 import {motion} from "framer-motion";
+import {signUp} from "@/utils/auth";
 
 export const SignUp = () => {
+    const [loginStatus, setLoginStatus] = useState(0)
+    const signUpRef = useRef(null)
+
+    const handleSignUp = async () => {
+        if (!signUpRef.current) return
+
+        const firstName: string = signUpRef.current['firstName']['value']
+        console.log(firstName)
+    }
+
     return (
         <div className="absolute top-0 left-0 right-0 bottom-0 m-auto pattern">
             <div className='pattern fixed top-0 left-0 right-0 bottom-0 opacity-[10%] bg-black'/>
@@ -45,19 +50,21 @@ export const SignUp = () => {
                         </span>
                     </div>
 
-                    <div className="flex flex-col gap-3 w-96">
-                        <div className="flex flex-col gap-3 w-96">
+                    <form onSubmit={handleSignUp} className="flex flex-col gap-3 w-96">
+                        <div className="flex flex-col gap-4 w-96">
                             <div className="flex flex-col gap-1">
                                 <label htmlFor="firstName" className="text-sm">
                                     First Name
                                 </label>
-                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center
+                                focus-within:border-b-[2px] transition duration-300">
                                     <CgRename size={14}/>
                                     <input
                                         type="text"
                                         name="firstName"
                                         className="outline-none w-full"
                                         placeholder="Enter your first name..."
+                                        required={true}
                                     />
                                 </div>
                             </div>
@@ -66,13 +73,15 @@ export const SignUp = () => {
                                 <label htmlFor="lastName" className="text-sm">
                                     Last Name
                                 </label>
-                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center
+                                focus-within:border-b-[2px] transition duration-300">
                                     <CgRename size={14}/>
                                     <input
                                         type="text"
                                         name="lastName"
                                         className="outline-none w-full"
-                                        placeholder="Enter your first name..."
+                                        placeholder="Enter your last name..."
+                                        required={true}
                                     />
                                 </div>
                             </div>
@@ -81,13 +90,15 @@ export const SignUp = () => {
                                 <label htmlFor="name" className="text-sm">
                                     Email
                                 </label>
-                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center
+                                focus-within:border-b-[2px] transition duration-300">
                                     <AiOutlineMail size={14}/>
                                     <input
                                         type="text"
                                         name="email"
                                         className="outline-none w-full"
                                         placeholder="Enter your email address..."
+                                        required={true}
                                     />
                                 </div>
                             </div>
@@ -96,28 +107,34 @@ export const SignUp = () => {
                                 <label htmlFor="password" className="text-sm">
                                     Password
                                 </label>
-                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center
+                                focus-within:border-b-[2px] transition duration-300">
                                     <BiLock size={14}/>
                                     <input
                                         type="password"
                                         name="password"
                                         className="outline-none w-full"
                                         placeholder="Enter your password..."
+                                        minLength={8}
+                                        required={true}
                                     />
                                 </div>
                             </div>
 
                             <div className="flex flex-col gap-1">
-                                <label htmlFor="password" className="text-sm">
-                                    Password
+                                <label htmlFor="cpassword" className="text-sm">
+                                    Confirm Password
                                 </label>
-                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center">
+                                <div className="border-b-[1px] border-indigo-600 flex gap-2 items-center
+                                focus-within:border-b-[2px] transition duration-300">
                                     <BiLock size={14}/>
                                     <input
                                         type="password"
-                                        name="password"
+                                        name="cpassword"
                                         className="outline-none w-full"
-                                        placeholder="Comfirm your password..."
+                                        placeholder="Confirm your password..."
+                                        minLength={8}
+                                        required={true}
                                     />
                                 </div>
                             </div>
@@ -130,15 +147,20 @@ export const SignUp = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
 
                     <motion.button
-                        className="bg-indigo-500 h-12 w-96 flex justify-center items-center rounded-full text-white"
+                        type='submit'
+                        value='Register'
+                        className="bg-indigo-500 h-12 w-96 flex justify-center items-center rounded-full text-white
+                        cursor-pointer"
                         whileTap={{
                             scale: 0.95
-                        }}>
+                        }}
+                        onClick={handleSignUp}>
                         Register
                     </motion.button>
+
                 </div>
             </div>
         </div>
