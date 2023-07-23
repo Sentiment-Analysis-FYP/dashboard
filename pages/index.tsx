@@ -7,7 +7,7 @@ export default function Home() {
 
     const HomePage = () => {
         return (
-            <div className='mt-32'>
+            <div className='mt-24'>
                 Home Page
             </div>
         )
