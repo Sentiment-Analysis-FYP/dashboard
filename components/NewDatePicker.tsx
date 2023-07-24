@@ -18,9 +18,9 @@ const NewDatePicker = (props: NewDatePickerProps) => {
 
 
     return (
-        <div className="flex gap-8 px-4 pt-4">
+        <div className="absolute flex gap-8 px-4 pt-4 ml-[550px] mt-14">
             <div className="flex justify-center">
-                From
+                From&nbsp;
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date!)}
@@ -29,7 +29,7 @@ const NewDatePicker = (props: NewDatePickerProps) => {
             </div>
 
             <div className="flex justify-center">
-                Until
+                Until&nbsp;
                 <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date!)}

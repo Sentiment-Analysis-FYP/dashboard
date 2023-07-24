@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {ReactDOM} from "react";
 import {useState} from "react";
 import {AiOutlinePlus} from "react-icons/ai";
+import {BiLock} from "react-icons/bi";
 
 interface AddKeywordsProps {
     setKeywordsState: React.Dispatch<React.SetStateAction<string[]>>
@@ -39,11 +40,11 @@ const AddKeyword = (props: AddKeywordsProps) => {
 
 
     return (
-        <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md m-2">
-            <h1 className="my-2">Search keywords</h1>
+        <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md m-2 h-[450px]">
+            <span className="m-2">Search keywords</span>
             <div className="flex justify-between">
                 <input
-                    className="w-72 rounded-md mx-3 mr-0 px-4 py-3"
+                    className="w-72 rounded-md mx-2 mr-0 px-4 py-3 border-[1px] border-gray-300"
                     type="text"
                     //   function
                     value={keyword}
@@ -55,9 +56,9 @@ const AddKeyword = (props: AddKeywordsProps) => {
                 />
                 <button
                     onClick={addKeywords}
-                    className="w-40 flex gap-1 items-center justify-center bg-violet-500 py-3 to-white rounded-md
-                            font-bold hover:bg-blue-700">
-                      <span id="EnterButton">
+                    className="w-40 flex gap-2 items-center justify-center bg-violet-500 py-3 to-white rounded-md
+                            font-bold hover:bg-violet-700 text-gray-50 transition duration-500">
+                      <span>
                         <AiOutlinePlus size={20}/>
                       </span>
                     Add keyword
@@ -72,14 +73,16 @@ const AddKeyword = (props: AddKeywordsProps) => {
                                 <div
                                     className="flex gap-2 justify-between my-2 rounded-md"
                                     key={index}>
-                                    <li className="  bg-white w-72 font-semibold mx-3 px-4  mr-0 py-3 pr-10 rounded-md  ">
+                                    <li className="bg-white w-72 mx-2 px-4 mr-0 py-3 pr-10 rounded-md  ">
                                         {keyword}
                                     </li>
                                     <button
                                         onClick={() => {
                                             deleteKeyword(index as number)
                                         }}
-                                        className="w-40 bg-violet-500 to-white p-2 px-4 rounded-md font-bold hover:bg-blue-700">
+                                        className="w-40 text-gray-50 bg-violet-500 to-white p-2 px-4 rounded-md
+                                         font-bold hover:bg-violet-700 flex gap-3 items-center justify-center">
+                                        <BiLock size={20}/>
                                         Delete
                                     </button>
                                 </div>
@@ -87,7 +90,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
                         )}
                     </ul>
                 ) : (
-                    <div className="my-1 m-5">
+                    <div className="mx-2 my-5">
                         <p>No keyword provided</p>
                     </div>
                 )}
