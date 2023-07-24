@@ -19,14 +19,20 @@ export const requestScrape =
         return response.status
     }
 
-interface ScrapeData {
+export interface AnalyzedData {
     scrapeId: string,
-    data: ScrapeDataItem[]
+    data: AnalyzedDataItem[]
 }
 
-interface ScrapeDataItem {
+export interface AnalyzedDataItem {
     id: string,
     created_at: Date,
     text: string,
     username: string,
+    v_sentiment_neg: number,
+    v_sentiment_pos: number,
+    v_sentiment_polarity: number,
+    t_sentiment_polarity: number,
+    t_sentiment_subjectivity: number,
+    lr_sentiment: number
 }

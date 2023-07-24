@@ -1,11 +1,15 @@
 import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
+import {AnalyzedData} from "@/utils/scraper";
 
 interface AnalysisProps {
-    data: ScrapeData,
+    data: AnalyzedData,
 }
-const Analysis = () => {
+
+const Analysis = (props: AnalysisProps) => {
+
+
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
             <div className='absolute top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
