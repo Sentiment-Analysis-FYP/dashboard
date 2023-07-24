@@ -7,7 +7,7 @@ export default function AnalysisPage() {
         <div>
             <Header/>
             <main className='mt-24'>
-                <Analysis data={undefined}/>
+                <Analysis data={dummyData}/>
             </main>
         </div>
     )

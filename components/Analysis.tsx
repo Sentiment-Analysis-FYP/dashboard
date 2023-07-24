@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData} from "@/utils/scraper";
+import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -14,6 +14,15 @@ const NoAnalyzedData = () => {
             <span>Visit the <Link href='/scraper' className='text-violet-600'>Scraper </Link>
                 to gather fresh data</span>
             <span>or upload your own</span>
+        </div>
+    )
+}
+
+const DataTable = (props: AnalysisProps) => {
+    const {data} = props
+    return (
+        <div>
+            Table
         </div>
     )
 }
@@ -36,8 +45,8 @@ const Analysis = (props: AnalysisProps) => {
                     </div>
 
                     {data ?
-                        (<div>
-                            We got data
+                        (<div className='w-full h-full flex justify-center items-center'>
+                            <DataTable data={data}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
