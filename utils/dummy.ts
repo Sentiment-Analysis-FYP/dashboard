@@ -6,7 +6,7 @@ const randomFloatInRange = (min: number, max: number) =>
 const randomZeroOrOne = () => Math.round(Math.random());
 
 const randomDate = () =>
-    new Date(new Date().getTime() - Math.random() * 10000000000);
+    new Date(new Date().getTime() - Math.random() * 10000000000).toISOString().split('T')[0];
 
 const randomText = (length: number) => {
     const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -50,7 +50,7 @@ function generate500Items(): AnalyzedDataItem[] {
     return items;
 }
 
- const dataItems: AnalyzedDataItem[] = generate500Items();
+const dataItems: AnalyzedDataItem[] = generate500Items();
 
 export const dummyData: AnalyzedData = {
     scrapeId: randomId(),

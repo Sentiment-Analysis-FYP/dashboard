@@ -3,7 +3,8 @@ import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
 import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import {DataGrid, GridCellParams, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import clsx from "clsx";
 
 
 interface AnalysisProps {
@@ -26,22 +27,32 @@ const DataTable = (props: AnalysisProps) => {
     const rows = data!.data
 
     const columns: GridColDef[] = [
-        {field: 'id', headerName: 'ID', width: 90},
-        {field: 'username', headerName: 'Username', width: 150},
-        {field: 'text', headerName: 'Text', width: 300},
+        {field: 'id', headerName: 'ID', flex: 0.6},
+        {field: 'username', headerName: 'Username', flex: 0.7},
+        {field: 'text', headerName: 'Text', flex: 1},
         {
             field: 'Sentiment Score',
+            description: 'From -1 (negative) to 1 (positive)',
             headerName: 'Sentiment Score',
-            width: 150,
-            align: 'center',
+            flex: 0.7,
             valueGetter: (params: GridValueGetterParams) =>
                 `${getSentimentScore(params.row)}`,
+            cellClassName: (params: GridCellParams<any, number>) => {
+                if (params.value == null) {
+                    return '';
+                }
+
+                return clsx('super-app', {
+                    negative: params.value < 0,
+                    positive: params.value > 0,
+                });
+            },
         },
         {
             field: 'created_at',
             headerName: 'Date Sent',
-            description: 'This column indicates when the text was created',
-            width: 160,
+            description: 'YYYY-MM-DD',
+            flex: 0.5,
         },
     ];
 
@@ -57,6 +68,24 @@ const DataTable = (props: AnalysisProps) => {
                 }}
                 pageSizeOptions={[5, 10, 20, 40, 100]}
                 checkboxSelection
+                sx={{
+                    '& .super-app-theme--cell': {
+                        backgroundColor: 'rgba(224, 183, 60, 0.55)',
+                        color: '#1a3e72',
+                        fontWeight: '600',
+                    },
+                    '& .super-app.positive': {
+                        // backgroundColor: 'rgba(157, 255, 118, 0.49)',
+                        color: '#38761D',
+                        fontWeight: '600',
+                    },
+                    '& .super-app.negative': {
+                        // backgroundColor: '#d47483',
+                        color: '#ff0088',
+                        fontWeight: '600',
+                    },
+                    border: 0
+                }}
             />
         </div>
     )
@@ -72,7 +101,7 @@ const Analysis = (props: AnalysisProps) => {
                     <div className='flex flex-row-reverse'>
                         <Link href='/scraper'>
                             <div className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
-                                    w-48 text-gray-50 h-10 rounded-lg transition duration-500'>
+                                    w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'>
                                 <AiOutlinePlus size={20}/>
                                 <span>New Search</span>
                             </div>
