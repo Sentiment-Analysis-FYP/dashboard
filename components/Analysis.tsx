@@ -26,62 +26,36 @@ const DataTable = (props: AnalysisProps) => {
     const rows = data!.data
 
     const columns: GridColDef[] = [
-        {field: 'id', headerName: 'ID', width: 70},
-        {field: 'username', headerName: 'Username', width: 130},
-        {field: 'text', headerName: 'Text', width: 130},
+        {field: 'id', headerName: 'ID', width: 90},
+        {field: 'username', headerName: 'Username', width: 150},
+        {field: 'text', headerName: 'Text', width: 300},
         {
-            field: 'age',
+            field: 'Sentiment Score',
             headerName: 'Sentiment Score',
-            width: 90,
+            width: 150,
+            align: 'center',
             valueGetter: (params: GridValueGetterParams) =>
                 `${getSentimentScore(params.row)}`,
         },
         {
             field: 'created_at',
             headerName: 'Date Sent',
-            // description: 'This column has a value getter and is not sortable.',
-            // sortable: false,
+            description: 'This column indicates when the text was created',
             width: 160,
         },
     ];
 
     return (
-        <div className='flex justify-center'>
-            {/*<TableContainer component={Paper}>*/}
-            {/*    <Table>*/}
-            {/*        <TableHead>*/}
-            {/*            <TableRow className='text-violet-600 uppercase'>*/}
-            {/*                <TableCell>id</TableCell>*/}
-            {/*                <TableCell align='center'>username</TableCell>*/}
-            {/*                <TableCell align='center'>text</TableCell>*/}
-            {/*                <TableCell align='center'>sentiment score</TableCell>*/}
-            {/*                <TableCell align='center'>date created</TableCell>*/}
-            {/*            </TableRow>*/}
-            {/*        </TableHead>*/}
-
-            {/*        <TableBody>*/}
-            {/*            {rows.map((row) => (*/}
-            {/*                <TableRow key={row.id}>*/}
-            {/*                    <TableCell component="th" scope="row">{row.id}</TableCell>*/}
-            {/*                    <TableCell align="right">{row.username}</TableCell>*/}
-            {/*                    <TableCell align="right">{row.text}</TableCell>*/}
-            {/*                    <TableCell align="right">{getSentimentScore(row)}</TableCell>*/}
-            {/*                    <TableCell align="right">{row.created_at.toDateString()}</TableCell>*/}
-            {/*                </TableRow>*/}
-            {/*            ))}*/}
-            {/*        </TableBody>*/}
-            {/*    </Table>*/}
-            {/*</TableContainer>*/}
-
+        <div className='flex justify-center h-full w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
                 initialState={{
                     pagination: {
-                        paginationModel: {page: 0, pageSize: 5},
+                        paginationModel: {page: 0, pageSize: 10},
                     },
                 }}
-                pageSizeOptions={[5, 10]}
+                pageSizeOptions={[5, 10, 20, 40, 100]}
                 checkboxSelection
             />
         </div>
@@ -94,7 +68,7 @@ const Analysis = (props: AnalysisProps) => {
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
             <div className='absolute top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
-                <div className='w-full bg-white h-[400px] shadow-2xl rounded-lg p-6'>
+                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
                     <div className='flex flex-row-reverse'>
                         <Link href='/scraper'>
                             <div className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
