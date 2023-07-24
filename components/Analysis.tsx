@@ -1,8 +1,10 @@
 import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
+import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -23,25 +25,65 @@ const DataTable = (props: AnalysisProps) => {
     const {data} = props
     const rows = data!.data
 
+    const columns: GridColDef[] = [
+        {field: 'id', headerName: 'ID', width: 70},
+        {field: 'username', headerName: 'Username', width: 130},
+        {field: 'text', headerName: 'Text', width: 130},
+        {
+            field: 'age',
+            headerName: 'Sentiment Score',
+            width: 90,
+            valueGetter: (params: GridValueGetterParams) =>
+                `${getSentimentScore(params.row)}`,
+        },
+        {
+            field: 'created_at',
+            headerName: 'Date Sent',
+            // description: 'This column has a value getter and is not sortable.',
+            // sortable: false,
+            width: 160,
+        },
+    ];
+
     return (
         <div className='flex justify-center'>
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow className='text-violet-600 uppercase'>
-                            <TableCell>id</TableCell>
-                            <TableCell align='center'>username</TableCell>
-                            <TableCell align='center'>text</TableCell>
-                            <TableCell align='center'>sentiment score</TableCell>
-                            <TableCell align='center'>date created</TableCell>
-                        </TableRow>
-                    </TableHead>
+            {/*<TableContainer component={Paper}>*/}
+            {/*    <Table>*/}
+            {/*        <TableHead>*/}
+            {/*            <TableRow className='text-violet-600 uppercase'>*/}
+            {/*                <TableCell>id</TableCell>*/}
+            {/*                <TableCell align='center'>username</TableCell>*/}
+            {/*                <TableCell align='center'>text</TableCell>*/}
+            {/*                <TableCell align='center'>sentiment score</TableCell>*/}
+            {/*                <TableCell align='center'>date created</TableCell>*/}
+            {/*            </TableRow>*/}
+            {/*        </TableHead>*/}
 
-                    <TableBody>
+            {/*        <TableBody>*/}
+            {/*            {rows.map((row) => (*/}
+            {/*                <TableRow key={row.id}>*/}
+            {/*                    <TableCell component="th" scope="row">{row.id}</TableCell>*/}
+            {/*                    <TableCell align="right">{row.username}</TableCell>*/}
+            {/*                    <TableCell align="right">{row.text}</TableCell>*/}
+            {/*                    <TableCell align="right">{getSentimentScore(row)}</TableCell>*/}
+            {/*                    <TableCell align="right">{row.created_at.toDateString()}</TableCell>*/}
+            {/*                </TableRow>*/}
+            {/*            ))}*/}
+            {/*        </TableBody>*/}
+            {/*    </Table>*/}
+            {/*</TableContainer>*/}
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                initialState={{
+                    pagination: {
+                        paginationModel: {page: 0, pageSize: 5},
+                    },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+            />
         </div>
     )
 }

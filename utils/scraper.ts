@@ -36,3 +36,11 @@ export interface AnalyzedDataItem {
     t_sentiment_subjectivity: number,
     lr_sentiment: number
 }
+
+export const getSentimentScore = (dataItem: AnalyzedDataItem): string => {
+    return (dataItem.t_sentiment_polarity + dataItem.v_sentiment_polarity).toFixed(2)
+}
+
+export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
+    return dataItem.lr_sentiment == 0 ? "Negative" : "Positive"
+}
