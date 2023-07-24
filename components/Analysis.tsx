@@ -2,6 +2,7 @@ import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
 import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -20,9 +21,27 @@ const NoAnalyzedData = () => {
 
 const DataTable = (props: AnalysisProps) => {
     const {data} = props
+    const rows = data!.data
+
     return (
-        <div>
-            Table
+        <div className='flex justify-center'>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow className='text-violet-600 uppercase'>
+                            <TableCell>id</TableCell>
+                            <TableCell align='center'>username</TableCell>
+                            <TableCell align='center'>text</TableCell>
+                            <TableCell align='center'>sentiment score</TableCell>
+                            <TableCell align='center'>date created</TableCell>
+                        </TableRow>
+                    </TableHead>
+
+                    <TableBody>
+
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }
