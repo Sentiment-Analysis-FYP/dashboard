@@ -18,3 +18,15 @@ export const requestScrape =
         console.log(response)
         return response.status
     }
+
+interface ScrapeData {
+    scrapeId: string,
+    data: ScrapeDataItem[]
+}
+
+interface ScrapeDataItem {
+    id: string,
+    created_at: Date,
+    text: string,
+    username: string,
+}
