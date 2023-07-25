@@ -1,6 +1,3 @@
-import {useEffect, useLayoutEffect} from "react";
-import WordCloud from "wordcloud";
-import {number} from "prop-types";
 import {AnalyzedDataItem} from "@/utils/scraper";
 import {TagCloud} from "react-tagcloud";
 import {generateWordCloudItemList} from "@/utils/visualizations";
@@ -24,9 +21,7 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
 
 
     return (
-        <div className='w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-red-700 overflow-clip '>
-            word cloud
-            {/*<canvas id='custom-wordcloud' width='100%' height='100%'/>*/}
+        <div className='w-[400px] md:w-[600px] h-[400px] md:h-[600px] overflow-clip '>
             <TagCloud minSize={12}
                       maxSize={35}
                       tags={wordList}

@@ -18,10 +18,12 @@ const Visualizations = (props: VisualizationsProps) => {
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6 flex justify-center items-center'>
                     <div className='sm:flex sm:flex-col grid grid-cols-2 gap-5 justify-center items-center'>
                         <div className='flex justify-center items-center gap-14'>
-                            <div>
+                            <div className='flex flex-col justify-center items-center'>
+                                <span className='text-2xl font-semibold'>Negative Word Cloud</span>
                                 <CustomWordCloud sentimentList={getSentimentList(data, NEGATIVE)}/>
                             </div>
-                            <div>
+                            <div className='flex flex-col justify-center items-center'>
+                                <span className='text-2xl font-semibold'>Positive Word Cloud</span>
                                 <CustomWordCloud sentimentList={getSentimentList(data, POSITIVE)}/>
                             </div>
                         </div>
