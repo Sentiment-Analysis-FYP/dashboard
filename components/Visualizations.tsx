@@ -54,17 +54,17 @@ const Visualizations = (props: VisualizationsProps) => {
                                 <span className='text-2xl font-semibold'>Variable Bar Chart</span>
                                 <div className="flex justify-between items-center w-80 pt-5 text-gray-800">
                                     <div className='flex gap-2'>
-                                        <input type='radio' value='Day' checked={groupByRadios[0]}
+                                        <input type='radio' value='day' checked={groupByRadios[0]}
                                                onChange={() => setGroupBy('day')}/>
                                         Day
                                     </div>
                                     <div className='flex gap-2'>
-                                        <input type='radio' value='Month' checked={groupByRadios[1]}
+                                        <input type='radio' value='month' checked={groupByRadios[1]}
                                                onChange={() => setGroupBy('month')}/>
                                         Month
                                     </div>
                                     <div className='flex gap-2'>
-                                        <input type='radio' value='Year' checked={groupByRadios[2]}
+                                        <input type='radio' value='year' checked={groupByRadios[2]}
                                                onChange={() => setGroupBy('year')}/>
                                         Year
                                     </div>
