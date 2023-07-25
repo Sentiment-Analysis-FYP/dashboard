@@ -18,9 +18,9 @@ const Visualizations = (props: VisualizationsProps) => {
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
-            <div className=' top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
+            <div className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-4 flex justify-center items-center'>
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6 flex justify-center items-center'>
-                    <div className='sm:flex sm:flex-col grid grid-cols-2 gap-5 justify-center items-center'>
+                    <div className='flex flex-col gap-5 justify-center items-center'>
                         <div className='flex justify-center items-center gap-14'>
                             <div className='flex flex-col justify-center items-center'>
                                 <span className='text-2xl font-semibold'>Negative Word Cloud</span>
@@ -31,11 +31,11 @@ const Visualizations = (props: VisualizationsProps) => {
                                 <CustomWordCloud sentimentList={getSentimentList(data, POSITIVE)}/>
                             </div>
                         </div>
-                        <div className='flex justify-center items-center gap-14'>
-                            <div className='w-full flex flex-col'>
+                        <div className='flex justify-center items-center gap-14 w-full'>
+                            <div className='flex flex-col justify-center items-center'>
+                                <span className='text-2xl font-semibold'>Variable Bar Chart</span>
                                 <CustomBarChart data={data} groupBy={groupBy}/>
                             </div>
-                            <div>word cloud (neg and pos)</div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
                             <div>scatter plot</div>

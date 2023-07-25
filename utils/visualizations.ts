@@ -145,14 +145,14 @@ export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: st
         if (groupedData[dateGroup]) {
             // Group already exists, update counts
             groupedData[dateGroup].count++
-            item.score < 0 ? groupedData[dateGroup].negativeCount++ : groupedData[dateGroup].positiveCount++
+            item.score < 0 ? groupedData[dateGroup].negativeCount-- : groupedData[dateGroup].positiveCount++
         } else {
             // Create a new group
             groupedData[dateGroup] = {
                 count: 1,
                 date: dateGroup,
-                positiveCount: item.v_sentiment_pos,
-                negativeCount: item.v_sentiment_neg,
+                negativeCount: item.score < 0 ? -1 : 0,
+                positiveCount: item.score < 0 ? 0 : 1
             };
         }
     })
