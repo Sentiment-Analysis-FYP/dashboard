@@ -88,3 +88,7 @@ function tokenizeThenStem(inputText: string) {
 function lemmatizerOnText(data: string[]): string[] {
     return data.map(word => lemmatizer(word));
 }
+
+export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudItem[] => {
+
+}
