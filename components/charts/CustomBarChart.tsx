@@ -26,7 +26,7 @@ const CustomBarChart = (props: CustomBarChartProps) => {
     return (
         <div className='w-full h-[600px] flex justify-center items-center py-10'>
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} barCategoryGap={10} barGap={0} margin={{
+                <BarChart data={chartData} barCategoryGap={2} barGap={0} margin={{
                     top: 5,
                     right: 20,
                     left: 20,

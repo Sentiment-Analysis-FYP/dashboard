@@ -1,6 +1,6 @@
 const CustomLineChart = () => {
     return (
-        <div className=''>
+        <div className='w-full h-[600px] flex justify-center items-center py-10'>
             line chart
         </div>
     )

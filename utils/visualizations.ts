@@ -158,4 +158,5 @@ export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: st
     })
 
     return Object.values(groupedData)
+        .sort((a, b) => a.date.localeCompare(b.date));
 }
