@@ -1,6 +1,6 @@
 import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
-import {number} from "prop-types";
-import {RegexpTokenizer} from "natural";
+import {PorterStemmer} from "natural";
+import lemmatizer from "lemmatizer";
 
 interface WordCloudItem {
     word: string,
@@ -43,7 +43,7 @@ const stopwords = ['a', 'about', 'above', 'after', 'again', 'ain', 'all', 'am', 
     'why', 'will', 'with', 'won', 'y', 'you', "youd", "youll", "youre",
     "youve", 'your', 'yours', 'yourself', 'yourselves']
 
-function cleaning_stopwords(text: string): string {
+function cleaning_stopwords(text: string) {
     const STOPWORDS: Set<string> = new Set(stopwords);
     return text
         .split(' ')
@@ -70,7 +70,21 @@ function cleaningNumbers(data: string): string {
     return data.replace(/[0-9]+/g, '');
 }
 
-function tokenizeText(inputText: string): string[] {
-    const tokenizer = new RegexpTokenizer({pattern: /\w+/});
-    return tokenizer.tokenize(inputText)!;
+// function tokenizeText(inputText: string): string[] {
+//     const tokenizer = new RegexpTokenizer({pattern: /\w+/});
+//     return tokenizer.tokenize(inputText)!;
+// }
+//
+//
+// function stemmingOnText(data: string[]): string[] {
+//     return data.map(word => PorterStemmer.stem(word));
+// }
+
+function tokenizeThenStem(inputText: string) {
+    return PorterStemmer.tokenizeAndStem(inputText)
+}
+
+
+function lemmatizerOnText(data: string[]): string[] {
+    return data.map(word => lemmatizer(word));
 }
