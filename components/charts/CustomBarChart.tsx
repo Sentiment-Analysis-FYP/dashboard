@@ -1,6 +1,6 @@
 const CustomBarChart = () => {
     return (
-        <div>
+        <div className=''>
             bar chart
         </div>
     )

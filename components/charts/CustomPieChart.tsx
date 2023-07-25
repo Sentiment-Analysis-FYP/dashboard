@@ -1,6 +1,6 @@
 const CustomPieChart = () => {
     return (
-        <div>
+        <div className=''>
             pie chart
         </div>
     )

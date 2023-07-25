@@ -1,6 +1,6 @@
 const CustomStackedBarChart = () => {
     return (
-        <div>
+        <div className=''>
             bar chart
         </div>
     )

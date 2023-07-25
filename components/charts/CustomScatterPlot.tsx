@@ -1,6 +1,6 @@
 const CustomScatterPlot = () => {
     return (
-        <div>
+        <div className=''>
             scatter plot
         </div>
     )

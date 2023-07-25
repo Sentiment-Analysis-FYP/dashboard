@@ -1,6 +1,6 @@
 const CustomWordCloud = () => {
     return (
-        <div>
+        <div className=''>
             word cloud
         </div>
     )

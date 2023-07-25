@@ -1,6 +1,6 @@
 const CustomLineChart = () => {
     return (
-        <div>
+        <div className=''>
             line chart
         </div>
     )
