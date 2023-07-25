@@ -12,13 +12,13 @@ interface CustomWordCloudProps {
 const CustomWordCloud = (props: CustomWordCloudProps) => {
     const {wordList} = props
 
-    useEffect(() => {
-        if (typeof window !== "undefined" && document && document.getElementById('custom-wordcloud')) {
-            // WordCloud(document.getElementById('custom-wordcloud')!, {
-            //     list: wordList
-            // })
-        }
-    },)
+    // useEffect(() => {
+    //     if (typeof window !== "undefined" && document && document.getElementById('custom-wordcloud')) {
+    //         // WordCloud(document.getElementById('custom-wordcloud')!, {
+    //         //     list: wordList
+    //         // })
+    //     }
+    // },)
 
 
     return (
@@ -27,8 +27,7 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
             {/*<canvas id='custom-wordcloud' width='100%' height='100%'/>*/}
             <TagCloud minSize={12}
                       maxSize={35}
-                      tags={data}
-                      onClick={(e: any) => alert(`${e.target.value}`)}
+                      tags={wordList}
             />
         </div>
     )

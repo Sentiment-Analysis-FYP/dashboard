@@ -3,12 +3,14 @@ import {PorterStemmer} from "natural";
 import lemmatizer from "lemmatizer";
 
 interface WordCloudItem {
-    word: string,
-    frequency: number
+    value: string,
+    count: number
 }
 
 export const getSentimentList = (data: AnalyzedData, sentiment: string): AnalyzedDataItem[] => {
     let sentimentList = data.data
+
+    console.log(`data has ${data.data.length} items`)
 
     if (sentiment == 'negative') {
         sentimentList = sentimentList
@@ -17,6 +19,8 @@ export const getSentimentList = (data: AnalyzedData, sentiment: string): Analyze
         sentimentList = sentimentList
             .filter((dataItem) => Number(getSentimentScore(dataItem)) > 0)
     }
+
+    console.log(`${sentiment} has ${sentimentList.length} items`)
 
     return sentimentList
 }
@@ -107,13 +111,8 @@ function getStringFrequency(arrays: string[][]): Map<string, number> {
 
 function mapToWordCloudItemArray(map: Map<string, number>): WordCloudItem[] {
     // return Array.from(map, ([word, frequency]) => ([word, frequency]));
-    return Array.from(map, ([word, frequency]) => {
-        const wci: WordCloudItem = {
-            word: word,
-            frequency: frequency
-        }
-        return wci
-    });
+    return Array.from(map, ([word, frequency]) =>
+        ({value: word, count: frequency}));
 }
 
 export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudItem[] => {
@@ -130,6 +129,5 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
                                 cleaningPunctuations(cleaning_stopwords(dataItem.text)))))))))
 
     const frequencyMap = getStringFrequency(tokenList)
-    const frequencyArray = mapToWordCloudItemArray(frequencyMap)
-    return frequencyArray
+    return mapToWordCloudItemArray(frequencyMap)
 }
