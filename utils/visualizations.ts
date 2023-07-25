@@ -1,5 +1,6 @@
 import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
 import {number} from "prop-types";
+import {RegexpTokenizer} from "natural";
 
 interface WordCloudItem {
     word: string,
@@ -55,4 +56,21 @@ function cleaningPunctuations(text: string): string {
 
     const punctuationRegex = new RegExp(`[${englishPunctuations}]`, 'g');
     return text.replace(punctuationRegex, '');
+}
+
+function cleaningRepeatingChar(text: string): string {
+    return text.replace(/(.)\1+/g, '$1');
+}
+
+function cleaningURLs(data: string): string {
+    return data.replace(/((www\.\S+)|(https?:\/\/\S+))/g, ' ');
+}
+
+function cleaningNumbers(data: string): string {
+    return data.replace(/[0-9]+/g, '');
+}
+
+function tokenizeText(inputText: string): string[] {
+    const tokenizer = new RegexpTokenizer({pattern: /\w+/});
+    return tokenizer.tokenize(inputText)!;
 }
