@@ -29,7 +29,7 @@ const Visualizations = (props: VisualizationsProps) => {
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
-                            <div>
+                            <div className=''>
                                 <CustomBarChart data={data}/>
                             </div>
                             <div>word cloud (neg and pos)</div>

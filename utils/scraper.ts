@@ -34,17 +34,8 @@ export interface AnalyzedDataItem {
     v_sentiment_polarity: number,
     t_sentiment_polarity: number,
     t_sentiment_subjectivity: number,
-    lr_sentiment: number
-}
-
-export const getSentimentScore = (dataItem: AnalyzedDataItem): string => {
-    let sent = dataItem.t_sentiment_polarity + dataItem.v_sentiment_polarity
-
-    if (sent < 0)
-        sent = Math.max(-1, sent)
-    else sent = Math.min(1, sent)
-
-    return (sent).toFixed(2)
+    lr_sentiment: number,
+    score: number
 }
 
 export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {

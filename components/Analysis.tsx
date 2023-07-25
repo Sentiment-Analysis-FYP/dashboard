@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
+import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {DataGrid, GridCellParams, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import clsx from "clsx";
@@ -31,12 +31,10 @@ const DataTable = (props: AnalysisProps) => {
         {field: 'username', headerName: 'Username', flex: 0.7},
         {field: 'text', headerName: 'Text', flex: 1},
         {
-            field: 'Sentiment Score',
+            field: 'score',
             description: 'From -1 (negative) to 1 (positive)',
             headerName: 'Sentiment Score',
             flex: 0.7,
-            valueGetter: (params: GridValueGetterParams) =>
-                `${getSentimentScore(params.row)}`,
             cellClassName: (params: GridCellParams<any, number>) => {
                 if (params.value == null) {
                     return '';

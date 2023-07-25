@@ -1,4 +1,4 @@
-import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper";
+import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
 import {PorterStemmer} from "natural";
 import lemmatizer from "lemmatizer";
 
@@ -14,22 +14,16 @@ export const getSentimentList = (data: AnalyzedData, sentiment: string): Analyze
 
     if (sentiment == 'negative') {
         sentimentList = sentimentList
-            .filter((dataItem) => Number(getSentimentScore(dataItem)) < 0)
+            .filter((dataItem) => dataItem.score < 0)
     } else if (sentiment == 'positive') {
         sentimentList = sentimentList
-            .filter((dataItem) => Number(getSentimentScore(dataItem)) > 0)
+            .filter((dataItem) => dataItem.score > 0)
     }
 
     console.log(`${sentiment} has ${sentimentList.length} items`)
 
     return sentimentList
 }
-
-// export const getWordCloudItemList = (dataItems: AnalyzedDataItem[]): WordCloudItem => {
-//     let wordCloudItemList = dataItems.map((dataItem) => [])
-// }
-
-// export const getWordFrequency = (texts: string[])
 
 const stopwords = ['a', 'about', 'above', 'after', 'again', 'ain', 'all', 'am', 'an',
     'and', 'any', 'are', 'as', 'at', 'be', 'because', 'been', 'before',
@@ -73,16 +67,6 @@ function cleaningURLs(data: string): string {
 function cleaningNumbers(data: string): string {
     return data.replace(/[0-9]+/g, '');
 }
-
-// function tokenizeText(inputText: string): string[] {
-//     const tokenizer = new RegexpTokenizer({pattern: /\w+/});
-//     return tokenizer.tokenize(inputText)!;
-// }
-//
-//
-// function stemmingOnText(data: string[]): string[] {
-//     return data.map(word => PorterStemmer.stem(word));
-// }
 
 function tokenizeThenStem(inputText: string) {
     return PorterStemmer.tokenizeAndStem(inputText)
@@ -130,4 +114,49 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
 
     const frequencyMap = getStringFrequency(tokenList)
     return mapToWordCloudItemArray(frequencyMap)
+}
+
+interface GroupedDataItem {
+    count: number,
+    date: string,
+    positiveCount: number,
+    negativeCount: number
+}
+
+export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: string): GroupedDataItem[] => {
+    const groupedData: { [key: string]: GroupedDataItem } = {};
+
+    data.forEach((item) => {
+        let dateGroup;
+        switch (groupBy) {
+            case 'day':
+                dateGroup = item.created_at.substring(0, 10); // Extracting the date up to the day (YYYY-MM-DD)
+                break;
+            case 'month':
+                dateGroup = item.created_at.substring(0, 7); // Extracting the date up to the month (YYYY-MM)
+                break;
+            case 'year':
+                dateGroup = item.created_at.substring(0, 4); // Extracting the date up to the year (YYYY)
+                break;
+            default:
+                throw new Error(`Invalid groupBy option: ${groupBy}`);
+        }
+
+        if (groupedData[dateGroup]) {
+            // Group already exists, update counts
+            groupedData[dateGroup].count++;
+            groupedData[dateGroup].positiveCount += item.v_sentiment_pos;
+            groupedData[dateGroup].negativeCount += item.v_sentiment_neg;
+        } else {
+            // Create a new group
+            groupedData[dateGroup] = {
+                count: 1,
+                date: dateGroup,
+                positiveCount: item.v_sentiment_pos,
+                negativeCount: item.v_sentiment_neg,
+            };
+        }
+    })
+
+    return Object.values(groupedData)
 }

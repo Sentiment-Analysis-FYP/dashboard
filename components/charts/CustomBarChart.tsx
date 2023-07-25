@@ -20,9 +20,11 @@ interface CustomBarChartProps {
 const CustomBarChart = (props: CustomBarChartProps) => {
     const {data} = props
     const chartData = data.data as any
+    const xDataKey = "score"
+    const yDataKey = ""
 
     return (
-        <div className=''>
+        <div className='w-full flex justify-center items-center'>
             bar chart
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart width={500} height={300} data={chartData} margin={{
