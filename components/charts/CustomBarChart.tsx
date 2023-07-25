@@ -12,16 +12,18 @@ import {
     ReferenceLine,
     Brush
 } from 'recharts'
+import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
 
 interface CustomBarChartProps {
-    data: AnalyzedData
+    data: AnalyzedData,
+    groupBy: string
 }
 
 const CustomBarChart = (props: CustomBarChartProps) => {
-    const {data} = props
-    const chartData = data.data as any
+    const {data, groupBy} = props
+    const chartData = getDataItemsCountGroupedBy(data.data, groupBy)
     const xDataKey = "score"
-    const yDataKey = ""
+    const yDataKey = "count"
 
     return (
         <div className='w-full flex justify-center items-center'>
