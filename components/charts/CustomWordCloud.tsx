@@ -1,30 +1,35 @@
-import {useLayoutEffect} from "react";
+import {useEffect, useLayoutEffect} from "react";
 import WordCloud from "wordcloud";
 import {number} from "prop-types";
 import {AnalyzedDataItem} from "@/utils/scraper";
+import {TagCloud} from "react-tagcloud";
 
 interface CustomWordCloudProps {
     wordList: AnalyzedDataItem[]
 }
 
 
-
 const CustomWordCloud = (props: CustomWordCloudProps) => {
     const {wordList} = props
 
-    useLayoutEffect(() => {
-        if (document && document.getElementById('custom-wordcloud'))
-            // draw cloud
-            WordCloud(document.getElementById('custom-wordcloud')!, {
-                list: wordList
-            })
+    useEffect(() => {
+        if (typeof window !== "undefined" && document && document.getElementById('custom-wordcloud')) {
+            // WordCloud(document.getElementById('custom-wordcloud')!, {
+            //     list: wordList
+            // })
+        }
     },)
 
 
     return (
         <div className='w-full'>
             word cloud
-            <canvas id='custom-wordcloud' width='100%' height='100%'/>
+            {/*<canvas id='custom-wordcloud' width='100%' height='100%'/>*/}
+            <TagCloud minSize={12}
+                      maxSize={35}
+                      tags={data}
+                      onClick={(e: any) => alert(`${e.target.value}`)}
+            />
         </div>
     )
 }
