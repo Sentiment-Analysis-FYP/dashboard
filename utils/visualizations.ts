@@ -89,6 +89,47 @@ function lemmatizerOnText(data: string[]): string[] {
     return data.map(word => lemmatizer(word));
 }
 
-export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudItem[] => {
+function getStringFrequency(arrays: string[][]): Map<string, number> {
+    const frequencyMap = new Map<string, number>();
 
+    arrays.forEach(array => {
+        array.forEach(item => {
+            if (frequencyMap.has(item)) {
+                frequencyMap.set(item, frequencyMap.get(item)! + 1);
+            } else {
+                frequencyMap.set(item, 1);
+            }
+        });
+    });
+
+    return frequencyMap;
+}
+
+function mapToWordCloudItemArray(map: Map<string, number>): WordCloudItem[] {
+    // return Array.from(map, ([word, frequency]) => ([word, frequency]));
+    return Array.from(map, ([word, frequency]) => {
+        const wci: WordCloudItem = {
+            word: word,
+            frequency: frequency
+        }
+        return wci
+    });
+}
+
+export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudItem[] => {
+    let tokenList: string[][] = []
+
+    // data.map((dataItem) => wordCloudItemList.push(cleaning_stopwords(dataItem.text)))
+    data.map((dataItem) =>
+        tokenList.push(
+            lemmatizerOnText(
+                tokenizeThenStem(
+                    cleaningNumbers(
+                        cleaningURLs(
+                            cleaningRepeatingChar(
+                                cleaningPunctuations(cleaning_stopwords(dataItem.text)))))))))
+
+    const frequencyMap = getStringFrequency(tokenList)
+    const frequencyArray = mapToWordCloudItemArray(frequencyMap)
+    return frequencyArray
 }
