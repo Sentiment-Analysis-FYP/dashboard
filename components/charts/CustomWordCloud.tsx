@@ -11,15 +11,6 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
     const {sentimentList} = props
     const wordList = generateWordCloudItemList(sentimentList)
 
-    // useEffect(() => {
-    //     if (typeof window !== "undefined" && document && document.getElementById('custom-wordcloud')) {
-    //         // WordCloud(document.getElementById('custom-wordcloud')!, {
-    //         //     list: wordList
-    //         // })
-    //     }
-    // },)
-
-
     return (
         <div className='w-[400px] md:w-[600px] h-[400px] md:h-[600px] overflow-clip '>
             <TagCloud minSize={12}

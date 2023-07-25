@@ -1,6 +1,7 @@
 import {AnalyzedData} from "@/utils/scraper";
 import CustomWordCloud from "@/components/charts/CustomWordCloud";
 import {getSentimentList} from "@/utils/visualizations";
+import CustomBarChart from "@/components/charts/CustomBarChart";
 
 interface VisualizationsProps {
     data: AnalyzedData
@@ -28,7 +29,9 @@ const Visualizations = (props: VisualizationsProps) => {
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
-                            <div>bar chart</div>
+                            <div>
+                                <CustomBarChart data={data}/>
+                            </div>
                             <div>word cloud (neg and pos)</div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
