@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Visualizations from "@/components/Visualizations";
 
 export default function VisualizationsPage() {
+
     return (
         <div>
             <Header/>
