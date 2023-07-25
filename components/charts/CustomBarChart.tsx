@@ -22,13 +22,11 @@ interface CustomBarChartProps {
 const CustomBarChart = (props: CustomBarChartProps) => {
     const {data, groupBy} = props
     const chartData = getDataItemsCountGroupedBy(data.data, groupBy)
-    const xDataKey = "score"
-    const yDataKey = "count"
 
     return (
-        <div className='w-full h-[600px] flex justify-center items-center'>
+        <div className='w-full h-[600px] flex justify-center items-center py-10'>
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart width={1000} height={800} data={chartData} barCategoryGap={2} barGap={2} margin={{
+                <BarChart data={chartData} barCategoryGap={10} barGap={0} margin={{
                     top: 5,
                     right: 20,
                     left: 20,

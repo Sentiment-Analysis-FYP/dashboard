@@ -31,7 +31,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                 <CustomWordCloud sentimentList={getSentimentList(data, POSITIVE)}/>
                             </div>
                         </div>
-                        <div className='flex justify-center items-center gap-14 w-full'>
+                        <div className='flex justify-center items-center gap-14 py-32'>
                             <div className='flex flex-col justify-center items-center'>
                                 <span className='text-2xl font-semibold'>Variable Bar Chart</span>
                                 <CustomBarChart data={data} groupBy={groupBy}/>
