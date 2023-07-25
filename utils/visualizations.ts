@@ -2,7 +2,7 @@ import {AnalyzedData, AnalyzedDataItem, getSentimentScore} from "@/utils/scraper
 import {PorterStemmer} from "natural";
 import lemmatizer from "lemmatizer";
 
-interface WordCloudItem {
+export interface WordCloudItem {
     value: string,
     count: number
 }
