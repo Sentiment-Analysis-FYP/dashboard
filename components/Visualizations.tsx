@@ -1,12 +1,29 @@
-const Visualizations = () => {
+import {AnalyzedData} from "@/utils/scraper";
+import CustomWordCloud from "@/components/charts/CustomWordCloud";
+import {getSentimentList} from "@/utils/visualizations";
+
+interface VisualizationsProps {
+    data: AnalyzedData
+}
+
+const NEGATIVE = 'negative'
+const POSITIVE = 'positive'
+
+const Visualizations = (props: VisualizationsProps) => {
+    const {data} = props
+
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
             <div className='absolute top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6 flex justify-center items-center'>
                     <div className='grid grid-cols-2 gap-5 justify-center items-center'>
                         <div className='flex justify-center items-center gap-14'>
-                            <div>Vis</div>
-                            <div>line chart</div>
+                            <div>
+                                <CustomWordCloud wordList={getSentimentList(data, NEGATIVE)}/>
+                            </div>
+                            <div>
+                                <CustomWordCloud wordList={getSentimentList(data, POSITIVE)}/>
+                            </div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
                             <div>bar chart</div>

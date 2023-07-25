@@ -1,10 +1,13 @@
 import {useLayoutEffect} from "react";
 import WordCloud from "wordcloud";
 import {number} from "prop-types";
+import {AnalyzedDataItem} from "@/utils/scraper";
 
 interface CustomWordCloudProps {
-    wordList: [string, number][]
+    wordList: AnalyzedDataItem[]
 }
+
+
 
 const CustomWordCloud = (props: CustomWordCloudProps) => {
     const {wordList} = props
@@ -15,7 +18,7 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
             WordCloud(document.getElementById('custom-wordcloud')!, {
                 list: wordList
             })
-    }, [])
+    },)
 
 
     return (
