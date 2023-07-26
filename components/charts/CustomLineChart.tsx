@@ -1,16 +1,7 @@
-import {
-    Line,
-    LineChart,
-    ResponsiveContainer,
-    CartesianGrid,
-    XAxis,
-    YAxis,
-    Tooltip,
-    ReferenceArea
-} from 'recharts'
+import {CartesianGrid, Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts'
 import {useEffect, useState} from "react";
-import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
-import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
+import {AnalyzedData} from "@/utils/scraper";
+import {getDataItemsCountGroupedBy, GroupedDataItem} from "@/utils/visualizations";
 
 interface CustomLineChartProps {
     data: AnalyzedData,
@@ -47,8 +38,7 @@ const impressions: Impressions[] = [
 const CustomLineChart = (props: CustomLineChartProps) => {
     const [groupBy, setGroupBy] = useState('day')
     const [groupByRadios, setGroupByRadios] = useState([true, false, false]);
-    const chartData = getDataItemsCountGroupedBy(props.data.data, groupBy)
-    const lineChartData = chartData
+    const lineChartData = getDataItemsCountGroupedBy(props.data.data, groupBy)
 
     useEffect(() => {
         switch (groupBy) {
@@ -78,7 +68,10 @@ const CustomLineChart = (props: CustomLineChartProps) => {
         bottom2: 'dataMin-20',
         animation: true
     };
-    const getAxisYDomain = (from: string | undefined, to: string | undefined, ref: keyof AnalyzedDataItem, offset: number): (number | string)[] => {
+    const getAxisYDomain = (from: string | undefined,
+                            to: string | undefined,
+                            ref: keyof GroupedDataItem,
+                            offset: number): (number | string)[] => {
         if (from && to) {
             const refData = lineChartData.slice(Number(from) - 1, Number(to));
             let [bottom, top] = [refData[0][ref], refData[0][ref]];
@@ -112,8 +105,8 @@ const CustomLineChart = (props: CustomLineChartProps) => {
         if (refAreaLeft && refAreaRight && refAreaLeft > refAreaRight) [refAreaLeft, refAreaRight] = [refAreaRight, refAreaLeft];
 
         // yAxis domain
-        const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'cost', 1);
-        const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'impression', 50);
+        const [bottom, top] = getAxisYDomain(refAreaLeft, refAreaRight, 'positiveCount', 1);
+        const [bottom2, top2] = getAxisYDomain(refAreaLeft, refAreaRight, 'negativeCount', 50);
         setZoomGraph(prev => ({
             ...prev,
             refAreaLeft: '',
@@ -197,13 +190,13 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                            }))}
                            onMouseUp={() => zoom()}>
                     <CartesianGrid strokeDasharray="10 10"/>
-                    <XAxis allowDataOverflow dataKey="name" domain={left && right ? [left, right] : undefined}
+                    <XAxis allowDataOverflow dataKey="count" domain={left && right ? [left, right] : undefined}
                            type="number"/>
                     <YAxis allowDataOverflow domain={[bottom, top]} type="number" yAxisId="1"/>
                     <YAxis orientation="right" allowDataOverflow domain={[bottom2, top2]} type="number" yAxisId="2"/>
                     <Tooltip/>
-                    <Line yAxisId="1" type="natural" dataKey="cost" stroke="#33cc00" animationDuration={400}/>
-                    <Line yAxisId="2" type="natural" dataKey="impression" stroke="#ff3333" animationDuration={700}/>
+                    <Line yAxisId="1" type="natural" dataKey="positiveCount" stroke="#33cc00" animationDuration={400}/>
+                    <Line yAxisId="2" type="natural" dataKey="negativeCount" stroke="#ff3333" animationDuration={700}/>
 
                     {refAreaLeft && refAreaRight ?
                         <ReferenceArea yAxisId="1" x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3}/> : null}

@@ -116,7 +116,7 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
     return mapToWordCloudItemArray(frequencyMap)
 }
 
-interface GroupedDataItem {
+export interface GroupedDataItem {
     count: number,
     date: string,
     positiveCount: number,
