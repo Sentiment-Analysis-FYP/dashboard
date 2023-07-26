@@ -14,24 +14,6 @@ const POSITIVE = 'positive'
 
 const Visualizations = (props: VisualizationsProps) => {
     const {data} = props
-    const [groupBy, setGroupBy] = useState('day')
-    const [groupByRadios, setGroupByRadios] = useState([true, false, false]);
-
-    useEffect(() => {
-        switch (groupBy) {
-            case 'day':
-                setGroupByRadios([true, false, false])
-                break
-
-            case 'month':
-                setGroupByRadios([false, true, false])
-                break
-
-            case 'year':
-                setGroupByRadios([false, false, true])
-                break
-        }
-    }, [groupBy]);
 
 
     return (
@@ -52,35 +34,14 @@ const Visualizations = (props: VisualizationsProps) => {
                         <div className='flex justify-center items-center gap-14 py-32 w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold'>Variable Bar Chart</span>
-                                <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
-                                    <div className='flex gap-2'
-                                         onClick={() => setGroupBy('day')}>
-                                        <input type='radio' value='day' checked={groupByRadios[0]}
-                                        />
-                                        Day
-                                    </div>
-                                    <div className='flex gap-2'
-                                         onClick={() => setGroupBy('month')}>
-                                        <input type='radio' value='month' checked={groupByRadios[1]}
-                                        />
-                                        Month
-                                    </div>
-                                    <div className='flex gap-2'
-                                         onClick={() => setGroupBy('year')}>
-                                        <input type='radio' value='year' checked={groupByRadios[2]}
-                                        />
-                                        Year
-                                    </div>
-                                </div>
-                                <CustomBarChart data={data} groupBy={groupBy}/>
+                                <CustomBarChart data={data}/>
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14 py-32 w-full'>
-                            <div>
-                                <span>Line Chart</span>
+                            <div className='flex flex-col justify-center items-center w-full'>
+                                <span className='text-2xl font-semibold'>Line Chart</span>
                                 <CustomLineChart data={data}/>
                             </div>
-                            <div>stacked bar chart</div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
                             <div>pie chart</div>

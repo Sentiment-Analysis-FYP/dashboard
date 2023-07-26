@@ -1,5 +1,5 @@
 import {AnalyzedData} from "@/utils/scraper";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
     ResponsiveContainer,
     Bar,
@@ -16,15 +16,52 @@ import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
 
 interface CustomBarChartProps {
     data: AnalyzedData,
-    groupBy: string
 }
 
 const CustomBarChart = (props: CustomBarChartProps) => {
-    const {data, groupBy} = props
+    const {data} = props
+    const [groupBy, setGroupBy] = useState('day')
     const chartData = getDataItemsCountGroupedBy(data.data, groupBy)
+    const [groupByRadios, setGroupByRadios] = useState([true, false, false]);
+
+    useEffect(() => {
+        switch (groupBy) {
+            case 'day':
+                setGroupByRadios([true, false, false])
+                break
+
+            case 'month':
+                setGroupByRadios([false, true, false])
+                break
+
+            case 'year':
+                setGroupByRadios([false, false, true])
+                break
+        }
+    }, [groupBy]);
 
     return (
-        <div className='w-full h-[600px] flex justify-center items-center py-10'>
+        <div className='w-full h-[600px] flex flex-col justify-center items-center py-10'>
+            <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('day')}>
+                    <input type='radio' value='day' checked={groupByRadios[0]}
+                    />
+                    Day
+                </div>
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('month')}>
+                    <input type='radio' value='month' checked={groupByRadios[1]}
+                    />
+                    Month
+                </div>
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('year')}>
+                    <input type='radio' value='year' checked={groupByRadios[2]}
+                    />
+                    Year
+                </div>
+            </div>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} barCategoryGap={2} barGap={0} margin={{
                     top: 5,

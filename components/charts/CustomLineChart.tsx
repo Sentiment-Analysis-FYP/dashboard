@@ -8,17 +8,17 @@ import {
     Tooltip,
     ReferenceArea
 } from 'recharts'
-import {useState} from "react";
-import {sortByCreatedAt} from "@/utils/visualizations";
+import {useEffect, useState} from "react";
 import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
+import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
 
 interface CustomLineChartProps {
-    data: AnalyzedData
+    data: AnalyzedData,
 }
 
-const getLineChartData = (data: AnalyzedDataItem[]) => {
-    return sortByCreatedAt(data)
-}
+// const getLineChartData = (data: AnalyzedDataItem[]) => {
+//     return sortByCreatedAt(data)
+// }
 
 export interface Impressions {
     name: number;
@@ -27,7 +27,7 @@ export interface Impressions {
 }
 
 // Sample data for Impressions
-const impressionsData: Impressions[] = [
+const impressions: Impressions[] = [
     {name: 1, cost: 100, impression: 2000},
     {name: 2, cost: 150, impression: 3000},
     {name: 3, cost: 80, impression: 1500},
@@ -45,11 +45,29 @@ const impressionsData: Impressions[] = [
 
 
 const CustomLineChart = (props: CustomLineChartProps) => {
-    const chartData = getLineChartData(props.data.data)
+    const [groupBy, setGroupBy] = useState('day')
+    const [groupByRadios, setGroupByRadios] = useState([true, false, false]);
+    const chartData = getDataItemsCountGroupedBy(props.data.data, groupBy)
+    const lineChartData = chartData
 
+    useEffect(() => {
+        switch (groupBy) {
+            case 'day':
+                setGroupByRadios([true, false, false])
+                break
+
+            case 'month':
+                setGroupByRadios([false, true, false])
+                break
+
+            case 'year':
+                setGroupByRadios([false, false, true])
+                break
+        }
+    }, [groupBy]);
 
     const initialState = {
-        data: impressionsData,
+        data: lineChartData,
         left: 'dataMin',
         right: 'dataMax',
         refAreaLeft: '',
@@ -60,9 +78,9 @@ const CustomLineChart = (props: CustomLineChartProps) => {
         bottom2: 'dataMin-20',
         animation: true
     };
-    const getAxisYDomain = (from: string | undefined, to: string | undefined, ref: keyof Impressions, offset: number): (number | string)[] => {
+    const getAxisYDomain = (from: string | undefined, to: string | undefined, ref: keyof AnalyzedDataItem, offset: number): (number | string)[] => {
         if (from && to) {
-            const refData = impressionsData.slice(Number(from) - 1, Number(to));
+            const refData = lineChartData.slice(Number(from) - 1, Number(to));
             let [bottom, top] = [refData[0][ref], refData[0][ref]];
             refData.forEach(d => {
                 if (d[ref] > top) top = d[ref];
@@ -139,16 +157,36 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     } = zoomGraph;
 
     return (
-        <div className='w-full h-[600px] flex flex-col justify-center items-center py-10 select-none'>
-            line chart
+        <div className='w-full flex flex-col justify-center items-center py-10 select-none gap-8'>
             <button type="button" className="px-10 py-2 bg-violet-500 hover:bg-violet-700 transition duration-500
             rounded-lg text-gray-50"
                     onClick={() => zoomOut()}>
                 Zoom Out
             </button>
 
+            <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('day')}>
+                    <input type='radio' value='day' checked={groupByRadios[0]}
+                    />
+                    Day
+                </div>
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('month')}>
+                    <input type='radio' value='month' checked={groupByRadios[1]}
+                    />
+                    Month
+                </div>
+                <div className='flex gap-2'
+                     onClick={() => setGroupBy('year')}>
+                    <input type='radio' value='year' checked={groupByRadios[2]}
+                    />
+                    Year
+                </div>
+            </div>
+
             <ResponsiveContainer minHeight={500}>
-                <LineChart width={800} height={400} data={data}
+                <LineChart data={data}
                            onMouseDown={e => setZoomGraph(prev => ({
                                ...prev,
                                refAreaLeft: e.activeLabel!
@@ -158,14 +196,14 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                                refAreaRight: e.activeLabel!
                            }))}
                            onMouseUp={() => zoom()}>
-                    <CartesianGrid strokeDasharray="3 3"/>
+                    <CartesianGrid strokeDasharray="10 10"/>
                     <XAxis allowDataOverflow dataKey="name" domain={left && right ? [left, right] : undefined}
                            type="number"/>
                     <YAxis allowDataOverflow domain={[bottom, top]} type="number" yAxisId="1"/>
                     <YAxis orientation="right" allowDataOverflow domain={[bottom2, top2]} type="number" yAxisId="2"/>
                     <Tooltip/>
-                    <Line yAxisId="1" type="natural" dataKey="cost" stroke="#8884d8" animationDuration={300}/>
-                    <Line yAxisId="2" type="natural" dataKey="impression" stroke="#82ca9d" animationDuration={300}/>
+                    <Line yAxisId="1" type="natural" dataKey="cost" stroke="#33cc00" animationDuration={400}/>
+                    <Line yAxisId="2" type="natural" dataKey="impression" stroke="#ff3333" animationDuration={700}/>
 
                     {refAreaLeft && refAreaRight ?
                         <ReferenceArea yAxisId="1" x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3}/> : null}

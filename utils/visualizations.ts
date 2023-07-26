@@ -161,15 +161,16 @@ export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: st
         .sort((a, b) => a.date.localeCompare(b.date));
 }
 
-export const sortByCreatedAt = (data: AnalyzedDataItem[]): AnalyzedDataItem[] => {
-    // Custom compare function to sort by 'created_at' date
-    const compareByCreatedAt = (a: AnalyzedDataItem, b: AnalyzedDataItem): number => {
-        const dateA = new Date(a.created_at);
-        const dateB = new Date(b.created_at);
-        return dateA.getTime() - dateB.getTime();
-    };
-
-    // Sorting the array based on 'created_at' date
-    let tempArray = [...data]
-    return tempArray.sort(compareByCreatedAt);
-};
+// export const sortByCreatedAt = (data: AnalyzedDataItem[]): GroupedDataItem[] => {
+//     // Custom compare function to sort by 'created_at' date
+//     const compareByCreatedAt = (a: AnalyzedDataItem, b: AnalyzedDataItem): number => {
+//         const dateA = new Date(a.created_at);
+//         const dateB = new Date(b.created_at);
+//         return dateA.getTime() - dateB.getTime();
+//     };
+//
+//     const groupeData = getDataItemsCountGroupedBy(data, )
+//     // Sorting the array based on 'created_at' date
+//     let tempArray = [...data]
+//     return tempArray.sort(compareByCreatedAt);
+// };
