@@ -57,7 +57,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
     return (
         <>
-            <div className='absolute bg-gray-800 bg-opacity-60 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
+            {showModal && <div className='absolute bg-gray-800 bg-opacity-60 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
                 w-screen h-screen flex justify-center items-center'>
                 <div
                     className='w-[400px] h-[400px] flex flex-col justify-center items-center bg-white rounded-lg
@@ -96,7 +96,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                         </motion.div>
                     </div>
                 </div>
-            </div>
+            </div>}
         </>
     )
 }

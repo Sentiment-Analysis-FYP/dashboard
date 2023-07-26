@@ -1,8 +1,7 @@
 import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {AnalyzedData} from "@/utils/scraper";
 import {DataGrid, GridCellParams, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import clsx from "clsx";
 
@@ -61,7 +60,7 @@ const DataTable = (props: AnalysisProps) => {
                 columns={columns}
                 initialState={{
                     pagination: {
-                        paginationModel: {page: 0, pageSize: 10},
+                        paginationModel: {page: 0, pageSize: 20},
                     },
                 }}
                 pageSizeOptions={[5, 10, 20, 40, 100]}
