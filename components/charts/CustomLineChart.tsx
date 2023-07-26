@@ -330,7 +330,7 @@ const CustomLineChart = (props: CustomLineChartProps) => {
             </div>
 
             <ResponsiveContainer minHeight={500}>
-                <LineChart data={data} width={1200}
+                <LineChart data={lineChartData} width={1200}
                            onMouseDown={e => setZoomGraph(prev => ({
                                ...prev,
                                refAreaLeft: e.activeLabel!
@@ -343,12 +343,15 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                     <CartesianGrid strokeDasharray="10 10"/>
                     <XAxis allowDataOverflow dataKey="date" domain={left && right ? [left, right] : undefined}
                            type="number"
-                        tickFormatter={tickData => formatTick(tickData)}
+                           tickFormatter={tickData => formatTick(tickData)}
                     />
                     <YAxis allowDataOverflow domain={[bottom, top]} type="number" yAxisId="1"/>
                     {/*<YAxis orientation="right" allowDataOverflow domain={[bottom2, top2]} type="number" yAxisId="2"/>*/}
                     {/*<YAxis/>*/}
-                    <Tooltip/>
+                    <Tooltip
+                        labelFormatter={value => {
+                            return `${formatTick(value)}`
+                        }}/>
                     <Line yAxisId="1" type="natural" dataKey="positiveCount" name="Positive" stroke="#33cc00"
                           animationDuration={400}/>
                     <Line yAxisId="1" type="natural" dataKey="negativeCount" name="Negative" stroke="#ff3333"
