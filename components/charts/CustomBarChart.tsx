@@ -45,19 +45,19 @@ const CustomBarChart = (props: CustomBarChartProps) => {
             <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('day')}>
-                    <input type='radio' value='day' checked={groupByRadios[0]}
+                    <input readOnly type='radio' value='day' checked={groupByRadios[0]}
                     />
                     Day
                 </div>
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('month')}>
-                    <input type='radio' value='month' checked={groupByRadios[1]}
+                    <input readOnly type='radio' value='month' checked={groupByRadios[1]}
                     />
                     Month
                 </div>
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('year')}>
-                    <input type='radio' value='year' checked={groupByRadios[2]}
+                    <input readOnly type='radio' value='year' checked={groupByRadios[2]}
                     />
                     Year
                 </div>

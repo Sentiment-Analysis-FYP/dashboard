@@ -168,3 +168,20 @@ export const makeNegativeCountsPositive = (data: GroupedDataItem[]): GroupedData
         negativeCount: Math.abs(item.negativeCount), // Convert negativeCount to its absolute value
     }));
 };
+
+export const convertDatesToNumberDates = (data: GroupedDataItem[]): LineChartDataItem[] => {
+    return data.map((item) => {
+        const numberDate = new Date(item.date).getTime();
+        return {
+            ...item,
+            date: numberDate,
+        };
+    });
+};
+
+export interface LineChartDataItem {
+    count: number,
+    date: number,
+    positiveCount: number,
+    negativeCount: number
+}
