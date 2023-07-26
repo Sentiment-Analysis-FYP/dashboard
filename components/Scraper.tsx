@@ -11,6 +11,7 @@ export const Scraper = () => {
     const [keywordsState, setKeywordsState] = useState([""]);
     const [dates, setDates] = useState([new Date(), new Date()]);
     const [scrapeSuccess, setScrapeSuccess] = useState(false);
+    const [showModal, setShowModal] = useState(true);
 
     const runScrape = async () => {
         if (!username || !keywordsState) {
@@ -33,7 +34,7 @@ export const Scraper = () => {
                 <AddKeyword setKeywordsState={setKeywordsState}/>
             </div>
 
-            <WebSocketHandler/>
+            {showModal && <WebSocketHandler showModal={showModal} setShowModal={setShowModal}/>}
         </div>
     )
 }
