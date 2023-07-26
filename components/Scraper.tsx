@@ -15,12 +15,13 @@ export const Scraper = () => {
 
     const runScrape = async () => {
         if (!username || !keywordsState) {
-            alert('Provide a username and/or password')
+            alert('Provide a username and/or keywords.')
         }
 
         const status = await requestScrape(username, keywordsState, dates[0], dates[1])
         setScrapeSuccess(status == 200)
     }
+
 
     return (
         <div className='bg-white flex flex-col h-[800px] w-[1300px] p-32 shadow-2xl'>
