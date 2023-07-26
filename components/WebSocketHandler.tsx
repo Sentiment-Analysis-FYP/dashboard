@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
+import {useRouter} from "next/router"
 
 const WebSocketComponent = () => {
+    const router = useRouter()
     const [isComplete, setIsComplete] = useState(false)
 
     useEffect(() => {
@@ -24,6 +26,21 @@ const WebSocketComponent = () => {
             ws.close()
         }
     }, [])
+
+    useEffect(() => {
+        // route to analysis page
+        let timeout: ReturnType<typeof setTimeout>
+        if (isComplete) {
+            timeout = setTimeout(() => {
+                router.push('/analysis')
+            }, 3000)
+        }
+
+        return () => {
+            clearTimeout(timeout) // Clean up the timeout when the component unmounts or isComplete changes.
+        }
+    }, [isComplete])
+
 
     return (
         <div>
