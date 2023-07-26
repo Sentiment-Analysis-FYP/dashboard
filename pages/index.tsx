@@ -1,9 +1,16 @@
 import {SignUp} from "@/components/SignUp";
 import Header from "@/components/Header";
 import {useAuth} from "@/hooks/auth";
+import {useEffect, useState} from "react";
 
 export default function Home() {
     const [email, token] = useAuth()
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        setIsLoggedIn(!!email)
+    }, [email]);
+
 
     const HomePage = () => {
         return (
@@ -16,7 +23,7 @@ export default function Home() {
     return (
         <main>
             <Header/>
-            {email ? (<HomePage/>) : (<SignUp/>)}
+            {isLoggedIn ? (<HomePage/>) : (<SignUp/>)}
         </main>
     )
 }
