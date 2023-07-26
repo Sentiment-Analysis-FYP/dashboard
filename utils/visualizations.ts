@@ -14,10 +14,10 @@ export const getSentimentList = (data: AnalyzedData, sentiment: string): Analyze
 
     if (sentiment == 'negative') {
         sentimentList = sentimentList
-            .filter((dataItem) => dataItem.score < 0)
+            .filter((dataItem) => Number(dataItem.score) < 0)
     } else if (sentiment == 'positive') {
         sentimentList = sentimentList
-            .filter((dataItem) => dataItem.score > 0)
+            .filter((dataItem) => Number(dataItem.score) > 0)
     }
 
     console.log(`${sentiment} has ${sentimentList.length} items`)
@@ -145,14 +145,14 @@ export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: st
         if (groupedData[dateGroup]) {
             // Group already exists, update counts
             groupedData[dateGroup].count++
-            item.score < 0 ? groupedData[dateGroup].negativeCount-- : groupedData[dateGroup].positiveCount++
+            Number(item.score) < 0 ? groupedData[dateGroup].negativeCount-- : groupedData[dateGroup].positiveCount++
         } else {
             // Create a new group
             groupedData[dateGroup] = {
                 count: 1,
                 date: dateGroup,
-                negativeCount: item.score < 0 ? -1 : 0,
-                positiveCount: item.score < 0 ? 0 : 1
+                negativeCount: Number(item.score) < 0 ? -1 : 0,
+                positiveCount: Number(item.score) < 0 ? 0 : 1
             };
         }
     })
@@ -160,3 +160,16 @@ export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: st
     return Object.values(groupedData)
         .sort((a, b) => a.date.localeCompare(b.date));
 }
+
+export const sortByCreatedAt = (data: AnalyzedDataItem[]): AnalyzedDataItem[] => {
+    // Custom compare function to sort by 'created_at' date
+    const compareByCreatedAt = (a: AnalyzedDataItem, b: AnalyzedDataItem): number => {
+        const dateA = new Date(a.created_at);
+        const dateB = new Date(b.created_at);
+        return dateA.getTime() - dateB.getTime();
+    };
+
+    // Sorting the array based on 'created_at' date
+    let tempArray = [...data]
+    return tempArray.sort(compareByCreatedAt);
+};
