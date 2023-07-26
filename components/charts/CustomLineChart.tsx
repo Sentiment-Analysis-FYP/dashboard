@@ -14,7 +14,7 @@ import {AnalyzedData} from "@/utils/scraper";
 import {
     convertDatesToNumberDates,
     getDataItemsCountGroupedBy,
-    GroupedDataItem,
+    GroupedDataItem, LineChartDataItem,
     makeNegativeCountsPositive
 } from "@/utils/visualizations";
 
@@ -146,12 +146,12 @@ const groupedData: GroupedDataItem[] = [
 const CustomLineChart = (props: CustomLineChartProps) => {
     const [groupBy, setGroupBy] = useState('day')
     const [groupByRadios, setGroupByRadios] = useState([true, false, false]);
-    // const lineChartData = convertDatesToNumberDates(makeNegativeCountsPositive(
-    //     getDataItemsCountGroupedBy(props.data.data, groupBy)))
     const lineChartData = convertDatesToNumberDates(makeNegativeCountsPositive(
-        groupedData))
+        getDataItemsCountGroupedBy(props.data.data, groupBy)))
+    // const lineChartData = convertDatesToNumberDates(makeNegativeCountsPositive(
+    //     groupedData))
 
-    console.log(lineChartData)
+    // console.log(lineChartData)
 
     const formatTick = (tickData: Date) => {
         let date = new Date(new Date(tickData).getTime()).toISOString().split('T')[0]
@@ -189,7 +189,7 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     }, [groupBy]);
 
     const initialState = {
-        data: impressions,
+        data: lineChartData,
         left: 'dataMin',
         right: 'dataMax',
         refAreaLeft: '',
@@ -202,18 +202,23 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     };
     const getAxisYDomain = (from: string | undefined,
                             to: string | undefined,
-                            ref: keyof Impressions,
+                            ref: keyof LineChartDataItem,
                             offset: number): (number | string)[] => {
         if (from && to) {
-            // const fromDate = new Date(from);
-            // const toDate = new Date(to);
-            const refData = impressions.slice(Number(from) - 1, Number(to));
+            const fromDate = new Date(from);
+            const toDate = new Date(to);
+            // const refData = data.slice(Number(from) - 1, Number(to));
             // const refData = lineChartData.filter((d) => {
             //     // const currentDate = new Date(d.date);
             //     // return currentDate >= fromDate && currentDate <= toDate;
             //     return d.date >= from && d.date <= to
             // });
             // console.log(`from ${fromDate} to ${toDate}`)
+            const refData = data.filter((d) => {
+                const currentDate = new Date(d.date);
+                return currentDate >= fromDate && currentDate <= toDate;
+            });
+
             console.log(refData)
             let [bottom, top] = [refData[0][ref], refData[0][ref]];
             refData.forEach(d => {
@@ -250,9 +255,9 @@ const CustomLineChart = (props: CustomLineChartProps) => {
         console.log(`refAreaLeft ${refAreaLeft}\nrefAreaRight ${refAreaRight}`)
         // yAxis domain
         const [bottom, top] =
-            getAxisYDomain(refAreaLeft, refAreaRight, 'cost', 1);
+            getAxisYDomain(refAreaLeft, refAreaRight, 'negativeCount', 1);
         const [bottom2, top2] =
-            getAxisYDomain(refAreaLeft, refAreaRight, 'impression', 50);
+            getAxisYDomain(refAreaLeft, refAreaRight, 'positiveCount', 50);
         setZoomGraph(prev => ({
             ...prev,
             refAreaLeft: '',
@@ -336,18 +341,18 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                            }))}
                            onMouseUp={() => zoom()}>
                     <CartesianGrid strokeDasharray="10 10"/>
-                    <XAxis allowDataOverflow dataKey="name" domain={left && right ? [left, right] : undefined}
+                    <XAxis allowDataOverflow dataKey="date" domain={left && right ? [left, right] : undefined}
                            type="number"
-                        // tickFormatter={tickData => formatTick(tickData)}
+                        tickFormatter={tickData => formatTick(tickData)}
                     />
                     <YAxis allowDataOverflow domain={[bottom, top]} type="number" yAxisId="1"/>
-                    <YAxis orientation="right" allowDataOverflow domain={[bottom2, top2]} type="number" yAxisId="2"/>
+                    {/*<YAxis orientation="right" allowDataOverflow domain={[bottom2, top2]} type="number" yAxisId="2"/>*/}
                     {/*<YAxis/>*/}
                     <Tooltip/>
-                    <Line yAxisId="1" type="natural" dataKey="cost" name="Positive" stroke="#33cc00"
+                    <Line yAxisId="1" type="natural" dataKey="positiveCount" name="Positive" stroke="#33cc00"
                           animationDuration={400}/>
-                    <Line yAxisId="2" type="natural" dataKey="impression" name="Negative" stroke="#ff3333"
-                          animationDuration={700}/>
+                    <Line yAxisId="1" type="natural" dataKey="negativeCount" name="Negative" stroke="#ff3333"
+                          animationDuration={600}/>
                     {refAreaLeft && refAreaRight ?
                         <ReferenceArea yAxisId="1" x1={refAreaLeft} x2={refAreaRight} strokeOpacity={0.3}/> : null}
                 </LineChart>
