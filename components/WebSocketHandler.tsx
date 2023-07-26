@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/router"
 import {motion} from "framer-motion";
+import {useAuth} from "@/hooks/auth";
 
 interface WebSocketComponentProps {
     showModal: boolean,
@@ -11,12 +12,16 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
     const {showModal, setShowModal} = props
     const router = useRouter()
     const [isComplete, setIsComplete] = useState(false)
+    const [email, token] = useAuth()
 
     useEffect(() => {
         const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
 
         ws.onopen = () => {
             console.log('WebSocket connection established')
+            if (email) ws.send(JSON.stringify({
+                email: `${email}`
+            }))
         }
 
         ws.onmessage = (event) => {

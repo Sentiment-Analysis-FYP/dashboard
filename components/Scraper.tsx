@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import UserName from "@/components/UserName";
 import BeginScrape from "@/components/BeginScrape";
 import AddKeyword from "@/components/AddKeyword";
@@ -11,7 +11,8 @@ export const Scraper = () => {
     const [keywordsState, setKeywordsState] = useState([""]);
     const [dates, setDates] = useState([new Date(), new Date()]);
     const [scrapeSuccess, setScrapeSuccess] = useState(false);
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const [enabled, setEnabled] = useState(false);
 
     const runScrape = async () => {
         if (!username || !keywordsState) {
@@ -22,12 +23,19 @@ export const Scraper = () => {
         setScrapeSuccess(status == 200)
     }
 
+    useEffect(() => {
+        if (username || keywordsState.length > 0) {
+            console.log(username)
+            setEnabled(true)
+        } else setEnabled(false)
+    }, [username, keywordsState]);
+
 
     return (
         <div className='bg-white flex flex-col h-[800px] w-[1300px] p-32 shadow-2xl'>
             <div className='flex justify-between'>
                 <UserName setUsername={setUsername}/>
-                <BeginScrape runScrape={runScrape}/>
+                <BeginScrape runScrape={runScrape} setShowModal={setShowModal} enabled={enabled}/>
             </div>
 
             <div className='flex justify-between w-full'>

@@ -4,10 +4,13 @@ import {motion} from "framer-motion";
 
 interface BeginScrapeProps {
     runScrape(): void
+
+    enabled: boolean
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const BeginScrape = (props: BeginScrapeProps) => {
-    const {runScrape} = props
+    const {runScrape, setShowModal, enabled} = props
 
     return (
         <div className='flex justify-center items-center'>
@@ -15,9 +18,14 @@ const BeginScrape = (props: BeginScrapeProps) => {
                 whileTap={{
                     scale: 0.9
                 }}
-                className=" bg-violet-500 w-[500px] h-32 hover:bg-violet-700 text-white font-bold px-4 rounded-md
-                transition duration-500"
-                onClick={() => runScrape()}>
+                className={" w-[500px] h-32 shadow-lg  font-bold px-4 rounded-md transition duration-500 "
+                    + (enabled ? " hover:bg-violet-700 bg-violet-500 text-white" : " bg-gray-100 text-gray-500")}
+                onClick={() => {
+                    setShowModal(true)
+                    runScrape()
+                }}
+                disabled={!enabled}
+            >
                 BEGIN SCRAPE
             </motion.button>
         </div>
