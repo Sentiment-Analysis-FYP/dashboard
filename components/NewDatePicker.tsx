@@ -24,7 +24,7 @@ const NewDatePicker = (props: NewDatePickerProps) => {
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date!)}
-                    open
+                    // open
                 />
             </div>
 
@@ -33,7 +33,7 @@ const NewDatePicker = (props: NewDatePickerProps) => {
                 <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date!)}
-                    open
+                    // open
                 />
             </div>
         </div>

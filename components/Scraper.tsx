@@ -4,6 +4,7 @@ import BeginScrape from "@/components/BeginScrape";
 import AddKeyword from "@/components/AddKeyword";
 import NewDatePicker from "@/components/NewDatePicker";
 import {requestScrape} from "@/utils/scraper";
+import WebSocketHandler from "@/components/WebSocketHandler";
 
 export const Scraper = () => {
     const [username, setUsername] = useState("");
@@ -31,6 +32,8 @@ export const Scraper = () => {
                 <NewDatePicker setDates={setDates}/>
                 <AddKeyword setKeywordsState={setKeywordsState}/>
             </div>
+
+            <WebSocketHandler/>
         </div>
     )
 }

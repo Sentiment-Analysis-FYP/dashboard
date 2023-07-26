@@ -6,7 +6,7 @@ const WebSocketComponent = () => {
     const [isComplete, setIsComplete] = useState(false)
 
     useEffect(() => {
-        const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_BASE_URL!) // Replace with your backend URL
+        const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
 
         ws.onopen = () => {
             console.log('WebSocket connection established')
@@ -43,9 +43,29 @@ const WebSocketComponent = () => {
 
 
     return (
-        <div>
-            {isComplete ? <p>Task is complete!</p> : <p>Task is not complete yet.</p>}
-        </div>
+        <>
+            {isComplete ?
+                <div className='absolute blur-lg top-0 right-0 left-0 bottom-0 m-auto w-screen h-screen'>
+                    <div className='w-[300px] h-[300px]'>
+                        Task is complete!
+                    </div>
+                </div> :
+                <div className='absolute backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto w-screen h-screen flex
+                    justify-center items-center'>
+                    <div
+                        className='w-[300px] h-[300px] flex flex-col justify-center items-center bg-white rounded-lg shadow-2xl'>
+                        Loading...
+
+                        <div className='flex w-full justify-center items-center dot-windmill mx-auto'
+                             // data-content={colors.at((position + 5) % colors.length)}
+                             style={{
+                                 backgroundColor: "#aa00ff",
+                                 color: "#aa00ff"
+                             }}/>
+                    </div>
+                </div>
+            }
+        </>
     )
 }
 
