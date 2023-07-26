@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/router"
 import {motion} from "framer-motion";
 import {useAuth} from "@/hooks/auth";
+import {useDispatch} from "react-redux";
+import {setAnalyzedData} from "@/utils/store/analyzedDataSlice";
 
 interface WebSocketComponentProps {
     showModal: boolean,
@@ -13,6 +15,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
     const router = useRouter()
     const [isComplete, setIsComplete] = useState(false)
     const [email, token] = useAuth()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
@@ -25,9 +28,18 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
         }
 
         ws.onmessage = (event) => {
-            const data = JSON.parse(event.data)
-            console.log(data)
-            setIsComplete(data.isComplete) // Update state based on data received from the backend
+            const eventData = JSON.parse(event.data)
+            const analyzedData = eventData.data
+
+            if (analyzedData) {
+                const jsonAnalyzedData = JSON.parse(analyzedData)
+                console.log('analyzed data:')
+                console.log(jsonAnalyzedData)
+                setIsComplete(eventData.isComplete)
+                dispatch(setAnalyzedData(jsonAnalyzedData))
+            } else {
+                console.log('No analyzed data')
+            }
         }
 
         ws.onclose = () => {
@@ -38,7 +50,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
             // Clean up the WebSocket connection when the component unmounts
             ws.close()
         }
-    }, [])
+    },)
 
     useEffect(() => {
         // route to analysis page

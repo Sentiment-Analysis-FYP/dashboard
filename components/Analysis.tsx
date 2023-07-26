@@ -2,9 +2,9 @@ import Link from "next/link";
 import {AiOutlinePlus} from "react-icons/ai";
 import React from "react";
 import {AnalyzedData} from "@/utils/scraper";
-import {DataGrid, GridCellParams, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
-
+import {useSelector} from "react-redux";
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -90,6 +90,8 @@ const DataTable = (props: AnalysisProps) => {
 
 const Analysis = (props: AnalysisProps) => {
     const {data} = props
+    const analyzedData = useSelector((state: any) => state.analyzedData)
+    console.log(analyzedData)
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
@@ -104,9 +106,9 @@ const Analysis = (props: AnalysisProps) => {
                             </div>
                         </Link>
                     </div>
-                    {data ?
+                    {analyzedData.data.length ?
                         (<div className='w-full h-full flex justify-center items-center'>
-                            <DataTable data={data}/>
+                            <DataTable data={analyzedData}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
