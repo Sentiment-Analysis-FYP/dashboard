@@ -139,9 +139,11 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     } = zoomGraph;
 
     return (
-        <div className='w-full h-[600px] flex justify-center items-center py-10 select-none'>
+        <div className='w-full h-[600px] flex flex-col justify-center items-center py-10 select-none'>
             line chart
-            <button type="button" className="btn update" onClick={() => zoomOut()}>
+            <button type="button" className="px-10 py-2 bg-violet-500 hover:bg-violet-700 transition duration-500
+            rounded-lg text-gray-50"
+                    onClick={() => zoomOut()}>
                 Zoom Out
             </button>
 
@@ -149,11 +151,11 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                 <LineChart width={800} height={400} data={data}
                            onMouseDown={e => setZoomGraph(prev => ({
                                ...prev,
-                               refAreaLeft: e.activeLabel
+                               refAreaLeft: e.activeLabel!
                            }))}
                            onMouseMove={e => zoomGraph.refAreaLeft && setZoomGraph(prev => ({
                                ...prev,
-                               refAreaRight: e.activeLabel
+                               refAreaRight: e.activeLabel!
                            }))}
                            onMouseUp={() => zoom()}>
                     <CartesianGrid strokeDasharray="3 3"/>
