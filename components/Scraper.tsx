@@ -5,6 +5,7 @@ import AddKeyword from "@/components/AddKeyword";
 import NewDatePicker from "@/components/NewDatePicker";
 import {requestScrape} from "@/utils/scraper";
 import WebSocketHandler from "@/components/WebSocketHandler";
+import {useAuth} from "@/hooks/auth";
 
 export const Scraper = () => {
     const [username, setUsername] = useState("");
@@ -13,21 +14,20 @@ export const Scraper = () => {
     const [scrapeSuccess, setScrapeSuccess] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [enabled, setEnabled] = useState(false);
+    const [email, token] = useAuth()
 
     const runScrape = async () => {
         if (!username || !keywordsState) {
             alert('Provide a username and/or keywords.')
         }
 
-        const status = await requestScrape(username, keywordsState, dates[0], dates[1])
+        const status = await requestScrape(username, keywordsState, dates[0], dates[1], email ? email : "guest")
         setScrapeSuccess(status == 200)
     }
 
     useEffect(() => {
-        if (username || keywordsState.length > 0) {
-            console.log(username)
-            setEnabled(true)
-        } else setEnabled(false)
+        if (username || keywordsState.length > 0) setEnabled(true)
+        else setEnabled(false)
     }, [username, keywordsState]);
 
 

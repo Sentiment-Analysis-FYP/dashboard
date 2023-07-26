@@ -26,6 +26,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
         ws.onmessage = (event) => {
             const data = JSON.parse(event.data)
+            console.log(data)
             setIsComplete(data.isComplete) // Update state based on data received from the backend
         }
 
@@ -62,8 +63,9 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                     className='w-[400px] h-[400px] flex flex-col justify-center items-center bg-white rounded-lg
                         shadow-2xl text-3xl'>
                     {isComplete ?
-                        <div>
-
+                        <div className='flex flex-col justify-center items-center gap-2 mb-4'>
+                            <span className='-mt-10'>Processing results</span>
+                            <span className='text-lg'>This may take a few minutes...</span>
                         </div>
                         :
                         <div className='flex flex-col justify-center items-center gap-2 mb-4'>
