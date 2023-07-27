@@ -4,6 +4,8 @@ import {getSentimentList} from "@/utils/visualizations";
 import CustomBarChart from "@/components/charts/CustomBarChart";
 import {useEffect, useState} from "react";
 import CustomLineChart from "@/components/charts/CustomLineChart";
+import {useSelector} from "react-redux";
+import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 
 interface VisualizationsProps {
     data: AnalyzedData
@@ -15,6 +17,15 @@ const POSITIVE = 'positive'
 const Visualizations = (props: VisualizationsProps) => {
     const {data} = props
 
+    const storeAnalyzedData = useSelector(getAnalyzedData)
+    console.log(`analyzed data from store:`)
+    console.log(storeAnalyzedData)
+
+    let analyzedData: AnalyzedData = {
+        scrapeId: storeAnalyzedData.payload.scrapeId,
+        data: storeAnalyzedData.payload.analyzedData
+    }
+
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
@@ -23,24 +34,24 @@ const Visualizations = (props: VisualizationsProps) => {
                     <div className='flex flex-col gap-5 justify-center items-center'>
                         <div className='flex justify-center items-center gap-14'>
                             <div className='flex flex-col justify-center items-center'>
-                                <span className='text-2xl font-semibold'>Negative Word Cloud</span>
-                                <CustomWordCloud sentimentList={getSentimentList(data, NEGATIVE)}/>
+                                <span className='text-2xl font-semibold text-violet-700'>Negative Word Cloud</span>
+                                <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
                             </div>
                             <div className='flex flex-col justify-center items-center'>
-                                <span className='text-2xl font-semibold'>Positive Word Cloud</span>
-                                <CustomWordCloud sentimentList={getSentimentList(data, POSITIVE)}/>
+                                <span className='text-2xl font-semibold text-violet-700'>Positive Word Cloud</span>
+                                <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14 py-32 w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                <span className='text-2xl font-semibold'>Variable Bar Chart</span>
-                                <CustomBarChart data={data}/>
+                                <span className='text-2xl font-semibold text-violet-700'>Variable Bar Chart</span>
+                                <CustomBarChart data={analyzedData}/>
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14 py-32 w-full'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                <span className='text-2xl font-semibold'>Line Chart</span>
-                                <CustomLineChart data={data}/>
+                                <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
+                                <CustomLineChart data={analyzedData}/>
                             </div>
                         </div>
                         <div className='flex justify-center items-center gap-14'>
