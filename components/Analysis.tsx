@@ -1,10 +1,11 @@
 import Link from "next/link";
-import {AiOutlinePlus} from "react-icons/ai";
+import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData} from "@/utils/scraper";
+import {AnalyzedData, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
 import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
+import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -90,14 +91,23 @@ const DataTable = (props: AnalysisProps) => {
 
 const Analysis = (props: AnalysisProps) => {
     const {data} = props
-    const analyzedData = useSelector((state: any) => state.analyzedData)
-    console.log(analyzedData)
+
+    const storeAnalyzedData = useSelector(getAnalyzedData)
+    console.log(`analyzed data from store:`)
+    console.log(storeAnalyzedData)
+
+    let analyzedData: AnalyzedData = {
+        scrapeId: storeAnalyzedData.payload.scrapeId,
+        data: storeAnalyzedData.payload.analyzedData
+    }
+
+    analyzedData = updateScoresToTwoDecimalPlaces(analyzedData)
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
             <div className='absolute top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
-                    <div className='flex flex-row-reverse'>
+                    <div className='flex flex-row-reverse justify-between'>
                         <Link href='/scraper'>
                             <div className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
                                     w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'>
@@ -105,10 +115,23 @@ const Analysis = (props: AnalysisProps) => {
                                 <span>New Search</span>
                             </div>
                         </Link>
+
+                        {analyzedData && analyzedData.data &&
+                            <Link href='/visualizations'>
+                                <div
+                                    className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
+                                        ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'}>
+                                    <AiOutlineLineChart size={20}/>
+                                    <span>Visualize</span>
+                                </div>
+                            </Link>}
                     </div>
-                    {analyzedData.data.length ?
-                        (<div className='w-full h-full flex justify-center items-center'>
+                    {analyzedData && analyzedData.data ?
+                        (<div className='w-full h-full flex flex-col justify-center items-center'>
                             <DataTable data={analyzedData}/>
+                            {/*<div className=''>*/}
+                            {/*    Generate Visualizations*/}
+                            {/*</div>*/}
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>

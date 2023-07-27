@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react'
 import {useRouter} from "next/router"
 import {motion} from "framer-motion";
 import {useAuth} from "@/hooks/auth";
-import {useDispatch} from "react-redux";
-import {setAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import store from "@/utils/store/store";
 
 interface WebSocketComponentProps {
     showModal: boolean,
@@ -33,10 +34,8 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
             if (analyzedData) {
                 const jsonAnalyzedData = JSON.parse(analyzedData)
-                console.log('analyzed data:')
-                console.log(jsonAnalyzedData)
-                setIsComplete(eventData.isComplete)
                 dispatch(setAnalyzedData(jsonAnalyzedData))
+                setIsComplete(eventData.isComplete)
             } else {
                 console.log('No analyzed data')
             }
@@ -65,6 +64,13 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
             clearTimeout(timeout) // Clean up the timeout when the component unmounts or isComplete changes.
         }
     }, [isComplete])
+
+    const analyzedData = useSelector(getAnalyzedData);
+
+    useEffect(() => {
+        console.log(`analyzed data payload from store`)
+        console.log(analyzedData.payload.analyzedData)
+    }, [analyzedData]);
 
 
     return (
@@ -104,7 +110,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                             className='px-6 py-2 hover:text-violet-700 transition duration-300 hover:-translate-y-1
                             cursor-pointer hover:bg-gray-200 rounded-lg'
                             onClick={() => setShowModal(false)}>
-                            Go back
+                            Cancel
                         </motion.div>
                     </div>
                 </div>

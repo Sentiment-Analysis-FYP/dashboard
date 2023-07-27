@@ -1,5 +1,5 @@
 // analyzedDataSlice.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {AnalyzedData} from "@/utils/scraper";
 
 const initialState: AnalyzedData = {
@@ -15,9 +15,16 @@ const analyzedDataSlice = createSlice({
             return action.payload;
         },
         clearAnalyzedData: () => initialState,
+        getAnalyzedData: (state, action) => {
+            state.data
+        }
     },
 });
 
-export const { setAnalyzedData, clearAnalyzedData } = analyzedDataSlice.actions;
+export const {
+    setAnalyzedData,
+    clearAnalyzedData,
+    getAnalyzedData
+} = analyzedDataSlice.actions;
 
 export default analyzedDataSlice.reducer;

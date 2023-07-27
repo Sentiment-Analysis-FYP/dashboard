@@ -11,8 +11,8 @@ export const requestScrape =
             body: JSON.stringify({
                 username: username,
                 keywords: keywords,
-                startDate: startDate,
-                endDate: endDate,
+                start_date: startDate,
+                end_date: endDate,
                 email: email
             })
         })
@@ -43,3 +43,16 @@ export interface AnalyzedDataItem {
 export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
     return dataItem.lr_sentiment == 0 ? "Negative" : "Positive"
 }
+
+export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
+    if (data.data.length)
+        return {
+            ...data,
+            data: data.data.map((item) => ({
+                ...item,
+                score: Number(item.score).toFixed(2),
+            })),
+        };
+
+    else return data
+};
