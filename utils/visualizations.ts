@@ -12,6 +12,8 @@ export const getSentimentList = (data: AnalyzedData, sentiment: string): Analyze
 
     console.log(`data has ${data.data.length} items`)
 
+    if (!sentimentList.length) return sentimentList
+
     if (sentiment == 'negative') {
         sentimentList = sentimentList
             .filter((dataItem) => Number(dataItem.score) < 0)
@@ -101,16 +103,15 @@ function mapToWordCloudItemArray(map: Map<string, number>): WordCloudItem[] {
 
 export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudItem[] => {
     let tokenList: string[][] = []
-
-    // data.map((dataItem) => wordCloudItemList.push(cleaning_stopwords(dataItem.text)))
-    data.map((dataItem) =>
-        tokenList.push(
-            lemmatizerOnText(
-                tokenizeThenStem(
-                    cleaningNumbers(
-                        cleaningURLs(
-                            cleaningRepeatingChar(
-                                cleaningPunctuations(cleaning_stopwords(dataItem.text)))))))))
+    if (data.length)
+        data.map((dataItem) =>
+            tokenList.push(
+                lemmatizerOnText(
+                    tokenizeThenStem(
+                        cleaningNumbers(
+                            cleaningURLs(
+                                cleaningRepeatingChar(
+                                    cleaningPunctuations(cleaning_stopwords(dataItem.text)))))))))
 
     const frequencyMap = getStringFrequency(tokenList)
     return mapToWordCloudItemArray(frequencyMap)
@@ -126,36 +127,37 @@ export interface GroupedDataItem {
 export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: string): GroupedDataItem[] => {
     const groupedData: { [key: string]: GroupedDataItem } = {};
 
-    data.forEach((item) => {
-        let dateGroup;
-        switch (groupBy) {
-            case 'day':
-                dateGroup = item.created_at.substring(0, 10); // Extracting the date up to the day (YYYY-MM-DD)
-                break;
-            case 'month':
-                dateGroup = item.created_at.substring(0, 7); // Extracting the date up to the month (YYYY-MM)
-                break;
-            case 'year':
-                dateGroup = item.created_at.substring(0, 4); // Extracting the date up to the year (YYYY)
-                break;
-            default:
-                throw new Error(`Invalid groupBy option: ${groupBy}`);
-        }
+    if (data.length)
+        data.forEach((item) => {
+            let dateGroup;
+            switch (groupBy) {
+                case 'day':
+                    dateGroup = item.created_at.substring(0, 10); // Extracting the date up to the day (YYYY-MM-DD)
+                    break;
+                case 'month':
+                    dateGroup = item.created_at.substring(0, 7); // Extracting the date up to the month (YYYY-MM)
+                    break;
+                case 'year':
+                    dateGroup = item.created_at.substring(0, 4); // Extracting the date up to the year (YYYY)
+                    break;
+                default:
+                    throw new Error(`Invalid groupBy option: ${groupBy}`);
+            }
 
-        if (groupedData[dateGroup]) {
-            // Group already exists, update counts
-            groupedData[dateGroup].count++
-            Number(item.score) < 0 ? groupedData[dateGroup].negativeCount-- : groupedData[dateGroup].positiveCount++
-        } else {
-            // Create a new group
-            groupedData[dateGroup] = {
-                count: 1,
-                date: dateGroup,
-                negativeCount: Number(item.score) < 0 ? -1 : 0,
-                positiveCount: Number(item.score) < 0 ? 0 : 1
-            };
-        }
-    })
+            if (groupedData[dateGroup]) {
+                // Group already exists, update counts
+                groupedData[dateGroup].count++
+                Number(item.score) < 0 ? groupedData[dateGroup].negativeCount-- : groupedData[dateGroup].positiveCount++
+            } else {
+                // Create a new group
+                groupedData[dateGroup] = {
+                    count: 1,
+                    date: dateGroup,
+                    negativeCount: Number(item.score) < 0 ? -1 : 0,
+                    positiveCount: Number(item.score) < 0 ? 0 : 1
+                };
+            }
+        })
 
     return Object.values(groupedData)
         .sort((a, b) => a.date.localeCompare(b.date));
