@@ -2,7 +2,12 @@ import {SignUp} from "@/components/SignUp";
 import Header from "@/components/Header";
 import {useAuth} from "@/hooks/auth";
 import {useEffect, useState} from "react";
-import {motion} from "framer-motion";
+import {AnimatePresence, motion} from "framer-motion";
+import {Scraper} from "@/components/Scraper";
+import Analysis from "@/components/Analysis";
+import Visualizations from "@/components/Visualizations";
+import Help from "@/components/Help";
+import HomePage from "@/components/HomePage";
 
 export default function Home() {
     const [email, token] = useAuth()
@@ -14,14 +19,6 @@ export default function Home() {
     }, [email]);
 
 
-    const HomePage = () => {
-        return (
-            <div className='mt-24'>
-                Home Page
-            </div>
-        )
-    }
-
     const HOME_PAGE = 0
     const SCRAPER_PAGE = 1
     const ANALYSIS_PAGE = 2
@@ -32,22 +29,27 @@ export default function Home() {
         switch (position) {
             case HOME_PAGE:
                 return <motion.div>
+                    <HomePage/>
                 </motion.div>
 
             case SCRAPER_PAGE:
                 return <motion.div>
+                    <Scraper/>
                 </motion.div>
 
             case ANALYSIS_PAGE:
                 return <motion.div>
+                    <Analysis/>
                 </motion.div>
 
             case VISUALIZATIONS_PAGE:
                 return <motion.div>
+                    {/*<Visualizations />*/}
                 </motion.div>
 
             case HELP_PAGE:
                 return <motion.div>
+                    <Help/>
                 </motion.div>
         }
     }
@@ -55,7 +57,22 @@ export default function Home() {
     return (
         <main>
             <Header activePage={activePage} setActivePage={setActivePage}/>
-            {isLoggedIn ? (<HomePage/>) : (<SignUp/>)}
+            {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
+
+            <motion.div
+                className='w-full h-screen flex justify-center items-center'>
+                <AnimatePresence>
+                    <motion.div
+                        key={activePage}
+                        initial={{opacity: 0, x: "100%"}}
+                        animate={{opacity: 1, x: 0}}
+                        exit={{opacity: 0, x: "-100%"}}
+                        transition={{duration: .1, delay: .1}}
+                        className=''>
+                        {renderSlide(activePage)}
+                    </motion.div>
+                </AnimatePresence>
+            </motion.div>
         </main>
     )
 }
