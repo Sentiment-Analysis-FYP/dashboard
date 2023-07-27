@@ -40,7 +40,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
 
 
     return (
-        <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md my-2 h-[450px] shadow">
+        <div className="flex w-[500px] flex-col bg-violet-50 px-4 py-2 rounded-md my-2 h-[450px] shadow">
             <span className="m-2 text-violet-600 text-xl">Search keywords</span>
             <div className="flex justify-between w-full">
                 <input
