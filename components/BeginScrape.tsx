@@ -19,7 +19,7 @@ const BeginScrape = (props: BeginScrapeProps) => {
                     scale: 0.9
                 }}
                 className={" w-[500px] h-32 shadow-lg  font-bold px-4 rounded-md transition duration-500 "
-                    + (enabled ? " hover:bg-violet-700 bg-violet-500 text-white" : " bg-violet-300 text-gray-500")}
+                    + (enabled ? " hover:bg-violet-700 bg-violet-500 text-white" : " bg-violet-200 text-gray-100")}
                 onClick={() => {
                     setShowModal(true)
                     runScrape()

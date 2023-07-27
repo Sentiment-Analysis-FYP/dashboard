@@ -2,10 +2,12 @@ import {AnalyzedData} from "@/utils/scraper";
 import CustomWordCloud from "@/components/charts/CustomWordCloud";
 import {getSentimentList} from "@/utils/visualizations";
 import CustomBarChart from "@/components/charts/CustomBarChart";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import CustomLineChart from "@/components/charts/CustomLineChart";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import Link from "next/link";
+import {motion} from "framer-motion";
 
 interface VisualizationsProps {
     data: AnalyzedData
@@ -13,6 +15,17 @@ interface VisualizationsProps {
 
 const NEGATIVE = 'negative'
 const POSITIVE = 'positive'
+
+const NoAnalyzedData = () => {
+    return (
+        <div className='flex flex-col text-2xl justify-center items-center'>
+            <span>Sorry, you have no analyzed data.</span>
+            <span>Visit the <Link href='/scraper' className='text-violet-600'>Scraper </Link>
+                to gather fresh data</span>
+            <span>or upload your own</span>
+        </div>
+    )
+}
 
 const Visualizations = (props: VisualizationsProps) => {
     const {data} = props
@@ -30,7 +43,7 @@ const Visualizations = (props: VisualizationsProps) => {
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
             <div className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-4 flex justify-center items-center'>
-                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6 flex justify-center items-center'>
+                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg px-10 py-16 flex justify-center items-center'>
                     <div className='flex flex-col gap-5 justify-center items-center'>
                         <div className='flex justify-center items-center gap-14'>
                             <div className='flex flex-col justify-center items-center'>
@@ -61,6 +74,17 @@ const Visualizations = (props: VisualizationsProps) => {
                     </div>
                 </div>
             </div>
+
+            {!analyzedData.data.length &&
+                <div className='fixed bg-gray-800 bg-opacity-60 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
+                w-screen h-screen flex justify-center items-center'>
+                    <div
+                        className='w-[500px] h-[400px] flex flex-col justify-center items-center bg-white rounded-lg
+                        shadow-2xl text-3xl'>
+                        <NoAnalyzedData/>
+                    </div>
+                </div>
+            }
         </div>
     )
 }

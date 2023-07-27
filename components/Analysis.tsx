@@ -14,7 +14,7 @@ interface AnalysisProps {
 const NoAnalyzedData = () => {
     return (
         <div className='flex flex-col text-2xl justify-center items-center'>
-            <span>Sorry, you have no analyzed data.</span>
+            <span>Sorry, you have no scraped data.</span>
             <span>Visit the <Link href='/scraper' className='text-violet-600'>Scraper </Link>
                 to gather fresh data</span>
             <span>or upload your own</span>
