@@ -6,6 +6,7 @@ import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {motion} from "framer-motion";
 
 interface AnalysisProps {
     data?: AnalyzedData,
@@ -101,7 +102,7 @@ const Analysis = (props: AnalysisProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = scrambleAnalyzedDataIds(analyzedData)
+    analyzedData = updateScoresToTwoDecimalPlaces(scrambleAnalyzedDataIds(analyzedData))
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
@@ -109,21 +110,28 @@ const Analysis = (props: AnalysisProps) => {
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
                     <div className='flex flex-row-reverse justify-between'>
                         <Link href='/scraper'>
-                            <div className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
+                            <motion.div
+                                whileTap={{
+                                    scale: 0.9
+                                }}
+                                className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
                                     w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'>
                                 <AiOutlinePlus size={20}/>
                                 <span>New Search</span>
-                            </div>
+                            </motion.div>
                         </Link>
 
                         {analyzedData && analyzedData.data.length &&
                             <Link href='/visualizations'>
-                                <div
+                                <motion.div
+                                    whileTap={{
+                                        scale: 0.9
+                                    }}
                                     className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
                                         ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'}>
                                     <AiOutlineLineChart size={20}/>
                                     <span>Visualize</span>
-                                </div>
+                                </motion.div>
                             </Link>}
                     </div>
                     {analyzedData && analyzedData.data.length ?

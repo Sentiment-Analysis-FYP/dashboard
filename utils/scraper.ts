@@ -45,7 +45,7 @@ export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
 }
 
 export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
-    if (data && data.data.length)
+    if (data && data.data && data.data.length)
         return {
             ...data,
             data: data.data.map((item) => ({
