@@ -17,12 +17,17 @@ export const Scraper = () => {
     const [email, token] = useAuth()
 
     const runScrape = async () => {
-        if (!username || !keywordsState) {
-            alert('Provide a username and/or keywords.')
+        console.log(username)
+        console.log(keywordsState)
+
+        if (username || keywordsState.length > 0) {
+            const status = await requestScrape(username, keywordsState, dates[0], dates[1], email ? email : "guest")
+            setScrapeSuccess(status == 200)
+            return
         }
 
-        const status = await requestScrape(username, keywordsState, dates[0], dates[1], email ? email : "guest")
-        setScrapeSuccess(status == 200)
+        alert('Provide a username and/or keywords.')
+        return
     }
 
     useEffect(() => {
