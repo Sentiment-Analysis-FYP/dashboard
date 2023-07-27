@@ -55,3 +55,9 @@
         transform: rotateZ(720deg) translate3d(0, 0, 0);
     }
 }
+
+#keyword-scroll::-webkit-scrollbar {
+    visibility: hidden;
+    opacity: 0;
+    width: 0;
+}

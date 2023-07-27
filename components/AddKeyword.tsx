@@ -65,13 +65,13 @@ const AddKeyword = (props: AddKeywordsProps) => {
                 </button>
             </div>
 
-            <div>
+            <div className='py-2'>
                 {keywords?.length > 0 ? (
-                    <ul>
+                    <div id='keyword-scroll' className='overflow-y-scroll h-[350px] snap-y py-2'>
                         {keywords.map(
                             (keyword, index) => (
                                 <div
-                                    className="flex gap-2 justify-between my-2 rounded-md"
+                                    className="flex gap-2 justify-between my-2 rounded-md snap-start "
                                     key={index}>
                                     <li className="bg-white w-72 mx-2 px-4 mr-0 py-3 pr-10 rounded-md  ">
                                         {keyword}
@@ -88,7 +88,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
                                 </div>
                             )
                         )}
-                    </ul>
+                    </div>
                 ) : (
                     <div className="mx-2 my-5">
                         <p>No keyword provided</p>
