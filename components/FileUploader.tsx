@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {motion} from "framer-motion";
+import axios from "axios";
 
 const FileUploader = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -9,17 +10,27 @@ const FileUploader = () => {
         setSelectedFile(file || null);
     };
 
-    const handleFileUpload = () => {
+    const handleFileUpload = async () => {
         if (selectedFile) {
-            // Process the file or upload it to your server
-            // For example, you can use FileReader API to read the file content
-            const reader = new FileReader();
-            reader.onload = () => {
-                const fileContent = reader.result;
-                // Do something with the file content (e.g., parse the CSV data)
-                console.log('File Content:', fileContent);
-            };
-            reader.readAsText(selectedFile);
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            const scrapeId = Date.now(); // Get the current date as a number for scrapeId
+
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_EXPRESS_BASE_URL}/ml/upload/run_analysis/${scrapeId}`,
+                formData)
+
+            console.log(response)
+
+            // const reader = new FileReader();
+            // reader.onload = () => {
+            //     const fileContent = reader.result;
+            //     // Do something with the file content (e.g., parse the CSV data)
+            //     console.log('File Content:', fileContent);
+            // };
+            // reader.readAsText(selectedFile);
         }
     };
 
