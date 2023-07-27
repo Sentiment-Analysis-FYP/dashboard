@@ -8,7 +8,7 @@ const UserName = (props: UserNameProps) => {
     const {setUsername} = props
 
     return (
-        <div className="w-[500px] h-32 bottom flex items-center space-x-7 bg-violet-50 my-2 px-4 rounded-md">
+        <div className="w-[500px] h-32 bottom flex items-center space-x-7 bg-violet-50 my-2 px-4 rounded-md shadow">
             <div className=" flex flex-col">
                 <div className=" flex flex-col m-2 ">
                     <label htmlFor="username" className="my-2 mb-0 text-violet-600 text-xl">

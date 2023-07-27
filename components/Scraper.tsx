@@ -6,6 +6,7 @@ import NewDatePicker from "@/components/NewDatePicker";
 import {requestScrape} from "@/utils/scraper";
 import WebSocketHandler from "@/components/WebSocketHandler";
 import {useAuth} from "@/hooks/auth";
+import FileUploader from "@/components/FileUploader";
 
 export const Scraper = () => {
     const [username, setUsername] = useState("");
@@ -45,7 +46,10 @@ export const Scraper = () => {
 
             <div className='flex justify-between w-full'>
                 <AddKeyword setKeywordsState={setKeywordsState}/>
-                <NewDatePicker setDates={setDates}/>
+                <div className=''>
+                    <NewDatePicker setDates={setDates}/>
+                    <FileUploader/>
+                </div>
             </div>
 
             {showModal && <WebSocketHandler showModal={showModal} setShowModal={setShowModal}/>}
