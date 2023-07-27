@@ -18,23 +18,33 @@ const NewDatePicker = (props: NewDatePickerProps) => {
 
 
     return (
-        <div className="absolute flex gap-8 px-4 pt-4 ml-[550px] mt-14">
-            <div className="flex justify-center">
-                From&nbsp;
-                <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date!)}
-                    // open
-                />
+        <div className=" flex w-[500px] justify-between px-4 py-14 text-xl">
+            <div className="flex flex-col ">
+                <label htmlFor="startdate" className='text-violet-600 font-semibold' >
+                    From&nbsp;
+                </label>
+                {/*<DatePicker*/}
+                {/*    selected={startDate}*/}
+                {/*    onChange={(date) => setStartDate(date!)}*/}
+                {/*    // open*/}
+                {/*/>*/}
+                <input type="date"
+                       id="startdate"
+                       onChange={(date) => setStartDate(new Date(date.target.value))}/>
             </div>
 
-            <div className="flex justify-center">
-                Until&nbsp;
-                <DatePicker
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date!)}
-                    // open
-                />
+            <div className="flex flex-col ">
+                <label htmlFor="enddate" className='text-violet-600 font-semibold'>
+                    Until&nbsp;
+                </label>
+                {/*<DatePicker*/}
+                {/*    selected={endDate}*/}
+                {/*    onChange={(date) => setEndDate(date!)}*/}
+                {/*    // open*/}
+                {/*/>*/}
+                <input type="date"
+                       id="enddate"
+                       onChange={(date) => setEndDate(new Date(date.target.value))}/>
             </div>
         </div>
     );

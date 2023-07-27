@@ -40,9 +40,9 @@ const AddKeyword = (props: AddKeywordsProps) => {
 
 
     return (
-        <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md m-2 h-[450px]">
-            <span className="m-2">Search keywords</span>
-            <div className="flex justify-between">
+        <div className="flex w-[500px] flex-col bg-gray-100 px-4 py-2 rounded-md my-2 h-[450px] shadow">
+            <span className="m-2 text-violet-600 text-xl">Search keywords</span>
+            <div className="flex justify-between w-full">
                 <input
                     className="w-72 rounded-md mx-2 mr-0 px-4 py-3 border-[1px] border-gray-300"
                     type="text"
@@ -73,9 +73,10 @@ const AddKeyword = (props: AddKeywordsProps) => {
                                 <div
                                     className="flex gap-2 justify-between my-2 rounded-md snap-start "
                                     key={index}>
-                                    <li className="bg-white w-72 mx-2 px-4 mr-0 py-3 pr-10 rounded-md  ">
+                                    <span
+                                        className="bg-white w-72 h-12 mx-2 px-4 mr-0 py-3 pr-10 rounded-md text-gray-800">
                                         {keyword}
-                                    </li>
+                                    </span>
                                     <button
                                         onClick={() => {
                                             deleteKeyword(index as number)
@@ -94,6 +95,8 @@ const AddKeyword = (props: AddKeywordsProps) => {
                         <p>No keyword provided</p>
                     </div>
                 )}
+
+                <div className='w-full px-3 h-[2px] bg-gray-300'></div>
             </div>
         </div>
     );

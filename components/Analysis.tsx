@@ -116,7 +116,7 @@ const Analysis = (props: AnalysisProps) => {
                             </div>
                         </Link>
 
-                        {analyzedData && analyzedData.data &&
+                        {analyzedData && analyzedData.data.length &&
                             <Link href='/visualizations'>
                                 <div
                                     className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
@@ -126,7 +126,7 @@ const Analysis = (props: AnalysisProps) => {
                                 </div>
                             </Link>}
                     </div>
-                    {analyzedData && analyzedData.data ?
+                    {analyzedData && analyzedData.data.length ?
                         (<div className='w-full h-full flex flex-col justify-center items-center'>
                             <DataTable data={analyzedData}/>
                         </div>) :

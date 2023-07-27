@@ -37,15 +37,15 @@ export const Scraper = () => {
 
 
     return (
-        <div className='bg-white flex flex-col h-[800px] w-[1300px] p-32 shadow-2xl'>
-            <div className='flex justify-between'>
+        <div className='bg-white flex flex-col h-[800px] w-[1300px] p-32 shadow-2xl rounded-lg'>
+            <div className='flex justify-between w-full'>
                 <UserName setUsername={setUsername}/>
                 <BeginScrape runScrape={runScrape} setShowModal={setShowModal} enabled={enabled}/>
             </div>
 
             <div className='flex justify-between w-full'>
-                <NewDatePicker setDates={setDates}/>
                 <AddKeyword setKeywordsState={setKeywordsState}/>
+                <NewDatePicker setDates={setDates}/>
             </div>
 
             {showModal && <WebSocketHandler showModal={showModal} setShowModal={setShowModal}/>}
