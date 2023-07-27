@@ -129,9 +129,6 @@ const Analysis = (props: AnalysisProps) => {
                     {analyzedData && analyzedData.data ?
                         (<div className='w-full h-full flex flex-col justify-center items-center'>
                             <DataTable data={analyzedData}/>
-                            {/*<div className=''>*/}
-                            {/*    Generate Visualizations*/}
-                            {/*</div>*/}
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
