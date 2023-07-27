@@ -48,7 +48,7 @@ export const Scraper = () => {
                 <AddKeyword setKeywordsState={setKeywordsState}/>
                 <div className=''>
                     <NewDatePicker setDates={setDates}/>
-                    <FileUploader/>
+                    <FileUploader showModal={showModal} setShowModal={setShowModal}/>
                 </div>
             </div>
 

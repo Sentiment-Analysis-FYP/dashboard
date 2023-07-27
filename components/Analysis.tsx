@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
+import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
 import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
@@ -101,7 +101,7 @@ const Analysis = (props: AnalysisProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = updateScoresToTwoDecimalPlaces(analyzedData)
+    analyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(analyzedData))
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>

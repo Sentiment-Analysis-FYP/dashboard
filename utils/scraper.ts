@@ -52,23 +52,24 @@ export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData
                 ...item,
                 score: Number(item.score).toFixed(2),
             })),
-        };
+        }
 
     else return data
-};
+}
 
 export const scrambleAnalyzedDataIds = (data: AnalyzedData): AnalyzedData => {
-    const updatedData: AnalyzedDataItem[] = data.data.map((item) => {
-        const randomNumbers = Math.floor(10000 + Math.random() * 90000).toString();
-        const newId = item.id.slice(0, -5) + randomNumbers;
+    if (!data || !data.data) return data
+    const updatedData: AnalyzedDataItem[] = data.data.map((item, index) => {
+        const randomNumbers = Math.floor(10000 + Math.random() * 90000).toString()
+        const newId = item.id.slice(0, -5) + randomNumbers
         return {
             ...item,
             id: newId,
-        };
-    });
+        }
+    })
 
     return {
         ...data,
         data: updatedData,
-    };
-};
+    }
+}

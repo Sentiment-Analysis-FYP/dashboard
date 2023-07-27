@@ -1,9 +1,15 @@
-import {useState} from "react"
+import React, {useState} from "react"
 import {motion} from "framer-motion"
 import axios from "axios"
 import {useAuth} from "@/hooks/auth"
 
-const FileUploader = () => {
+interface FileUploaderProps {
+    showModal: boolean,
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+const FileUploader = (props: FileUploaderProps) => {
+    const {showModal, setShowModal} = props
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [email, token] = useAuth()
 
@@ -27,6 +33,10 @@ const FileUploader = () => {
                 formData)
 
             console.log(response)
+
+            if (response.status == 200) {
+                setShowModal(true)
+            }
         }
     }
 
