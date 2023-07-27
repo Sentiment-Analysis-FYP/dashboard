@@ -2,9 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 import {useAuth} from "@/hooks/auth"
 
-const Header = () => {
+interface HeaderProps {
+    activePage: number,
+    setActivePage: React.Dispatch<React.SetStateAction<number>>,
+}
+
+const Header = (props: HeaderProps) => {
+    const {activePage, setActivePage} = props
     const [email, token] = useAuth()
-    const [activePage, setActivePage] = useState(0);
+    // const [activePage, setActivePage] = useState(0);
 
     let stockCategories = [
         {name: "Home", slug: ""},
@@ -22,8 +28,8 @@ const Header = () => {
 
 
     return (
-        <div className="fixed top-0 bottom-0 left-0 bg-white z-50 h-5/6 w-96 shadow-lg my-10 mx-10 rounded-lg">
-            <div className=' w-full flex items-center'>
+        <div className="fixed top-0 bottom-0 left-0 z-50 h-full w-96 mx-10 flex flex-col ">
+            <div className='bg-white my-10 rounded-lg h-full w-full flex shadow-lg'>
                 <div className=" w-full">
                     <div className=" w-full border-gray-300 py-14 items-center flex flex-col justify-between">
                         <div className="flex flex-col justify-center items-center">
@@ -46,7 +52,7 @@ const Header = () => {
                                                 'font-semibold py-14  group transform uppercase ' +
                                                 ' ease-in-out text-xl ' +
                                                 ((activePage == index) ? " shadow-md bg-violet-50" :
-                                                    " hover:text-violet-400 hover:duration-400 hover:bg-gray-200 transition ")}>
+                                                    " hover:text-violet-400 duration-400 hover:bg-gray-200 transition ")}>
                                             <p className='transition duration-300 group-hover:translate-x-1'>
                                                 {category.name}
                                             </p>
