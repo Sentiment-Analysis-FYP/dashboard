@@ -45,7 +45,7 @@ export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
 }
 
 export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
-    if (data.data.length)
+    if (data && data.data.length)
         return {
             ...data,
             data: data.data.map((item) => ({
@@ -58,10 +58,10 @@ export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData
 }
 
 export const scrambleAnalyzedDataIds = (data: AnalyzedData): AnalyzedData => {
-    if (!data || !data.data) return data
-    const updatedData: AnalyzedDataItem[] = data.data.map((item, index) => {
+    if (!data || !data.data || !data.data.length) return data
+    const updatedData: AnalyzedDataItem[] = data.data.map((item) => {
         const randomNumbers = Math.floor(10000 + Math.random() * 90000).toString()
-        const newId = item.id.slice(0, -5) + randomNumbers
+        const newId = item.id.toString().slice(0, -5) + randomNumbers
         return {
             ...item,
             id: newId,

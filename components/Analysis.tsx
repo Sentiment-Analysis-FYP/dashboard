@@ -101,7 +101,7 @@ const Analysis = (props: AnalysisProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(analyzedData))
+    analyzedData = scrambleAnalyzedDataIds(analyzedData)
 
     return (
         <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>

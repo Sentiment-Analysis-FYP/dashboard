@@ -301,9 +301,10 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     } = zoomGraph;
 
     return (
-        <div className='w-full flex flex-col justify-center items-center py-10 select-none gap-8'>
-            <button type="button" className="px-10 py-2 bg-violet-500 hover:bg-violet-700 transition duration-500
-            rounded-lg text-gray-50"
+        <div className='w-full flex flex-col justify-center items-center py-10 select-none gap-6'>
+            <button type="button"
+                    className="px-10 py-2 bg-violet-500 hover:bg-violet-700 -mt-2 transition duration-500
+                        rounded-lg text-gray-50"
                     onClick={() => zoomOut()}>
                 Zoom Out
             </button>

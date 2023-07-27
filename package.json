@@ -12,10 +12,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "@types/react-redux": "^7.1.25",
     "autoprefixer": "10.4.14",
-    "axios": "^1.4.0",
     "dayjs": "^1.11.7",
     "dotenv": "^16.3.1",
     "eslint": "8.39.0",

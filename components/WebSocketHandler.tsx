@@ -5,7 +5,7 @@ import {useAuth} from "@/hooks/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import store from "@/utils/store/store";
-import {scrambleAnalyzedDataIds} from "@/utils/scraper";
+import {scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
 
 interface WebSocketComponentProps {
     showModal: boolean,
@@ -37,7 +37,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                 const jsonAnalyzedData = JSON.parse(analyzedData)
 
                 // scramble IDs in case of duplicates
-                const scrambledAnalyzedData = scrambleAnalyzedDataIds(jsonAnalyzedData)
+                const scrambledAnalyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(jsonAnalyzedData))
                 dispatch(setAnalyzedData(scrambledAnalyzedData))
                 setIsComplete(eventData.isComplete)
             } else {

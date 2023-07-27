@@ -28,9 +28,13 @@ const FileUploader = (props: FileUploaderProps) => {
 
             const scrapeId = Date.now() // Get the current date as a number for scrapeId
 
-            const response = await axios.post(
+            const response = await fetch(
                 `${process.env.NEXT_PUBLIC_EXPRESS_BASE_URL}/ml/upload/run_analysis/${scrapeId}`,
-                formData)
+                {
+                    method: 'POST',
+                    body: formData,
+                }
+            )
 
             console.log(response)
 

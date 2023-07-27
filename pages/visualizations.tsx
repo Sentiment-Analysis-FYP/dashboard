@@ -12,7 +12,7 @@ export default function VisualizationsPage() {
         <div>
             <Header/>
 
-            <main className='mt-24'>
+            <main className='mt-24 '>
                 <Visualizations data={dummyData}/>
             </main>
         </div>

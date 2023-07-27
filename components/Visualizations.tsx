@@ -1,4 +1,4 @@
-import {AnalyzedData} from "@/utils/scraper";
+import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
 import CustomWordCloud from "@/components/charts/CustomWordCloud";
 import {getSentimentList} from "@/utils/visualizations";
 import CustomBarChart from "@/components/charts/CustomBarChart";
@@ -39,29 +39,43 @@ const Visualizations = (props: VisualizationsProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
+    analyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(analyzedData))
+
 
     return (
-        <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
-            <div className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-4 flex justify-center items-center'>
-                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg px-10 py-16 flex justify-center items-center'>
-                    <div className='flex flex-col gap-5 justify-center items-center'>
+        <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern overflow-y-scroll'>
+            <div className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-32 w-5/6 flex justify-center items-center'>
+                <div
+                    className='w-full bg-white  shadow-2xl rounded-lg py-16 flex justify-center items-center'>
+                    <div className='flex flex-col gap-5 justify-center items-center px-10'>
                         <div className='flex justify-center items-center gap-14'>
-                            <div className='flex flex-col justify-center items-center'>
-                                <span className='text-2xl font-semibold text-violet-700'>Negative Word Cloud</span>
+                            <div
+                                className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
+                                <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                    Negative Word Cloud
+                                </span>
                                 <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
                             </div>
-                            <div className='flex flex-col justify-center items-center'>
-                                <span className='text-2xl font-semibold text-violet-700'>Positive Word Cloud</span>
+                            <div
+                                className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8
+                                rounded-lg shadow'>
+                                <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                    Positive Word Cloud
+                                </span>
                                 <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>
                             </div>
                         </div>
-                        <div className='flex justify-center items-center gap-14 py-32 w-full'>
+                        <div
+                            className='flex justify-center items-center gap-14 my-10 py-24 w-full bg-violet-50 shadow
+                            rounded-lg'>
                             <div className='flex flex-col justify-center items-center w-full'>
-                                <span className='text-2xl font-semibold text-violet-700'>Variable Bar Chart</span>
+                                <span className='text-2xl font-semibold text-violet-700'>
+                                    Variable Bar Chart
+                                </span>
                                 <CustomBarChart data={analyzedData}/>
                             </div>
                         </div>
-                        <div className='flex justify-center items-center gap-14 py-32 w-full'>
+                        <div className='flex justify-center items-center py-24 w-full bg-violet-50 rounded-lg shadow'>
                             <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                 <CustomLineChart data={analyzedData}/>
