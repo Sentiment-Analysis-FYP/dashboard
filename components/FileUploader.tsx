@@ -1,38 +1,34 @@
-import {useState} from "react";
-import {motion} from "framer-motion";
-import axios from "axios";
+import {useState} from "react"
+import {motion} from "framer-motion"
+import axios from "axios"
+import {useAuth} from "@/hooks/auth"
 
 const FileUploader = () => {
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null)
+    const [email, token] = useAuth()
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        setSelectedFile(file || null);
-    };
+        const file = event.target.files?.[0]
+        setSelectedFile(file || null)
+    }
 
     const handleFileUpload = async () => {
         if (selectedFile) {
 
-            const formData = new FormData();
-            formData.append('file', selectedFile);
+            const formData = new FormData()
+            formData.append('file', selectedFile)
 
-            const scrapeId = Date.now(); // Get the current date as a number for scrapeId
+            formData.append('email', email ? email : "guest")
+
+            const scrapeId = Date.now() // Get the current date as a number for scrapeId
 
             const response = await axios.post(
                 `${process.env.NEXT_PUBLIC_EXPRESS_BASE_URL}/ml/upload/run_analysis/${scrapeId}`,
                 formData)
 
             console.log(response)
-
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //     const fileContent = reader.result;
-            //     // Do something with the file content (e.g., parse the CSV data)
-            //     console.log('File Content:', fileContent);
-            // };
-            // reader.readAsText(selectedFile);
         }
-    };
+    }
 
     return (
         <div className='flex flex-col gap-5 items-center pt-8 mt-1 mx-8 border-t-[2px] border-gray-300'>

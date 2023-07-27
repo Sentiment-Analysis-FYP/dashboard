@@ -23,7 +23,7 @@ const Header = () => {
                         <div className="">
                             <Link href='/'>
                                 <span
-                                    className="cursor-pointer font-bold text-md md:text-2xl
+                                    className="cursor-pointer font-bold text-2xl
                                      text-violet-800 tracking-widest">
                                     SENTINEL
                                 </span>
