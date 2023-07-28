@@ -12,7 +12,7 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
     const wordList = generateWordCloudItemList(sentimentList)
 
     return (
-        <div className='w-[400px] h-[600px] flex justify-center items-center'>
+        <div className='w-[500px] h-[600px] flex justify-center items-center'>
             {wordList.length ?
                 <TagCloud minSize={12}
                           maxSize={100}

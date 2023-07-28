@@ -46,15 +46,15 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     return (
-        <div>
+        <div className='w-full h-screen'>
             {analyzedData.data.length ?
-                <div className='w-[1200px] '>
+                <div className='w-ful '>
                     <div
                         className=' py-32 w-full flex justify-center items-center'>
                         <div
-                            className='w-[1200px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-16 flex justify-center items-center'>
-                            <div className='flex w-full bg-red-700 flex-col gap-5 justify-center items-center px-10'>
-                                <div className='flex justify-center items-center gap-14'>
+                            className='w-[1400px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-20 flex justify-center items-center'>
+                            <div className='flex flex-col gap-5 justify-center items-center '>
+                                <div className='flex w-[1200px] justify-between items-center'>
                                     <div
                                         className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
                                         <span className='text-2xl font-semibold text-violet-700 mb-8'>
@@ -73,7 +73,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                 </div>
 
                                 <div
-                                    className='flex justify-center items-center gap-14 my-10 py-24 w-[1000px] bg-violet-50 shadow
+                                    className='flex justify-center items-center gap-14 my-10 py-24 w-[1200px] bg-violet-50 shadow
                                     rounded-lg'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>
@@ -83,16 +83,16 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
                                 <div
-                                    className='flex justify-center items-center py-24 w-[1000px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>
                                     </div>
                                 </div>
-                                <div className='flex justify-center items-center gap-14'>
-                                    <div>pie chart</div>
-                                    <div>more tins</div>
-                                </div>
+                                {/*<div className='flex justify-center items-center gap-14'>*/}
+                                {/*    <div>pie chart</div>*/}
+                                {/*    <div>more tins</div>*/}
+                                {/*</div>*/}
                             </div>
                         </div>
                     </div>
