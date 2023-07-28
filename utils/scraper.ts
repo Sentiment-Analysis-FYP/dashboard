@@ -37,7 +37,9 @@ export interface AnalyzedDataItem {
     t_sentiment_polarity: number,
     t_sentiment_subjectivity: number,
     lr_sentiment: number,
-    score: string
+    score: string,
+    emotion_label: string,
+    emotion_score: number
 }
 
 export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
