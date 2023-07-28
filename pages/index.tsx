@@ -68,27 +68,31 @@ export default function Home() {
             <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
                      toggleSidebar={handleViewSidebar}/>
 
-            <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
-                + (sidebarOpen ? " pl-96" : "")}>
-                <Dashboard/>
-            </div>
-            {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
+            {isLoggedIn ? <div>
+                    <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
+                        + (sidebarOpen ? " pl-96" : "")}>
+                        <Dashboard setActivePage={setActivePage}/>
+                    </div>
+                    {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
 
-            {/*<motion.div*/}
-            {/*    className='w-screen h-screen flex justify-end items-center '>*/}
-            {/*    /!*<AnimatePresence mode='popLayout'>*!/*/}
-            {/*    /!*    <motion.div*!/*/}
-            {/*    /!*        key={activePage}*!/*/}
-            {/*    /!*        initial={{opacity: 0, x: "30%"}}*!/*/}
-            {/*    /!*        animate={{opacity: 1, x: 0}}*!/*/}
-            {/*    /!*        exit={{opacity: 0, x: "-100%"}}*!/*/}
-            {/*    /!*        transition={{duration: .3, delay: 0}}*!/*/}
-            {/*    /!*        className=''>*!/*/}
-            {/*    /!*        {renderSlide(activePage)}*!/*/}
-            {/*    /!*    </motion.div>*!/*/}
-            {/*    /!*</AnimatePresence>*!/*/}
-            {/*</motion.div>*/}
+                    {/*<motion.div*/}
+                    {/*    className='w-screen h-screen flex justify-end items-center '>*/}
+                    {/*    /!*<AnimatePresence mode='popLayout'>*!/*/}
+                    {/*    /!*    <motion.div*!/*/}
+                    {/*    /!*        key={activePage}*!/*/}
+                    {/*    /!*        initial={{opacity: 0, x: "30%"}}*!/*/}
+                    {/*    /!*        animate={{opacity: 1, x: 0}}*!/*/}
+                    {/*    /!*        exit={{opacity: 0, x: "-100%"}}*!/*/}
+                    {/*    /!*        transition={{duration: .3, delay: 0}}*!/*/}
+                    {/*    /!*        className=''>*!/*/}
+                    {/*    /!*        {renderSlide(activePage)}*!/*/}
+                    {/*    /!*    </motion.div>*!/*/}
+                    {/*    /!*</AnimatePresence>*!/*/}
+                    {/*</motion.div>*/}
+                </div>
+                :
+                <SignUp/>}
         </main>
     )
 }
