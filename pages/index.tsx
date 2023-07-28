@@ -9,6 +9,13 @@ import Visualizations from "@/components/Visualizations";
 import Help from "@/components/Help";
 import HomePage from "@/components/HomePage";
 
+export const HOME_PAGE = 0
+export const SCRAPER_PAGE = 1
+export const ANALYSIS_PAGE = 2
+export const VISUALIZATIONS_PAGE = 3
+export const HELP_PAGE = 4
+
+
 export default function Home() {
     const [email, token] = useAuth()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,12 +26,6 @@ export default function Home() {
     }, [email]);
 
 
-    const HOME_PAGE = 0
-    const SCRAPER_PAGE = 1
-    const ANALYSIS_PAGE = 2
-    const VISUALIZATIONS_PAGE = 3
-    const HELP_PAGE = 4
-
     const renderSlide = (position: number) => {
         switch (position) {
             case HOME_PAGE:
@@ -34,7 +35,7 @@ export default function Home() {
 
             case SCRAPER_PAGE:
                 return <motion.div>
-                    <Scraper/>
+                    <Scraper setActivePage={setActivePage}/>
                 </motion.div>
 
             case ANALYSIS_PAGE:
@@ -55,12 +56,12 @@ export default function Home() {
     }
 
     return (
-        <main className='pattern'>
+        <main className='pattern w-screen flex justify-end pr-96'>
             <Header activePage={activePage} setActivePage={setActivePage}/>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
             <motion.div
-                className='w-screen h-screen flex justify-center items-center pl-48'>
+                className='w-screen h-screen flex justify-end items-center '>
                 <AnimatePresence mode='popLayout'>
                     <motion.div
                         key={activePage}

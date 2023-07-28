@@ -48,7 +48,7 @@ const Visualizations = (props: VisualizationsProps) => {
     return (
         <div>
             {analyzedData.data.length ?
-                <div className='m-auto pattern overflow-y-scroll'>
+                <div className='m-auto overflow-y-scroll'>
                     <div
                         className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-32 w-5/6 flex justify-center items-center'>
                         <div

@@ -18,14 +18,14 @@ const DataTable = (props: AnalysisDataProps) => {
     const rows = data!.data
 
     const columns: GridColDef[] = [
-        {field: 'id', headerName: 'ID', flex: 0.6},
-        {field: 'username', headerName: 'Username', flex: 0.7},
+        {field: 'id', headerName: 'ID', flex: 0.5},
+        {field: 'username', headerName: 'Username', flex: 0.6},
         {field: 'text', headerName: 'Text', flex: 1},
         {
             field: 'score',
             description: 'From -1 (negative) to 1 (positive)',
             headerName: 'Sentiment Score',
-            flex: 0.7,
+            flex: 0.6,
             cellClassName: (params: GridCellParams<any, number>) => {
                 if (params.value == null) {
                     return '';
@@ -41,12 +41,12 @@ const DataTable = (props: AnalysisDataProps) => {
             field: 'created_at',
             headerName: 'Date Sent',
             description: 'YYYY-MM-DD',
-            flex: 0.5,
+            flex: 0.4,
         },
     ];
 
     return (
-        <div className='flex justify-center h-full w-full py-4'>
+        <div className='flex justify-center h-[1200px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -101,7 +101,7 @@ const Analysis = (props: AnalysisProps) => {
 
     const NoAnalyzedData = () => {
         return (
-            <div className='flex flex-col text-2xl justify-center items-center p-16'>
+            <div className='flex flex-col text-2xl justify-center items-center p-20'>
                 <span>Sorry, you have no scraped data.</span>
                 <span>Visit the <span onClick={() => setActivePage(1)} className='text-violet-500 cursor-pointer
                 hover:text-violet-700 transition duration-300'>
@@ -114,7 +114,7 @@ const Analysis = (props: AnalysisProps) => {
 
 
     return (
-        <div className='h-full w-full'>
+        <div className=' w-full'>
             <div className='h-full flex justify-center items-center'>
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
                     <div className='flex flex-row-reverse justify-between'>
@@ -144,12 +144,13 @@ const Analysis = (props: AnalysisProps) => {
                             </Link>}
                     </div>
                     {analyzedData && analyzedData.data.length ?
-                        (<div className='w-full h-full flex flex-col justify-center items-center'>
+                        (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center'>
                             <DataTable data={analyzedData}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
-                        </div>)}
+                        </div>)
+                    }
                 </div>
             </div>
         </div>

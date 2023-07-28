@@ -4,16 +4,17 @@ import {motion} from "framer-motion";
 import {useAuth} from "@/hooks/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
-import store from "@/utils/store/store";
 import {scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
+import {ANALYSIS_PAGE} from "@/pages";
 
 interface WebSocketComponentProps {
     showModal: boolean,
-    setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+    setShowModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setActivePage: React.Dispatch<React.SetStateAction<number>>
 }
 
 const WebSocketComponent = (props: WebSocketComponentProps) => {
-    const {showModal, setShowModal} = props
+    const {showModal, setShowModal, setActivePage} = props
     const router = useRouter()
     const [isComplete, setIsComplete] = useState(false)
     const [email, token] = useAuth()
@@ -37,7 +38,8 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                 const jsonAnalyzedData = JSON.parse(analyzedData)
 
                 // scramble IDs in case of duplicates
-                const scrambledAnalyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(jsonAnalyzedData))
+                const scrambledAnalyzedData =
+                    scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(jsonAnalyzedData))
                 dispatch(setAnalyzedData(scrambledAnalyzedData))
                 setIsComplete(eventData.isComplete)
             } else {
@@ -60,7 +62,8 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
         let timeout: ReturnType<typeof setTimeout>
         if (isComplete) {
             timeout = setTimeout(() => {
-                router.push('/analysis')
+                // router.push('/analysis')
+                setActivePage(ANALYSIS_PAGE)
             }, 3000)
         }
 
@@ -79,11 +82,11 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
     return (
         <>
-            {showModal && <div className='absolute bg-gray-800 bg-opacity-60 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
-                w-screen h-screen flex justify-center items-center'>
+            {showModal && <div className='absolute bg-violet-50 bg-opacity-50 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
+                w-full h-screen flex justify-center items-center '>
                 <div
                     className='w-[400px] h-[400px] flex flex-col justify-center items-center bg-white rounded-lg
-                        shadow-2xl text-3xl'>
+                        shadow-2xl text-3xl transition- duration-500'>
                     {isComplete ?
                         <div className='flex flex-col justify-center items-center gap-2 mb-4'>
                             <span className='-mt-10'>Processing results</span>

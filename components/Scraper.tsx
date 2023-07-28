@@ -8,7 +8,12 @@ import WebSocketHandler from "@/components/WebSocketHandler";
 import {useAuth} from "@/hooks/auth";
 import FileUploader from "@/components/FileUploader";
 
-export const Scraper = () => {
+interface ScraperProps {
+    setActivePage: React.Dispatch<React.SetStateAction<number>>
+}
+
+export const Scraper = (props: ScraperProps) => {
+    const {setActivePage} = props
     const [username, setUsername] = useState("");
     const [keywordsState, setKeywordsState] = useState([""]);
     const [dates, setDates] = useState([new Date(), new Date()]);
@@ -52,7 +57,8 @@ export const Scraper = () => {
                 </div>
             </div>
 
-            {showModal && <WebSocketHandler showModal={showModal} setShowModal={setShowModal}/>}
+            {showModal &&
+                <WebSocketHandler showModal={showModal} setShowModal={setShowModal} setActivePage={setActivePage}/>}
         </div>
     )
 }
