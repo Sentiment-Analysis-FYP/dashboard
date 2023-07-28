@@ -22,7 +22,7 @@ export const HELP_PAGE = 5
 export default function Home() {
     const [email, token] = useAuth()
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [activePage, setActivePage] = useState(-1)
+    const [activePage, setActivePage] = useState(0)
     const [sidebarOpen, setSideBarOpen] = useState(false);
 
     useEffect(() => {
@@ -37,12 +37,16 @@ export default function Home() {
         switch (position) {
             case DASHBOARD:
                 return <motion.div>
-                    <HomePage/>
+                    <Dashboard setActivePage={setActivePage}/>
                 </motion.div>
 
             case SCRAPER_PAGE:
                 return <motion.div>
                     <Scraper setActivePage={setActivePage}/>
+                </motion.div>
+
+            case PREPROCESSING:
+                return <motion.div>
                 </motion.div>
 
             case ANALYSIS_PAGE:
@@ -66,32 +70,32 @@ export default function Home() {
         <main className='pattern '>
             <Header/>
 
-            <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
-                     toggleSidebar={handleViewSidebar}/>
+            {isLoggedIn && <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
+                                    toggleSidebar={handleViewSidebar}/>}
 
             {isLoggedIn ?
                 <div className='h-screen'>
-                    <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
-                        + (sidebarOpen ? " pl-96" : "")}>
-                        <Dashboard setActivePage={setActivePage}/>
-                    </div>
+                    {/*<div className={'flex w-screen h-screen justify-center items-center transition duration-300 '*/}
+                    {/*    + (sidebarOpen ? " pl-96" : "")}>*/}
+                    {/*    <Dashboard setActivePage={setActivePage}/>*/}
+                    {/*</div>*/}
                     {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
 
-                    {/*<motion.div*/}
-                    {/*    className='w-screen h-screen flex justify-end items-center '>*/}
-                    {/*    /!*<AnimatePresence mode='popLayout'>*!/*/}
-                    {/*    /!*    <motion.div*!/*/}
-                    {/*    /!*        key={activePage}*!/*/}
-                    {/*    /!*        initial={{opacity: 0, x: "30%"}}*!/*/}
-                    {/*    /!*        animate={{opacity: 1, x: 0}}*!/*/}
-                    {/*    /!*        exit={{opacity: 0, x: "-100%"}}*!/*/}
-                    {/*    /!*        transition={{duration: .3, delay: 0}}*!/*/}
-                    {/*    /!*        className=''>*!/*/}
-                    {/*    /!*        {renderSlide(activePage)}*!/*/}
-                    {/*    /!*    </motion.div>*!/*/}
-                    {/*    /!*</AnimatePresence>*!/*/}
-                    {/*</motion.div>*/}
+                    <motion.div
+                        className='w-screen h-screen flex justify-center items-center '>
+                        <AnimatePresence mode='popLayout'>
+                            <motion.div
+                                key={activePage}
+                                initial={{opacity: 0, x: "30%"}}
+                                animate={{opacity: 1, x: 0}}
+                                exit={{opacity: 0, x: "-100%"}}
+                                transition={{duration: .3, delay: 0}}
+                                className=''>
+                                {renderSlide(activePage)}
+                            </motion.div>
+                        </AnimatePresence>
+                    </motion.div>
                 </div>
                 :
                 <SignUp/>}

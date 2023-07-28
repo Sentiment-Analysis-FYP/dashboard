@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import Link from 'next/link'
-import {useAuth} from "@/hooks/auth"
-import {GrClose} from "react-icons/gr";
 import {GiHamburgerMenu} from "react-icons/gi";
 import {AiOutlineCloudDownload, AiOutlineFunction} from "react-icons/ai";
 import {TbDeviceDesktopAnalytics} from "react-icons/tb";
-import {BsBarChartFill, BsBarChartLine} from "react-icons/bs";
+import {BsBarChartLine} from "react-icons/bs";
 
 interface HeaderProps {
     activePage: number,
@@ -61,11 +58,10 @@ const SideNav = (props: HeaderProps) => {
                 </div>
             </div>
 
-            <div className='bg-white  rounded-lg h-full w-full flex shadow-lg '>
+            <div className='bg-white rounded-lg h-full w-full flex shadow-lg '>
                 <div className=" w-full bg-white">
                     <div className=" w-full bg-white py-14 items-center flex flex-col justify-center">
                         <div className="flex w-full flex-col items-center justify-center">
-
                             <div className="flex flex-col  mt-20 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
                                     <div key={category.slug} onClick={() => setActivePage(index)}>
