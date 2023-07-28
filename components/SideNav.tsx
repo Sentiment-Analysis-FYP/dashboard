@@ -16,22 +16,16 @@ interface HeaderProps {
 
 const SideNav = (props: HeaderProps) => {
     const {activePage, setActivePage, isOpen, toggleSidebar} = props
-    const [email, token] = useAuth()
-    const [userEmail, setUserEmail] = useState('')
     // const [activePage, setActivePage] = useState(0)
 
     let stockCategories = [
         {name: "Scraper", slug: "scraper"},
         {name: "Analysis", slug: "analysis"},
-        {name: "Preprocessing", slug: "analysis"},
+        {name: "Preprocessing", slug: "preprocessing"},
         {name: "Visualizations", slug: "visualizations"},
     ]
 
     const [categories, setCategories] = useState(stockCategories)
-
-    useEffect(() => {
-        setUserEmail(email ? email : '')
-    }, [email])
 
     const sidebarClass = props.isOpen ? "sidebar open" : "sidebar";
 
@@ -59,21 +53,17 @@ const SideNav = (props: HeaderProps) => {
     }
 
     return (
-        <div className={" " + sidebarClass}>
+        <div className={sidebarClass}>
             <div>
                 <div className=' sidebar-toggle text-violet-600 '
                      onClick={toggleSidebar}>
                     <GiHamburgerMenu size={40}/>
-                    {/*<GiHamburgerMenu size={40}/>*/}
-                    {/*<GiHamburgerMenu size={40}/>*/}
-                    {/*<GiHamburgerMenu size={40}/>*/}
-                    {/*<GiHamburgerMenu size={40}/>*/}
                 </div>
             </div>
 
             <div className='bg-white  rounded-lg h-full w-full flex shadow-lg '>
-                <div className=" w-full">
-                    <div className=" w-full border-gray-300 py-14 items-center flex flex-col justify-center">
+                <div className=" w-full bg-white">
+                    <div className=" w-full bg-white py-14 items-center flex flex-col justify-center">
                         <div className="flex w-full flex-col items-center justify-center">
 
                             <div className="flex flex-col  mt-20 justify-center items-center  w-full">
@@ -91,8 +81,8 @@ const SideNav = (props: HeaderProps) => {
                                             {isOpen &&
                                                 <p className='pl-6 transition duration-300 group-hover:translate-x-1'>
                                                     {category.name}
-                                                </p>}
-
+                                                </p>
+                                            }
                                         </div>
                                     </div>
                                 ))}

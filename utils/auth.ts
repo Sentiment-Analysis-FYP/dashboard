@@ -60,3 +60,8 @@ export const signUp = async (firstName: string, lastName: string, email: string,
     })
     return status
 }
+
+export const logout = () => {
+    window.sessionStorage.setItem('email', '')
+    window.sessionStorage.setItem('token', '')
+}

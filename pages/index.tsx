@@ -11,17 +11,18 @@ import HomePage from "@/components/HomePage";
 import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
 
-export const HOME_PAGE = 0
+export const DASHBOARD = 0
 export const SCRAPER_PAGE = 1
 export const ANALYSIS_PAGE = 2
-export const VISUALIZATIONS_PAGE = 3
-export const HELP_PAGE = 4
+export const PREPROCESSING = 3
+export const VISUALIZATIONS_PAGE = 4
+export const HELP_PAGE = 5
 
 
 export default function Home() {
     const [email, token] = useAuth()
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [activePage, setActivePage] = useState(0)
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [activePage, setActivePage] = useState(-1)
     const [sidebarOpen, setSideBarOpen] = useState(false);
 
     useEffect(() => {
@@ -34,7 +35,7 @@ export default function Home() {
 
     const renderSlide = (position: number) => {
         switch (position) {
-            case HOME_PAGE:
+            case DASHBOARD:
                 return <motion.div>
                     <HomePage/>
                 </motion.div>
@@ -62,13 +63,14 @@ export default function Home() {
     }
 
     return (
-        <main className='pattern w-screen flex justify-end items-center '>
+        <main className='pattern '>
             <Header/>
 
             <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
                      toggleSidebar={handleViewSidebar}/>
 
-            {isLoggedIn ? <div>
+            {isLoggedIn ?
+                <div className='h-screen'>
                     <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
                         + (sidebarOpen ? " pl-96" : "")}>
                         <Dashboard setActivePage={setActivePage}/>

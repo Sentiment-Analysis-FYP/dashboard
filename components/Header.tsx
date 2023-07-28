@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 import {GrFormClose} from "react-icons/gr";
 import {useAuth} from "@/hooks/auth";
+import {logout} from "@/utils/auth";
 
 const Header = () => {
     const [userEmail, setUserEmail] = useState('');
@@ -46,13 +47,12 @@ const Header = () => {
         return (
             <Link href='/login'>
                 <div className="rounded-full w-10 h-10 text-white bg-violet-500 uppercase
-            text-2xl flex justify-center items-center absolute right-20 bottom-5 shadow-md
+            text-2xl flex justify-center items-center absolute right-40 bottom-5 shadow-md
             cursor-pointer hover:bg-violet-600 transition duration-300 hover:shadow-lg">
 
                     <div className='flex justify-center items-center pb-[2px]'>
                         {userEmail.charAt(0)}
                     </div>
-
                 </div>
             </Link>
         )
@@ -87,7 +87,22 @@ const Header = () => {
                         {/*</div>*/}
                     </div>
                 </div>
-                {userEmail ? (<UserProfile/>) : (<div></div>)}
+                {userEmail ? (<div className='flex justify-center items-center mr-14 mt-2'>
+                    <UserProfile/>
+                    <span
+                        className='w-20 flex justify-center items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
+                        cursor-pointer hover:bg-violet-100 transition duration-200'
+                        onClick={() => {
+                            setUserEmail('')
+                            logout()
+                        }}>
+                        Log out
+                    </span>
+                </div>) : (<div
+                    className='text-lg w-72 right-20 text-violet-600 flex justify-center items-center gap-5 '>
+                    <Link href='/login'><span className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Login</span></Link>
+                    <Link href='/register'><span className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Sign Up</span></Link>
+                </div>)}
 
             </div>
 
