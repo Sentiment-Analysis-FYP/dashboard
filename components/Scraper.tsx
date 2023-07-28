@@ -43,7 +43,7 @@ export const Scraper = (props: ScraperProps) => {
 
 
     return (
-        <div className='bg-white flex flex-col h-[800px] w-[1300px] p-32 shadow-2xl rounded-lg'>
+        <div className='bg-white flex flex-col h-[800px] 3xl:w-[1300px] p-32 shadow-2xl rounded-lg'>
             <div className='flex justify-between w-full'>
                 <UserName setUsername={setUsername}/>
                 <BeginScrape runScrape={runScrape} setShowModal={setShowModal} enabled={enabled}/>

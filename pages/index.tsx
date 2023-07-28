@@ -56,7 +56,7 @@ export default function Home() {
     }
 
     return (
-        <main className='pattern w-screen flex justify-end pr-96'>
+        <main className='pattern w-screen flex justify-end pr-8 3xl:pr-64 '>
             <Header activePage={activePage} setActivePage={setActivePage}/>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
