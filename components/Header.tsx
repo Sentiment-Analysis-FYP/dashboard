@@ -29,8 +29,8 @@ const Header = (props: HeaderProps) => {
 
 
     return (
-        <div className="fixed top-0 bottom-0 left-0 z-50 h-full w-96 mx-10 flex flex-col select-none ">
-            <div className='bg-white my-10 rounded-lg h-full w-full flex shadow-lg'>
+        <div className="fixed top-0 bottom-0 left-0 z-50 h-full w-96 mx-14 flex flex-col select-none ">
+            <div className='bg-white my-14 rounded-lg h-full w-full flex shadow-lg'>
                 <div className=" w-full">
                     <div className=" w-full border-gray-300 py-14 items-center flex flex-col justify-between">
                         <div className="flex flex-col justify-center items-center">

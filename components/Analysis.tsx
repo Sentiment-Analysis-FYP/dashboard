@@ -8,22 +8,12 @@ import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 
-interface AnalysisProps {
+interface AnalysisDataProps {
     data?: AnalyzedData,
 }
 
-const NoAnalyzedData = () => {
-    return (
-        <div className='flex flex-col text-2xl justify-center items-center'>
-            <span>Sorry, you have no scraped data.</span>
-            <span>Visit the <Link href='/scraper' className='text-violet-600'>Scraper </Link>
-                to gather fresh data</span>
-            <span>or upload your own</span>
-        </div>
-    )
-}
 
-const DataTable = (props: AnalysisProps) => {
+const DataTable = (props: AnalysisDataProps) => {
     const {data} = props
     const rows = data!.data
 
@@ -90,8 +80,13 @@ const DataTable = (props: AnalysisProps) => {
     )
 }
 
+interface AnalysisProps {
+    setActivePage: React.Dispatch<React.SetStateAction<number>>
+}
+
 const Analysis = (props: AnalysisProps) => {
-    const {data} = props
+    // const {data} = props
+    const {setActivePage} = props
 
     const storeAnalyzedData = useSelector(getAnalyzedData)
     console.log(`analyzed data from store:`)
@@ -104,22 +99,36 @@ const Analysis = (props: AnalysisProps) => {
 
     analyzedData = updateScoresToTwoDecimalPlaces(scrambleAnalyzedDataIds(analyzedData))
 
+    const NoAnalyzedData = () => {
+        return (
+            <div className='flex flex-col text-2xl justify-center items-center p-16'>
+                <span>Sorry, you have no scraped data.</span>
+                <span>Visit the <span onClick={() => setActivePage(1)} className='text-violet-500 cursor-pointer
+                hover:text-violet-700 transition duration-300'>
+                    Scraper </span>
+                to gather fresh data</span>
+                <span>or upload your own</span>
+            </div>
+        )
+    }
+
+
     return (
-        <div className='absolute top-0 left-0 right-0 bottom-0 m-auto pattern'>
-            <div className='absolute top-0 left-0 right-0 bottom-0 m-auto p-32 flex justify-center items-center'>
+        <div className='h-full w-full'>
+            <div className='h-full flex justify-center items-center'>
                 <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
                     <div className='flex flex-row-reverse justify-between'>
-                        <Link href='/scraper'>
-                            <motion.div
-                                whileTap={{
-                                    scale: 0.9
-                                }}
-                                className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
-                                    w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'>
-                                <AiOutlinePlus size={20}/>
-                                <span>New Search</span>
-                            </motion.div>
-                        </Link>
+                        <motion.div
+                            whileTap={{
+                                scale: 0.9
+                            }}
+                            className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
+                                    w-40 text-gray-50 h-10 rounded-lg transition duration-300 shadow-xl select-none
+                                    hover:shadow-lg cursor-pointer'
+                            onClick={() => setActivePage(1)}>
+                            <AiOutlinePlus size={20}/>
+                            <span>New Search</span>
+                        </motion.div>
 
                         {analyzedData && analyzedData.data.length &&
                             <Link href='/visualizations'>

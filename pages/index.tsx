@@ -39,7 +39,7 @@ export default function Home() {
 
             case ANALYSIS_PAGE:
                 return <motion.div>
-                    <Analysis/>
+                    <Analysis setActivePage={setActivePage}/>
                 </motion.div>
 
             case VISUALIZATIONS_PAGE:
@@ -55,19 +55,19 @@ export default function Home() {
     }
 
     return (
-        <main>
+        <main className='pattern'>
             <Header activePage={activePage} setActivePage={setActivePage}/>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
             <motion.div
-                className='w-full h-screen flex justify-center items-center'>
-                <AnimatePresence>
+                className='w-screen h-screen flex justify-center items-center pl-48'>
+                <AnimatePresence mode='wait'>
                     <motion.div
                         key={activePage}
-                        initial={{opacity: 0, x: "100%"}}
+                        initial={{opacity: 0, x: "30%"}}
                         animate={{opacity: 1, x: 0}}
                         exit={{opacity: 0, x: "-100%"}}
-                        transition={{duration: .1, delay: .1}}
+                        transition={{duration: .3, delay: 0}}
                         className=''>
                         {renderSlide(activePage)}
                     </motion.div>
