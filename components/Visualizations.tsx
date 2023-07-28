@@ -48,32 +48,33 @@ const Visualizations = (props: VisualizationsProps) => {
     return (
         <div>
             {analyzedData.data.length ?
-                <div className='m-auto overflow-y-scroll'>
+                <div className='w-[1200px] '>
                     <div
-                        className=' top-0 left-0 right-0 bottom-0 m-auto py-32 px-32 w-5/6 flex justify-center items-center'>
+                        className=' py-32 w-full flex justify-center items-center'>
                         <div
-                            className='w-full bg-white  shadow-2xl rounded-lg py-16 flex justify-center items-center'>
-                            <div className='flex flex-col gap-5 justify-center items-center px-10'>
+                            className='w-[1200px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-16 flex justify-center items-center'>
+                            <div className='flex w-full bg-red-700 flex-col gap-5 justify-center items-center px-10'>
                                 <div className='flex justify-center items-center gap-14'>
                                     <div
                                         className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
-                                <span className='text-2xl font-semibold text-violet-700 mb-8'>
-                                    Negative Word Cloud
-                                </span>
+                                        <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                            Negative Word Cloud
+                                        </span>
                                         <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
                                     </div>
                                     <div
                                         className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8
-                                rounded-lg shadow'>
-                                <span className='text-2xl font-semibold text-violet-700 mb-8'>
-                                    Positive Word Cloud
-                                </span>
+                                        rounded-lg shadow'>
+                                    <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                        Positive Word Cloud
+                                    </span>
                                         <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>
                                     </div>
                                 </div>
+
                                 <div
-                                    className='flex justify-center items-center gap-14 my-10 py-24 w-full bg-violet-50 shadow
-                            rounded-lg'>
+                                    className='flex justify-center items-center gap-14 my-10 py-24 w-[1000px] bg-violet-50 shadow
+                                    rounded-lg'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>
                                     Variable Bar Chart
@@ -82,7 +83,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
                                 <div
-                                    className='flex justify-center items-center py-24 w-full bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-24 w-[1000px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>

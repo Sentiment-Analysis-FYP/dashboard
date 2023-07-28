@@ -7,6 +7,7 @@ import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
+import {VISUALIZATIONS_PAGE} from "@/pages";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -131,17 +132,17 @@ const Analysis = (props: AnalysisProps) => {
                         </motion.div>
 
                         {analyzedData && analyzedData.data.length &&
-                            <Link href='/visualizations'>
-                                <motion.div
-                                    whileTap={{
-                                        scale: 0.9
-                                    }}
-                                    className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
-                                        ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl'}>
-                                    <AiOutlineLineChart size={20}/>
-                                    <span>Visualize</span>
-                                </motion.div>
-                            </Link>}
+                            <motion.div
+                                whileTap={{
+                                    scale: 0.9
+                                }}
+                                className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
+                                    ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl cursor-pointer'}
+                                onClick={() => setActivePage(VISUALIZATIONS_PAGE)}>
+                                <AiOutlineLineChart size={20}/>
+                                <span>Visualize</span>
+                            </motion.div>
+                        }
                     </div>
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center'>

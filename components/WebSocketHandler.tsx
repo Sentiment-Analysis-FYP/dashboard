@@ -89,7 +89,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
                         shadow-2xl text-3xl transition- duration-500'>
                     {isComplete ?
                         <div className='flex flex-col justify-center items-center gap-2 mb-4'>
-                            <span className='-mt-10'>Processing results</span>
+                            <span className='-mt-10 text-violet-600'>Processing results</span>
                             <span className='text-lg'>This may take a few minutes...</span>
                         </div>
                         :
