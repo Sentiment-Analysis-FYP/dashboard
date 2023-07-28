@@ -69,7 +69,7 @@ export default function Home() {
                      toggleSidebar={handleViewSidebar}/>
 
             <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
-                + (sidebarOpen ? " pl-64" : "")}>
+                + (sidebarOpen ? " pl-96" : "")}>
                 <Dashboard/>
             </div>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}

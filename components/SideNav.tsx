@@ -80,12 +80,12 @@ const SideNav = (props: HeaderProps) => {
                                 {categories.map((category, index) => (
                                     <div key={category.slug} onClick={() => setActivePage(index)}>
                                         <div
-                                            className={'w-72 flex  items-center text-gray-800 ' +
+                                            className={'w-64 flex  items-center text-gray-800 ' +
                                                 'font-semibold py-14  group transform uppercase cursor-pointer ' +
-                                                ' ease-in-out text-xl transition duration-100 ' + (isOpen ? " justify-start " : " justify-end") +
+                                                ' ease-in-out text-xl transition duration-100 ' +
                                                 ((activePage == index) ? " text-violet-600" :
                                                     " hover:text-violet-400 duration-400 hover:bg-gray-200 transition ")}>
-                                            <div className={!isOpen ? 'pr-[50px] ' : " pl-[30px]"}>
+                                            <div className={!isOpen ? ' pl-[180px] ' : " pl-[25px]"}>
                                                 {renderIcon(index)}
                                             </div>
                                             {isOpen &&
