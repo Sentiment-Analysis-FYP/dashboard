@@ -73,3 +73,8 @@ export const scrambleAnalyzedDataIds = (data: AnalyzedData): AnalyzedData => {
         data: updatedData,
     }
 }
+
+const removeSelectedDataItems = (dataItems: AnalyzedDataItem[], itemIds: string[]): AnalyzedDataItem[] => {
+    // Use the filter method to exclude items with specified IDs
+    return dataItems.filter((item) => !itemIds.includes(item.id));
+}

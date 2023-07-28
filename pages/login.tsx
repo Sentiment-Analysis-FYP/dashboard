@@ -1,10 +1,10 @@
 import {SignIn} from "@/components/SignIn";
-import Header from "@/components/Header";
+import SideNav from "@/components/SideNav";
 
 export default function Login() {
     return (
         <div>
-            <Header/>
+            <SideNav/>
 
             <SignIn/>
         </div>

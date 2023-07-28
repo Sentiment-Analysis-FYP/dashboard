@@ -1,10 +1,10 @@
 import {SignUp} from "@/components/SignUp";
-import Header from "@/components/Header";
+import SideNav from "@/components/SideNav";
 
 export default function Register() {
     return (
         <div>
-            <Header/>
+            <SideNav/>
             <div className='mt-32'>
                 <SignUp/>
             </div>

@@ -1,5 +1,5 @@
 import {SignUp} from "@/components/SignUp";
-import Header from "@/components/Header";
+import SideNav from "@/components/SideNav";
 import {useAuth} from "@/hooks/auth";
 import {useEffect, useState} from "react";
 import {AnimatePresence, motion} from "framer-motion";
@@ -8,6 +8,8 @@ import Analysis from "@/components/Analysis";
 import Visualizations from "@/components/Visualizations";
 import Help from "@/components/Help";
 import HomePage from "@/components/HomePage";
+import Header from "@/components/Header";
+import Dashboard from "@/components/Dashboard";
 
 export const HOME_PAGE = 0
 export const SCRAPER_PAGE = 1
@@ -20,11 +22,15 @@ export default function Home() {
     const [email, token] = useAuth()
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [activePage, setActivePage] = useState(0)
+    const [sidebarOpen, setSideBarOpen] = useState(false);
 
     useEffect(() => {
         setIsLoggedIn(!!email)
     }, [email]);
 
+    const handleViewSidebar = () => {
+        setSideBarOpen(!sidebarOpen);
+    };
 
     const renderSlide = (position: number) => {
         switch (position) {
@@ -57,23 +63,31 @@ export default function Home() {
 
     return (
         <main className='pattern w-screen flex justify-end pr-8 3xl:pr-64 '>
-            <Header activePage={activePage} setActivePage={setActivePage}/>
+            <Header/>
+
+            <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
+                     toggleSidebar={handleViewSidebar}/>
+
+            <div className='flex w-screen h-screen justify-end items-center'>
+                <Dashboard/>
+            </div>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}
 
-            <motion.div
-                className='w-screen h-screen flex justify-end items-center '>
-                <AnimatePresence mode='popLayout'>
-                    <motion.div
-                        key={activePage}
-                        initial={{opacity: 0, x: "30%"}}
-                        animate={{opacity: 1, x: 0}}
-                        exit={{opacity: 0, x: "-100%"}}
-                        transition={{duration: .3, delay: 0}}
-                        className=''>
-                        {renderSlide(activePage)}
-                    </motion.div>
-                </AnimatePresence>
-            </motion.div>
+
+            {/*<motion.div*/}
+            {/*    className='w-screen h-screen flex justify-end items-center '>*/}
+            {/*    /!*<AnimatePresence mode='popLayout'>*!/*/}
+            {/*    /!*    <motion.div*!/*/}
+            {/*    /!*        key={activePage}*!/*/}
+            {/*    /!*        initial={{opacity: 0, x: "30%"}}*!/*/}
+            {/*    /!*        animate={{opacity: 1, x: 0}}*!/*/}
+            {/*    /!*        exit={{opacity: 0, x: "-100%"}}*!/*/}
+            {/*    /!*        transition={{duration: .3, delay: 0}}*!/*/}
+            {/*    /!*        className=''>*!/*/}
+            {/*    /!*        {renderSlide(activePage)}*!/*/}
+            {/*    /!*    </motion.div>*!/*/}
+            {/*    /!*</AnimatePresence>*!/*/}
+            {/*</motion.div>*/}
         </main>
     )
 }

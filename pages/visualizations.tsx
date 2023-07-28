@@ -1,4 +1,4 @@
-// import Header from "@/components/Header";
+// import SideNav from "@/components/SideNav";
 // import Visualizations from "@/components/Visualizations";
 // import {useDispatch, useSelector} from "react-redux";
 // import {AnalyzedData} from "@/utils/scraper";
@@ -10,7 +10,7 @@
 //
 //     return (
 //         <div>
-//             <Header/>
+//             <SideNav/>
 //
 //             <main className='mt-24 '>
 //                 <Visualizations data={dummyData}/>

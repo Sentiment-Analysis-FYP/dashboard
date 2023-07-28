@@ -1,9 +1,9 @@
-import Header from "@/components/Header";
+import SideNav from "@/components/SideNav";
 
 export default function Help() {
     return (
         <div>
-            <Header/>
+            <SideNav/>
 
             <div className='mt-24'>
                 Put Content here @Kharte
