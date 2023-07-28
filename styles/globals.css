@@ -64,9 +64,9 @@
 
 .sidebar {
     position: absolute;
-    top: 60px;
+    /*top: 60px;*/
     left: -150px;
-    height: 100%;
+    /*height: 100%;*/
     width: 300px;
     transition: left 0.3s ease-in-out;
     background-color: lightgray;
@@ -78,7 +78,6 @@
     left: 55px;
     height: 60px;
     width: 60px;
-    z-index: 1;
 }
 
 .content {

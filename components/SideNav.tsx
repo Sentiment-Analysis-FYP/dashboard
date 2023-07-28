@@ -50,7 +50,7 @@ const SideNav = (props: HeaderProps) => {
     }
 
     return (
-        <div className={sidebarClass}>
+        <div className={sidebarClass + ' mt-0 h-full'}>
             <div>
                 <div className=' sidebar-toggle text-violet-600 '
                      onClick={toggleSidebar}>
@@ -58,11 +58,11 @@ const SideNav = (props: HeaderProps) => {
                 </div>
             </div>
 
-            <div className='bg-white rounded-lg h-full w-full flex shadow-lg '>
+            <div className='z-50 bg-white rounded-lg h-full w-full flex shadow-lg '>
                 <div className=" w-full bg-white">
                     <div className=" w-full bg-white py-14 items-center flex flex-col justify-center">
                         <div className="flex w-full flex-col items-center justify-center">
-                            <div className="flex flex-col  mt-20 justify-center items-center  w-full">
+                            <div className="flex flex-col  mt-40 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
                                     <div key={category.slug} onClick={() => setActivePage(index)}>
                                         <div
