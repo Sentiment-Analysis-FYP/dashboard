@@ -46,7 +46,7 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     return (
-        <div className='w-full h-screen'>
+        <div className=''>
             {analyzedData.data.length ?
                 <div className='w-ful '>
                     <div
