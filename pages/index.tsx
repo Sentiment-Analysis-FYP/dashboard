@@ -44,7 +44,7 @@ export default function Home() {
 
             case VISUALIZATIONS_PAGE:
                 return <motion.div>
-                    {/*<Visualizations />*/}
+                    <Visualizations setActivePage={setActivePage}/>
                 </motion.div>
 
             case HELP_PAGE:
@@ -61,7 +61,7 @@ export default function Home() {
 
             <motion.div
                 className='w-screen h-screen flex justify-center items-center pl-48'>
-                <AnimatePresence mode='wait'>
+                <AnimatePresence mode='popLayout'>
                     <motion.div
                         key={activePage}
                         initial={{opacity: 0, x: "30%"}}
