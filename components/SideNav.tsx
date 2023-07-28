@@ -64,13 +64,13 @@ const SideNav = (props: HeaderProps) => {
                         <div className="flex w-full flex-col items-center justify-center">
                             <div className="flex flex-col  mt-40 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
-                                    <div key={category.slug} onClick={() => setActivePage(index)}>
+                                    <div key={category.slug} onClick={() => setActivePage(index + 1)}>
                                         <div
                                             className={'w-64 flex  items-center text-gray-800 ' +
                                                 'font-semibold py-14  group transform uppercase cursor-pointer ' +
                                                 ' ease-in-out text-xl transition duration-100 ' +
                                                 ((activePage == index) ? " text-violet-600" :
-                                                    " hover:text-violet-400 duration-400 hover:bg-gray-200 transition ")}>
+                                                    " hover:text-violet-400 duration-400 transition ")}>
                                             <div className={!isOpen ? ' pl-[180px] ' : " pl-[25px]"}>
                                                 {renderIcon(index)}
                                             </div>

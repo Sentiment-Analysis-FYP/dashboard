@@ -74,7 +74,7 @@ export default function Home() {
                                     toggleSidebar={handleViewSidebar}/>}
 
             {isLoggedIn ?
-                <div className='h-screen z-10'>
+                <div className='h-screen '>
                     {/*<div className={'flex w-screen h-screen justify-center items-center transition duration-300 '*/}
                     {/*    + (sidebarOpen ? " pl-96" : "")}>*/}
                     {/*    <Dashboard setActivePage={setActivePage}/>*/}

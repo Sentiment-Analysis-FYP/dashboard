@@ -16,7 +16,7 @@ const Dashboard = (props: DashboardProps) => {
             <div className='flex flex-wrap gap-20 justify-center items-center'>
                 {pages.map((page, index) => (
                     <div key={page}
-                         onClick={() => setActivePage(index)}
+                         onClick={() => setActivePage(index + 1)}
                          className='cursor-pointer hover:bg-violet-200 transition duration-200 w-[400px] h-[400px] p-10 bg-violet-50 flex flex-col justify-between items-center rounded-lg shadow-md'>
                         <div className='flex justify-center items-center'>
                             <AiFillPieChart size={200}/>
