@@ -62,13 +62,14 @@ export default function Home() {
     }
 
     return (
-        <main className='pattern w-screen flex justify-end pr-8 3xl:pr-64 '>
+        <main className='pattern w-screen flex justify-end items-center '>
             <Header/>
 
             <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
                      toggleSidebar={handleViewSidebar}/>
 
-            <div className='flex w-screen h-screen justify-end items-center'>
+            <div className={'flex w-screen h-screen justify-center items-center transition duration-300 '
+                + (sidebarOpen ? " pl-64" : "")}>
                 <Dashboard/>
             </div>
             {/*{isLoggedIn ? (<HomePage/>) : (<SignUp/>)}*/}

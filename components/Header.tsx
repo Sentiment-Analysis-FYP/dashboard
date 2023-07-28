@@ -59,10 +59,10 @@ const Header = () => {
     }
 
     return (
-        <div className="fixed top-0 left-0 bg-white z-40 h-22 w-full shadow-lg">
+        <div className="fixed top-0 left-0 bg-white z-40 h-22 w-full ">
             <div className=' w-full flex items-center'>
                 <div className="px-6 w-full">
-                    <div className=" w-full border-gray-300 py-6 items-center md:px-12 flex">
+                    <div className=" w-full border-gray-300 py-6 items-center px-10 flex">
                         <div className="float-left">
                             <Link href='/'>
                                 <span
@@ -96,16 +96,7 @@ const Header = () => {
                     " bg-transparent overflow-hidden z-50 " + fadeInTopRight :
                     " flex flex-col items-center fixed top-0 left-0 w-full p-4 bg-transparent overflow-hidden z-50 " +
                     fadeOutTopRight}>
-                {/*<div className="pl-4 bg-gray-100 w-full overflow-hidden rounded-sm">*/}
-                {/*    {categories.map((category) => (*/}
-                {/*        <Link key={category.slug} href={`/${category.slug}`}>*/}
-                {/*            <div key={category.slug} className="border-b-[1px] border-gray-200 flex*/}
-                {/*        items-center pl-2 py-6 text-lg text-black cursor-pointer">*/}
-                {/*                {category.name}*/}
-                {/*            </div>*/}
-                {/*        </Link>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
+
                 <div className="fixed top-6 right-10 rounded-full w-16 h-16
                     flex justify-center items-center opacity-80" onClick={toggleMobileMenu}>
                     <GrFormClose size={36}/>
