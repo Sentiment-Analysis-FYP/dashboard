@@ -10,6 +10,7 @@ import Help from "@/components/Help";
 import HomePage from "@/components/HomePage";
 import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
+import Preprocessing from "@/components/Preprocessing";
 
 export const DASHBOARD = 0
 export const SCRAPER_PAGE = 1
@@ -47,6 +48,7 @@ export default function Home() {
 
             case PREPROCESSING:
                 return <motion.div>
+                    <Preprocessing setActivePage={setActivePage}/>
                 </motion.div>
 
             case ANALYSIS_PAGE:
