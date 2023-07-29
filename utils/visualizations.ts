@@ -43,7 +43,7 @@ const stopwords = ['a', 'about', 'above', 'after', 'again', 'ain', 'all', 'am', 
     'why', 'will', 'with', 'won', 'y', 'you', "youd", "youll", "youre",
     "youve", 'your', 'yours', 'yourself', 'yourselves']
 
-function cleaning_stopwords(text: string) {
+export function cleaning_stopwords(text: string) {
     const STOPWORDS: Set<string> = new Set(stopwords);
     return text
         .split(' ')

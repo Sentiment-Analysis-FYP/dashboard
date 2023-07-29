@@ -4,10 +4,15 @@ import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} f
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
-import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
+import {
+    removePunctuationFromAnalyzedData,
+    removeRepeatingCharactersFromAnalyzedData,
+    removeStopwordsFromAnalyzedData, removeURLsFromAnalyzedData
+} from "@/utils/preprocessing";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -56,7 +61,7 @@ const DataTable = (props: AnalysisDataProps) => {
     ];
 
     return (
-        <div className='flex justify-center h-[1200px] w-full py-4'>
+        <div className='flex justify-center h-[1000px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -108,6 +113,7 @@ const Preprocessing = (props: AnalysisProps) => {
     }
 
     analyzedData = updateScoresToTwoDecimalPlaces(scrambleAnalyzedDataIds(analyzedData))
+    const [preprocessedAnalyzedData, setPreprocessedAnalyzedData] = useState(analyzedData);
 
     const NoAnalyzedData = () => {
         return (
@@ -125,7 +131,7 @@ const Preprocessing = (props: AnalysisProps) => {
     const initialPreprocessorState = [
         {name: "Stopwords", enabled: false},
         {name: "Punctuation", enabled: false},
-        {name: "Characters", enabled: false},
+        {name: "Repeating Characters", enabled: false},
         {name: "URLS", enabled: false},
     ]
 
@@ -157,9 +163,33 @@ const Preprocessing = (props: AnalysisProps) => {
     useEffect(() => {
         console.log(preprocessors)
         // handle table data update
+        let preprocessedData = analyzedData
 
+        if (preprocessors[0].enabled) {
+            // remove stopwords
+            preprocessedData = removeStopwordsFromAnalyzedData(preprocessedData)
+        }
 
-    }, [preprocessors]);
+        if (preprocessors[1].enabled) {
+            // remove punctuation
+            preprocessedData = removePunctuationFromAnalyzedData(preprocessedData)
+        }
+
+        if (preprocessors[2].enabled) {
+            // remove repeating chars
+            preprocessedData = removeRepeatingCharactersFromAnalyzedData(preprocessedData)
+        }
+
+        if (preprocessors[3].enabled) {
+            // remove urls
+            preprocessedData = removeURLsFromAnalyzedData(preprocessedData)
+        }
+
+        // this is the redux function, do not use here, we are not overwriting
+        // setAnalyzedData(preprocessedData)
+        setPreprocessedAnalyzedData(preprocessedData)
+
+    }, [analyzedData, preprocessors]);
 
 
     return (
@@ -195,9 +225,9 @@ const Preprocessing = (props: AnalysisProps) => {
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center gap-4'>
                             <div className='flex'>
-                                <div className='flex flex-col justify-start flex-wrap items-center pt-12 gap-8 w-full pr-20'>
-                                    <span className='text-xl text-violet-600 select-none'>Data Cleaning</span>
-                                    <span className='text-xl text-violet-600 select-none'>Special Extractors</span>
+                                <div className='flex flex-col justify-start flex-wrap  pt-10 gap-8 w-full pr-20'>
+                                    <span className='text-xl text-violet-600 select-none pb-2'>Data Cleaning</span>
+                                    <span className='text-xl text-violet-600 select-none'>Special Functions</span>
                                 </div>
                                 <div className='w-full flex flex-col justify-start flex-wrap items-center pt-8 gap-8'>
                                     <div className='flex w-full gap-10'>
@@ -238,7 +268,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                     </div>
                                 </div>
                             </div>
-                            <DataTable data={analyzedData}/>
+                            <DataTable data={preprocessedAnalyzedData}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
