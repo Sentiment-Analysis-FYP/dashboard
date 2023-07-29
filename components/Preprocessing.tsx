@@ -248,14 +248,14 @@ const Preprocessing = (props: AnalysisProps) => {
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex mt-10 flex-col justify-center items-center gap-4'>
                             <div className='flex w-full flex-col items-center'>
-                                <div className='w-full flex justify-center items-center flex-col gap-8'>
+                                <div className='w-full flex justify-center items-center flex-col gap-8 px-10 py-5 bg-violet-50 rounded-lg'>
                                     <div className='flex flex-wrap w-full gap-10'>
                                         <span className='text-xl text-violet-600 select-none '>Data Cleaning</span>
                                         {preprocessors.map((preprocessor, index) => (
                                             <div key={index}
                                                  className={'px-4 py-2 flex justify-between items-center gap-2 rounded-lg ' +
                                                      'cursor-pointer select-none  ' +
-                                                     (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-violet-100")}
+                                                     (preprocessor.enabled ? " bg-purple-500 text-gray-50" : " bg-violet-100")}
                                                  onClick={() => {
                                                      handleEnablePreprocessors(index)
                                                  }}>
@@ -274,7 +274,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                             <div key={index}
                                                  className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
                                                      'cursor-pointer select-none ' +
-                                                     (specialFunction.enabled ? " bg-violet-500 text-gray-50" : " bg-violet-100")}
+                                                     (specialFunction.enabled ? " bg-purple-500 text-gray-50" : " bg-violet-100")}
                                                  onClick={() => {
                                                      handleEnableSpecialFunctions(index)
                                                  }}>
