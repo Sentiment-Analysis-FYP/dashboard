@@ -23,20 +23,29 @@ const DataTable = (props: AnalysisDataProps) => {
         {field: 'username', headerName: 'Username', flex: 0.6},
         {field: 'text', headerName: 'Text', flex: 1},
         {
-            field: 'score',
+            field: 'lr_sentiment',
             description: 'From -1 (negative) to 1 (positive)',
-            headerName: 'Sentiment Score',
+            headerName: 'Sentiment',
+            valueGetter: (params) => {
+                return params.value == 1 ? "Positive" : "Negative"
+            },
             flex: 0.6,
-            cellClassName: (params: GridCellParams<any, number>) => {
+            cellClassName: (params) => {
                 if (params.value == null) {
                     return '';
                 }
 
                 return clsx('super-app', {
-                    negative: params.value < 0,
-                    positive: params.value > 0,
+                    negative: params.value == "Negative",
+                    positive: params.value == "Positive",
                 });
             },
+        },
+        {
+            field: 'emotion_label',
+            headerName: 'Emotion',
+            description: '',
+            flex: 0.4,
         },
         {
             field: 'created_at',

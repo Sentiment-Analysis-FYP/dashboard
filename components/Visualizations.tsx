@@ -46,31 +46,14 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     return (
-        <div className=''>
+        <div className='h-screen overflow-y-scroll'>
             {analyzedData.data.length ?
-                <div className='w-ful '>
+                <div className='w-full '>
                     <div
                         className=' py-32 w-full flex justify-center items-center'>
                         <div
                             className='w-[1400px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-20 flex justify-center items-center'>
                             <div className='flex flex-col gap-5 justify-center items-center '>
-                                <div className='flex w-[1200px] justify-between items-center'>
-                                    <div
-                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
-                                        <span className='text-2xl font-semibold text-violet-700 mb-8'>
-                                            Negative Word Cloud
-                                        </span>
-                                        <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
-                                    </div>
-                                    <div
-                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8
-                                        rounded-lg shadow'>
-                                    <span className='text-2xl font-semibold text-violet-700 mb-8'>
-                                        Positive Word Cloud
-                                    </span>
-                                        <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>
-                                    </div>
-                                </div>
 
                                 <div
                                     className='flex justify-center items-center gap-14 my-10 py-24 w-[1200px] bg-violet-50 shadow
@@ -87,6 +70,24 @@ const Visualizations = (props: VisualizationsProps) => {
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>
+                                    </div>
+                                </div>
+
+                                <div className='flex w-[1200px] justify-between items-center'>
+                                    <div
+                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
+                                        <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                            Negative Word Cloud
+                                        </span>
+                                        <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
+                                    </div>
+                                    <div
+                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8
+                                        rounded-lg shadow'>
+                                    <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                        Positive Word Cloud
+                                    </span>
+                                        <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>
                                     </div>
                                 </div>
                                 {/*<div className='flex justify-center items-center gap-14'>*/}
