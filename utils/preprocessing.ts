@@ -118,7 +118,7 @@ export function exportToCSV(analyzedData: AnalyzedData): void {
     const blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
 
     // Prompt the user to save the file
-    const defaultFileName = 'analyzed_data.csv';
+    const defaultFileName = 'analyzed_data ' + new Date().toISOString().split('.')[0] + '.csv'
     saveAs(blob, defaultFileName);
 }
 
@@ -132,7 +132,7 @@ export function getTokenizedTextFromAnalyzedData(analyzedData: AnalyzedData): An
         const tokens = tokenize(item.text);
         return {
             ...item,
-            tokens: tokens,
+            text: tokens.join(' '),
         };
     });
 
@@ -147,7 +147,7 @@ export function getLemmatizedTextFromAnalyzedData(analyzedData: AnalyzedData): A
         const lemmatizedText = lemmatizerOnText(item.text.split(' ')).join(' ');
         return {
             ...item,
-            lemmatizedText: lemmatizedText,
+            text: lemmatizedText,
         };
     });
 

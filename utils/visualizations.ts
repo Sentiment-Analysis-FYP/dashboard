@@ -63,7 +63,9 @@ export function cleaningRepeatingChar(text: string): string {
 }
 
 export function cleaningURLs(data: string): string {
-    return data.replace(/((www\.\S+)|(https?:\/\/\S+))/g, ' ');
+    // return data.replace(/((www\.\S+)|(https?:\/\/\S+))/g, ' ');
+    const urlRegex = /(?:https?|ftp):\/\/[\n\S]+|www\.[\n\S]+/gi;
+    return data.replace(urlRegex, ' ');
 }
 
 export function cleaningNumbers(data: string): string {

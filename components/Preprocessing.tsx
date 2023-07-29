@@ -9,7 +9,7 @@ import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
 import {
-    exportToCSV, getTokenizedTextFromAnalyzedData,
+    exportToCSV, getLemmatizedTextFromAnalyzedData, getTokenizedTextFromAnalyzedData,
     removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
     removeRepeatingCharactersFromAnalyzedData,
@@ -132,10 +132,10 @@ const Preprocessing = (props: AnalysisProps) => {
     }
 
     const initialPreprocessorState = [
+        {name: "URLS", enabled: false},
         {name: "Stopwords", enabled: false},
         {name: "Punctuation", enabled: false},
         {name: "Repeating Characters", enabled: false},
-        {name: "URLS", enabled: false},
         {name: "Emojis", enabled: false},
     ]
 
@@ -165,40 +165,42 @@ const Preprocessing = (props: AnalysisProps) => {
     }
 
     useEffect(() => {
-        console.log(preprocessors);
         // handle table data update
-        let preprocessedData = analyzedData;
+        let preprocessedDataForPreprocessors = analyzedData;
 
         // Define an array of preprocessing functions
         const preprocessingFunctions = [
+            removeURLsFromAnalyzedData,
             removeStopwordsFromAnalyzedData,
             removePunctuationFromAnalyzedData,
             removeRepeatingCharactersFromAnalyzedData,
-            removeURLsFromAnalyzedData,
             removeEmojisFromAnalyzedData
         ];
 
         // Loop through each preprocessing function and apply it to the data
         preprocessors.forEach((preprocessor, index) => {
             if (preprocessor.enabled) {
-                preprocessedData = preprocessingFunctions[index](preprocessedData);
+                preprocessedDataForPreprocessors = preprocessingFunctions[index](preprocessedDataForPreprocessors);
             }
         });
 
-        setPreprocessedAnalyzedData(preprocessedData);
-    }, [preprocessors]);
-
-    useEffect(() => {
-        console.log(specialFunctions)
-        let preprocessedData = analyzedData;
+        // handle table data update
+        let preprocessedDataForSpecialFunctions = preprocessedDataForPreprocessors;
         const specialFunctionsArray = [
-            getLemmatizedTextFromAnalyzedData(preprocessedData),
-            getTokenizedTextFromAnalyzedData(preprocessedData)
-        ]
+            getTokenizedTextFromAnalyzedData,
+            getLemmatizedTextFromAnalyzedData
+        ];
 
-    }, [specialFunctions]);
+        // Loop through each special function and apply it to the data
+        specialFunctions.forEach((specialFunction, index) => {
+            if (specialFunction.enabled) {
+                preprocessedDataForSpecialFunctions = specialFunctionsArray[index](preprocessedDataForSpecialFunctions);
+            }
+        });
 
-
+        // Update the state with the preprocessed data from both preprocessors and special functions
+        setPreprocessedAnalyzedData(preprocessedDataForSpecialFunctions);
+    }, [preprocessors, specialFunctions]);
     const saveFileAsCsv = () => {
         exportToCSV(preprocessedAnalyzedData)
     }
