@@ -7,7 +7,7 @@ import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
-import {VISUALIZATIONS_PAGE} from "@/pages";
+import {PREPROCESSING_PAGE, VISUALIZATIONS_PAGE} from "@/pages";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -132,12 +132,12 @@ const Analysis = (props: AnalysisProps) => {
                             whileTap={{
                                 scale: 0.9
                             }}
-                            className='flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700
+                            className='flex justify-center items-center gap-3 bg-violet-600 hover:bg-violet-700
                                     w-40 text-gray-50 h-10 rounded-lg transition duration-300 shadow-xl select-none
                                     hover:shadow-lg cursor-pointer'
                             onClick={() => setActivePage(1)}>
                             <AiOutlinePlus size={20}/>
-                            <span>New Search</span>
+                            <span>New Scrape</span>
                         </motion.div>
 
                         {analyzedData && analyzedData.data.length &&
@@ -150,6 +150,19 @@ const Analysis = (props: AnalysisProps) => {
                                 onClick={() => setActivePage(VISUALIZATIONS_PAGE)}>
                                 <AiOutlineLineChart size={20}/>
                                 <span>Visualize</span>
+                            </motion.div>
+                        }
+
+                        {analyzedData && analyzedData.data.length &&
+                            <motion.div
+                                whileTap={{
+                                    scale: 0.9
+                                }}
+                                className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
+                                    ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl cursor-pointer'}
+                                onClick={() => setActivePage(PREPROCESSING_PAGE)}>
+                                <AiOutlineLineChart size={20}/>
+                                <span>Preprocessing</span>
                             </motion.div>
                         }
                     </div>

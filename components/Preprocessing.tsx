@@ -130,10 +130,8 @@ const Preprocessing = (props: AnalysisProps) => {
     ]
 
     const initialSpecialFunctionsState = [
-        {name: "Stopwords", enabled: false},
-        {name: "Punctuation", enabled: false},
-        {name: "Characters", enabled: false},
-        {name: "URLS", enabled: false},
+        {name: "Tokenize", enabled: false},
+        {name: "Lemmatize", enabled: false},
     ]
 
     const [preprocessors, setPreprocessors] =
@@ -143,11 +141,14 @@ const Preprocessing = (props: AnalysisProps) => {
         useState(initialSpecialFunctionsState)
 
     const handleEnablePreprocessors = (index: number) => {
-        // setEnabledPreprocessors()
-        // const prep = preprocessors
-        // prep[index].enabled = !prep[index].enabled
-        // setPreprocessors(prep)
         setPreprocessors((prevState) => {
+            prevState[index] = {name: prevState[index].name, enabled: !prevState[index].enabled}
+            return [...prevState]
+        })
+    }
+
+    const handleEnableSpecialFunctions = (index: number) => {
+        setSpecialFunctions((prevState) => {
             prevState[index] = {name: prevState[index].name, enabled: !prevState[index].enabled}
             return [...prevState]
         })
@@ -156,6 +157,8 @@ const Preprocessing = (props: AnalysisProps) => {
     useEffect(() => {
         console.log(preprocessors)
         // handle table data update
+
+
     }, [preprocessors]);
 
 
@@ -191,24 +194,49 @@ const Preprocessing = (props: AnalysisProps) => {
                     </div>
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center gap-4'>
-                            <div className='w-full flex justify-start flex-wrap items-center pt-8 gap-10'>
-                                <span className='text-xl text-violet-600 select-none'>Data Cleaning</span>
-                                {preprocessors.map((preprocessor, index) => (
-                                    <div key={index}
-                                         className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
-                                             'cursor-pointer' +
-                                             (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
-                                         onClick={() => {
-                                             handleEnablePreprocessors(index)
-                                         }}>
-                                        {preprocessors[index].enabled ? (
-                                            <AiOutlineCheck size={17} className='text-green-300 '/>
-                                        ) : (
-                                            <GrClose size={16} className='text-gray-50'/>
-                                        )}
-                                        {preprocessor.name}
+                            <div className='flex'>
+                                <div className='flex flex-col justify-start flex-wrap items-center pt-12 gap-8 w-full pr-20'>
+                                    <span className='text-xl text-violet-600 select-none'>Data Cleaning</span>
+                                    <span className='text-xl text-violet-600 select-none'>Special Extractors</span>
+                                </div>
+                                <div className='w-full flex flex-col justify-start flex-wrap items-center pt-8 gap-8'>
+                                    <div className='flex w-full gap-10'>
+                                        {preprocessors.map((preprocessor, index) => (
+                                            <div key={index}
+                                                 className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
+                                                     'cursor-pointer select-none ' +
+                                                     (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
+                                                 onClick={() => {
+                                                     handleEnablePreprocessors(index)
+                                                 }}>
+                                                {preprocessors[index].enabled ? (
+                                                    <AiOutlineCheck size={17} className='text-green-300 '/>
+                                                ) : (
+                                                    <GrClose size={17} className='text-gray-50'/>
+                                                )}
+                                                {preprocessor.name}
+                                            </div>
+                                        ))}
                                     </div>
-                                ))}
+                                    <div className='flex w-full gap-10'>
+                                        {specialFunctions.map((specialFunction, index) => (
+                                            <div key={index}
+                                                 className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
+                                                     'cursor-pointer select-none ' +
+                                                     (specialFunction.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
+                                                 onClick={() => {
+                                                     handleEnableSpecialFunctions(index)
+                                                 }}>
+                                                {specialFunctions[index].enabled ? (
+                                                    <AiOutlineCheck size={17} className='text-green-300 '/>
+                                                ) : (
+                                                    <GrClose size={17} className='text-gray-50'/>
+                                                )}
+                                                {specialFunction.name}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                             <DataTable data={analyzedData}/>
                         </div>) :

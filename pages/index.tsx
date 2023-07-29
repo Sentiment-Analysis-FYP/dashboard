@@ -15,7 +15,7 @@ import Preprocessing from "@/components/Preprocessing";
 export const DASHBOARD = 0
 export const SCRAPER_PAGE = 1
 export const ANALYSIS_PAGE = 2
-export const PREPROCESSING = 3
+export const PREPROCESSING_PAGE = 3
 export const VISUALIZATIONS_PAGE = 4
 export const HELP_PAGE = 5
 
@@ -46,7 +46,7 @@ export default function Home() {
                     <Scraper setActivePage={setActivePage}/>
                 </motion.div>
 
-            case PREPROCESSING:
+            case PREPROCESSING_PAGE:
                 return <motion.div>
                     <Preprocessing setActivePage={setActivePage}/>
                 </motion.div>
