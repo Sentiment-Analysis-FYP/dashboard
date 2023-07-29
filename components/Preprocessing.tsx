@@ -161,34 +161,26 @@ const Preprocessing = (props: AnalysisProps) => {
     }
 
     useEffect(() => {
-        console.log(preprocessors)
+        console.log(preprocessors);
         // handle table data update
-        let preprocessedData = analyzedData
+        let preprocessedData = analyzedData;
 
-        if (preprocessors[0].enabled) {
-            // remove stopwords
-            preprocessedData = removeStopwordsFromAnalyzedData(preprocessedData)
-        }
+        // Define an array of preprocessing functions
+        const preprocessingFunctions = [
+            removeStopwordsFromAnalyzedData,
+            removePunctuationFromAnalyzedData,
+            removeRepeatingCharactersFromAnalyzedData,
+            removeURLsFromAnalyzedData,
+        ];
 
-        if (preprocessors[1].enabled) {
-            // remove punctuation
-            preprocessedData = removePunctuationFromAnalyzedData(preprocessedData)
-        }
+        // Loop through each preprocessing function and apply it to the data
+        preprocessors.forEach((preprocessor, index) => {
+            if (preprocessor.enabled) {
+                preprocessedData = preprocessingFunctions[index](preprocessedData);
+            }
+        });
 
-        if (preprocessors[2].enabled) {
-            // remove repeating chars
-            preprocessedData = removeRepeatingCharactersFromAnalyzedData(preprocessedData)
-        }
-
-        if (preprocessors[3].enabled) {
-            // remove urls
-            preprocessedData = removeURLsFromAnalyzedData(preprocessedData)
-        }
-
-        // this is the redux function, do not use here, we are not overwriting
-        // setAnalyzedData(preprocessedData)
-        setPreprocessedAnalyzedData(preprocessedData)
-
+        setPreprocessedAnalyzedData(preprocessedData);
     }, [analyzedData, preprocessors]);
 
 
