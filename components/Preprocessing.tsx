@@ -1,13 +1,13 @@
-import Link from "next/link";
-import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
-import React from "react";
+import {AiOutlineCheck, AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
+import React, {useEffect, useState} from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
-import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
+import {GrClose} from "react-icons/gr";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -122,6 +122,42 @@ const Preprocessing = (props: AnalysisProps) => {
         )
     }
 
+    const initialPreprocessorState = [
+        {name: "Stopwords", enabled: false},
+        {name: "Punctuation", enabled: false},
+        {name: "Characters", enabled: false},
+        {name: "URLS", enabled: false},
+    ]
+
+    const initialSpecialFunctionsState = [
+        {name: "Stopwords", enabled: false},
+        {name: "Punctuation", enabled: false},
+        {name: "Characters", enabled: false},
+        {name: "URLS", enabled: false},
+    ]
+
+    const [preprocessors, setPreprocessors] =
+        useState(initialPreprocessorState)
+
+    const [specialFunctions, setSpecialFunctions] =
+        useState(initialSpecialFunctionsState)
+
+    const handleEnablePreprocessors = (index: number) => {
+        // setEnabledPreprocessors()
+        // const prep = preprocessors
+        // prep[index].enabled = !prep[index].enabled
+        // setPreprocessors(prep)
+        setPreprocessors((prevState) => {
+            prevState[index] = {name: prevState[index].name, enabled: !prevState[index].enabled}
+            return [...prevState]
+        })
+    }
+
+    useEffect(() => {
+        console.log(preprocessors)
+        // handle table data update
+    }, [preprocessors]);
+
 
     return (
         <div className=' w-full'>
@@ -154,7 +190,26 @@ const Preprocessing = (props: AnalysisProps) => {
                         }
                     </div>
                     {analyzedData && analyzedData.data.length ?
-                        (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center'>
+                        (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center gap-4'>
+                            <div className='w-full flex justify-start flex-wrap items-center pt-8 gap-10'>
+                                <span className='text-xl text-violet-600 select-none'>Data Cleaning</span>
+                                {preprocessors.map((preprocessor, index) => (
+                                    <div key={index}
+                                         className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
+                                             'cursor-pointer' +
+                                             (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
+                                         onClick={() => {
+                                             handleEnablePreprocessors(index)
+                                         }}>
+                                        {preprocessors[index].enabled ? (
+                                            <AiOutlineCheck size={17} className='text-green-300 '/>
+                                        ) : (
+                                            <GrClose size={16} className='text-gray-50'/>
+                                        )}
+                                        {preprocessor.name}
+                                    </div>
+                                ))}
+                            </div>
                             <DataTable data={analyzedData}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>

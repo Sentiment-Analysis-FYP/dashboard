@@ -51,35 +51,35 @@ function cleaning_stopwords(text: string) {
         .join(' ');
 }
 
-function cleaningPunctuations(text: string): string {
+export function cleaningPunctuations(text: string): string {
     const englishPunctuations = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
 
     const punctuationRegex = new RegExp(`[${englishPunctuations}]`, 'g');
     return text.replace(punctuationRegex, '');
 }
 
-function cleaningRepeatingChar(text: string): string {
+export function cleaningRepeatingChar(text: string): string {
     return text.replace(/(.)\1+/g, '$1');
 }
 
-function cleaningURLs(data: string): string {
+export function cleaningURLs(data: string): string {
     return data.replace(/((www\.\S+)|(https?:\/\/\S+))/g, ' ');
 }
 
-function cleaningNumbers(data: string): string {
+export function cleaningNumbers(data: string): string {
     return data.replace(/[0-9]+/g, '');
 }
 
-function tokenizeThenStem(inputText: string) {
+export function tokenizeThenStem(inputText: string) {
     return PorterStemmer.tokenizeAndStem(inputText)
 }
 
 
-function lemmatizerOnText(data: string[]): string[] {
+export function lemmatizerOnText(data: string[]): string[] {
     return data.map(word => lemmatizer(word));
 }
 
-function getStringFrequency(arrays: string[][]): Map<string, number> {
+export function getStringFrequency(arrays: string[][]): Map<string, number> {
     const frequencyMap = new Map<string, number>();
 
     arrays.forEach(array => {
@@ -95,7 +95,7 @@ function getStringFrequency(arrays: string[][]): Map<string, number> {
     return frequencyMap;
 }
 
-function mapToWordCloudItemArray(map: Map<string, number>): WordCloudItem[] {
+export function mapToWordCloudItemArray(map: Map<string, number>): WordCloudItem[] {
     // return Array.from(map, ([word, frequency]) => ([word, frequency]));
     return Array.from(map, ([word, frequency]) =>
         ({value: word, count: frequency}));
