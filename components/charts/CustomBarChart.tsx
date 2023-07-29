@@ -41,7 +41,7 @@ const CustomBarChart = (props: CustomBarChartProps) => {
     }, [groupBy]);
 
     return (
-        <div className='w-full h-[600px] flex flex-col justify-center items-center py-10'>
+        <div className='w-full h-[700px] flex flex-col justify-center items-center py-10'>
             <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('day')}>
@@ -82,6 +82,17 @@ const CustomBarChart = (props: CustomBarChartProps) => {
                     <Bar dataKey="negativeCount" name="Negative" fill="#ff3333"/>
                 </BarChart>
             </ResponsiveContainer>
+            <div className='text-2xl mt-20'>
+                <div>
+                    Sentiments over this period were generally <span className={'text-green-700'}>TODO</span>
+                </div>
+                <div>
+                    The emotion expressed by users within this period is <span className='text-red-700'>TODO</span>
+                </div>
+                <div>
+                    It is advised that the situation is <span className='text-green-700'>TODO</span>
+                </div>
+            </div>
         </div>
     )
 }
