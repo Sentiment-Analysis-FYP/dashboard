@@ -116,8 +116,9 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
                     tokenizeThenStem(
                         cleaningNumbers(
                             cleaningURLs(
-                                cleaningRepeatingChar(
-                                    cleaningPunctuations(cleaning_stopwords(dataItem.text)))))))))
+                                // cleaningRepeatingChar(
+                                cleaningPunctuations(cleaning_stopwords(dataItem.text))))))))
+// )
 
     const frequencyMap = getStringFrequency(tokenList)
     return mapToWordCloudItemArray(frequencyMap)
