@@ -12,7 +12,7 @@ import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
 import Preprocessing from "@/components/Preprocessing";
 
-export const DASHBOARD = 0
+export const DASHBOARD_PAGE = 0
 export const SCRAPER_PAGE = 1
 export const ANALYSIS_PAGE = 2
 export const PREPROCESSING_PAGE = 3
@@ -36,7 +36,7 @@ export default function Home() {
 
     const renderSlide = (position: number) => {
         switch (position) {
-            case DASHBOARD:
+            case DASHBOARD_PAGE:
                 return <motion.div>
                     <Dashboard setActivePage={setActivePage}/>
                 </motion.div>
@@ -69,8 +69,8 @@ export default function Home() {
     }
 
     return (
-        <main className='pattern '>
-            <Header/>
+        <main className=' bg-pattern'>
+            <Header setActivePage={setActivePage}/>
 
             {isLoggedIn && <SideNav activePage={activePage} setActivePage={setActivePage} isOpen={sidebarOpen}
                                     toggleSidebar={handleViewSidebar}/>}

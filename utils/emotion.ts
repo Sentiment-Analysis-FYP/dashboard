@@ -31,7 +31,7 @@ export function getEmotionPolarity(emotion: string): "positive" | "negative" {
 export function getHighestOccurringEmotion(dataItems: AnalyzedDataItem[]): string {
     // Create an object to count the occurrences of each emotion
     const emotionCounts: { [emotion: string]: number } = {};
-
+    if (!dataItems.length) return 'negative'
     // Count the occurrences of each emotion
     for (const dataItem of dataItems) {
         const emotion = dataItem.emotion_label;

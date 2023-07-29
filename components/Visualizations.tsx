@@ -62,7 +62,7 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     return (
-        <div className='h-screen overflow-y-scroll'>
+        <div id='vis-content' className='h-screen overflow-y-scroll'>
             {analyzedData.data.length ?
                 <div className='w-full '>
                     <div

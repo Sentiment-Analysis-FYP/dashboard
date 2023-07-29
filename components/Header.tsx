@@ -3,10 +3,16 @@ import Link from 'next/link'
 import {GrFormClose} from "react-icons/gr";
 import {useAuth} from "@/hooks/auth";
 import {logout} from "@/utils/auth";
+import {DASHBOARD_PAGE} from "@/pages";
 
-const Header = () => {
+interface HeaderProps {
+    setActivePage: React.Dispatch<React.SetStateAction<number>>
+}
+
+const Header = (props: HeaderProps) => {
     const [userEmail, setUserEmail] = useState('');
     const [email, token] = useAuth()
+    const {setActivePage} = props
     // let stockCategories = [
     //     {name: "Login", slug: "login"},
     //     {name: "Downloads", slug: "downloads"},
@@ -59,65 +65,68 @@ const Header = () => {
     }
 
     return (
-        <div className="fixed top-0 left-0 bg-white z-40 h-22 w-full ">
-            <div className=' w-full flex items-center'>
-                <div className="px-6 w-full">
-                    <div className=" w-full border-gray-300 py-6 items-center px-10 flex">
-                        <div className="float-left">
-                            <Link href='/'>
+        <>
+            <div className='absolute top-0 left-0 right-0 bg-white h-20 w-screen shadow-xl'/>
+            <div className="fixed top-0 left-0 bg-white z-40 h-22 w-full ">
+                <div className=' w-full flex items-center'>
+                    <div className="px-6 w-full">
+                        <div className=" w-full border-gray-300 py-6 items-center px-10 flex">
+                            <div className="float-left">
                                 <span
-                                    className=" font-bold text-4xl text-violet-800 tracking-[15px]">
-                                    SENTINEL
+                                    onClick={() => setActivePage(DASHBOARD_PAGE)}
+                                    className="select-none cursor-pointer hover:text-violet-500 font-bold text-4xl text-violet-800 tracking-[10px]">
+                                    FeelBack
                                 </span>
-                            </Link>
+                            </div>
+                            {/*<div className="flex items-center justify-center md:contents hidden float-right">*/}
+                            {/*    <div className="float-left flex mx-16 justify-center items-center p-1">*/}
+                            {/*        {categories.map((category) => (*/}
+                            {/*            <Link key={category.slug} href={`/${category.slug}`}>*/}
+                            {/*            <span*/}
+                            {/*                className='px-4 align-middle text-gray-800 ml-4 font-semibold*/}
+                            {/*                 cursor-pointer hover:text-gray-500 hover:translate-x-0.5 transform transition*/}
+                            {/*                  hover:duration-400 ease-in-out text-md'>*/}
+                            {/*                {category.name}*/}
+                            {/*            </span>*/}
+                            {/*            </Link>*/}
+                            {/*        ))}*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
-                        {/*<div className="flex items-center justify-center md:contents hidden float-right">*/}
-                        {/*    <div className="float-left flex mx-16 justify-center items-center p-1">*/}
-                        {/*        {categories.map((category) => (*/}
-                        {/*            <Link key={category.slug} href={`/${category.slug}`}>*/}
-                        {/*            <span*/}
-                        {/*                className='px-4 align-middle text-gray-800 ml-4 font-semibold*/}
-                        {/*                 cursor-pointer hover:text-gray-500 hover:translate-x-0.5 transform transition*/}
-                        {/*                  hover:duration-400 ease-in-out text-md'>*/}
-                        {/*                {category.name}*/}
-                        {/*            </span>*/}
-                        {/*            </Link>*/}
-                        {/*        ))}*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
                     </div>
-                </div>
-                {userEmail ? (<div className='flex justify-center items-center mr-14 mt-2'>
-                    <UserProfile/>
-                    <span
-                        className='w-20 flex justify-center items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
+                    {userEmail ? (<div className='flex justify-center items-center mr-14 mt-2'>
+                        <UserProfile/>
+                        <span
+                            className='w-20 flex justify-center items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
                         cursor-pointer hover:bg-violet-100 transition duration-200'
-                        onClick={() => {
-                            setUserEmail('')
-                            logout()
-                        }}>
+                            onClick={() => {
+                                setUserEmail('')
+                                logout()
+                            }}>
                         Log out
                     </span>
-                </div>) : (<div
-                    className='text-lg w-72 right-20 text-violet-600 flex justify-center items-center gap-5 '>
-                    <Link href='/login'><span className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Login</span></Link>
-                    <Link href='/register'><span className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Sign Up</span></Link>
-                </div>)}
+                    </div>) : (<div
+                        className='text-lg w-72 right-20 text-violet-600 flex justify-center items-center gap-5 '>
+                        <Link href='/login'><span
+                            className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Login</span></Link>
+                        <Link href='/register'><span className='bg-violet-50 px-3 py-1 rounded-lg hover:bg-violet-100'>Sign Up</span></Link>
+                    </div>)}
 
-            </div>
+                </div>
 
-            <div
-                className={mobileMenu ? "opacity-100 flex visible flex-col items-center fixed top-0 left-0 w-full p-4" +
-                    " bg-transparent overflow-hidden z-50 " + fadeInTopRight :
-                    " flex flex-col items-center fixed top-0 left-0 w-full p-4 bg-transparent overflow-hidden z-50 " +
-                    fadeOutTopRight}>
+                <div
+                    className={mobileMenu ? "opacity-100 flex visible flex-col items-center fixed top-0 left-0 w-full p-4" +
+                        " bg-transparent overflow-hidden z-50 " + fadeInTopRight :
+                        " flex flex-col items-center fixed top-0 left-0 w-full p-4 bg-transparent overflow-hidden z-50 " +
+                        fadeOutTopRight}>
 
-                <div className="fixed top-6 right-10 rounded-full w-16 h-16
+                    <div className="fixed top-6 right-10 rounded-full w-16 h-16
                     flex justify-center items-center opacity-80" onClick={toggleMobileMenu}>
-                    <GrFormClose size={36}/>
+                        <GrFormClose size={36}/>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

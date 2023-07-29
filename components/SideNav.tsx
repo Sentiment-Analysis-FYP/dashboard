@@ -52,7 +52,7 @@ const SideNav = (props: HeaderProps) => {
     return (
         <div className={sidebarClass + ' mt-0 h-full'}>
             <div>
-                <div className=' sidebar-toggle text-violet-600 '
+                <div className='cursor-pointer sidebar-toggle text-violet-500 hover:text-violet-600 transition duration-100 '
                      onClick={toggleSidebar}>
                     <GiHamburgerMenu size={40}/>
                 </div>

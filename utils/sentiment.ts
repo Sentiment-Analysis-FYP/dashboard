@@ -9,12 +9,13 @@ export function getHighestOccurringSentiment(dataItems: AnalyzedDataItem[]): str
     // Count the occurrences of negative and positive sentiments
     let negativeCount = 0;
     let positiveCount = 0;
+    if (!dataItems.length) return 'negative'
 
     for (const dataItem of dataItems) {
         if (dataItem.lr_sentiment === SentimentType.Negative) {
-            negativeCount++;
+            negativeCount++
         } else if (dataItem.lr_sentiment === SentimentType.Positive) {
-            positiveCount++;
+            positiveCount++
         }
     }
 
