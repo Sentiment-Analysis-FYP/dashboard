@@ -9,6 +9,7 @@ import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
 import {
+    exportToCSV, getTokenizedTextFromAnalyzedData,
     removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
     removeRepeatingCharactersFromAnalyzedData,
@@ -187,6 +188,20 @@ const Preprocessing = (props: AnalysisProps) => {
         setPreprocessedAnalyzedData(preprocessedData);
     }, [preprocessors]);
 
+    useEffect(() => {
+        console.log(specialFunctions)
+        let preprocessedData = analyzedData;
+        const specialFunctionsArray = [
+            getLemmatizedTextFromAnalyzedData(preprocessedData),
+            getTokenizedTextFromAnalyzedData(preprocessedData)
+        ]
+
+    }, [specialFunctions]);
+
+
+    const saveFileAsCsv = () => {
+        exportToCSV(preprocessedAnalyzedData)
+    }
 
     return (
         <div className=' w-full'>
@@ -228,7 +243,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                             <div key={index}
                                                  className={'px-4 py-2 flex justify-between items-center gap-2 rounded-lg ' +
                                                      'cursor-pointer select-none  ' +
-                                                     (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
+                                                     (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-violet-100")}
                                                  onClick={() => {
                                                      handleEnablePreprocessors(index)
                                                  }}>
@@ -247,7 +262,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                             <div key={index}
                                                  className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
                                                      'cursor-pointer select-none ' +
-                                                     (specialFunction.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
+                                                     (specialFunction.enabled ? " bg-violet-500 text-gray-50" : " bg-violet-100")}
                                                  onClick={() => {
                                                      handleEnableSpecialFunctions(index)
                                                  }}>
@@ -263,7 +278,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                 </div>
                             </div>
                             <DataTable data={preprocessedAnalyzedData}/>
-                            <FileExport/>
+                            <FileExport saveFileAsCsv={saveFileAsCsv}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>

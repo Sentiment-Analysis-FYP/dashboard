@@ -4,7 +4,7 @@ import {
     cleaningNumbers,
     cleaningPunctuations,
     cleaningRepeatingChar,
-    cleaningURLs, cleanEmojis
+    cleaningURLs, cleanEmojis, lemmatizerOnText
 } from "@/utils/visualizations"
 import {saveAs} from "file-saver"
 
@@ -100,17 +100,59 @@ export const removeEmojisFromAnalyzedData = (analyzedData: AnalyzedData): Analyz
 }
 
 
+function escapeCSVText(text: string): string {
+    // If the text contains double quotes, replace them with two double quotes (escaping)
+    return text.replace(/"/g, '""');
+}
+
 export function exportToCSV(analyzedData: AnalyzedData): void {
-    let csvContent = 'id,created_at,text,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score\n'
+    let csvContent = 'id,created_at,text,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score\n';
 
     analyzedData.data.forEach((item: AnalyzedDataItem) => {
-        const row = `${item.id},"${item.created_at}","${item.text}",${item.v_sentiment_neg},${item.v_sentiment_pos},${item.v_sentiment_polarity},${item.t_sentiment_polarity},${item.t_sentiment_subjectivity},${item.lr_sentiment},"${item.score}"\n`
-        csvContent += row
-    })
+        // Escape each field before including it in the CSV row
+        const escapedText = escapeCSVText(item.text);
+        const row = `${item.id},"${item.created_at}","${escapedText}",${item.v_sentiment_neg},${item.v_sentiment_pos},${item.v_sentiment_polarity},${item.t_sentiment_polarity},${item.t_sentiment_subjectivity},${item.lr_sentiment},"${item.score}"\n`;
+        csvContent += row;
+    });
 
-    const blob = new Blob([csvContent], {type: 'text/csvcharset=utf-8'})
+    const blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8'});
 
     // Prompt the user to save the file
-    const defaultFileName = 'analyzed_data.csv'
-    saveAs(blob, defaultFileName)
+    const defaultFileName = 'analyzed_data.csv';
+    saveAs(blob, defaultFileName);
+}
+
+export function getTokenizedTextFromAnalyzedData(analyzedData: AnalyzedData): AnalyzedData {
+    const tokenize = (text: string): string[] => {
+        // Basic tokenization using space as the separator
+        return text.split(' ');
+    };
+
+    const tokenizedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
+        const tokens = tokenize(item.text);
+        return {
+            ...item,
+            tokens: tokens,
+        };
+    });
+
+    return {
+        ...analyzedData,
+        data: tokenizedData,
+    };
+}
+
+export function getLemmatizedTextFromAnalyzedData(analyzedData: AnalyzedData): AnalyzedData {
+    const lemmatizedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
+        const lemmatizedText = lemmatizerOnText(item.text.split(' ')).join(' ');
+        return {
+            ...item,
+            lemmatizedText: lemmatizedText,
+        };
+    });
+
+    return {
+        ...analyzedData,
+        data: lemmatizedData,
+    };
 }
