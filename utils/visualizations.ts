@@ -70,6 +70,10 @@ export function cleaningNumbers(data: string): string {
     return data.replace(/[0-9]+/g, '');
 }
 
+export function cleanEmojis(text: string): string {
+    return text.replace(/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g, '');
+}
+
 export function tokenizeThenStem(inputText: string) {
     return PorterStemmer.tokenizeAndStem(inputText)
 }

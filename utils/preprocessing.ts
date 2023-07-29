@@ -4,7 +4,7 @@ import {
     cleaningNumbers,
     cleaningPunctuations,
     cleaningRepeatingChar,
-    cleaningURLs
+    cleaningURLs, cleanEmojis
 } from "@/utils/visualizations";
 
 export const removeStopwordsFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
@@ -71,6 +71,21 @@ export const removeURLsFromAnalyzedData = (analyzedData: AnalyzedData): Analyzed
 export const removeNumbersFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
     const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
         const cleanedText = cleaningNumbers(item.text);
+        return {
+            ...item,
+            text: cleanedText,
+        };
+    });
+
+    return {
+        ...analyzedData,
+        data: cleanedData,
+    };
+};
+
+export const removeEmojisFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
+    const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
+        const cleanedText = cleanEmojis(item.text);
         return {
             ...item,
             text: cleanedText,

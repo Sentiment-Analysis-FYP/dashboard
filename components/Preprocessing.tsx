@@ -24,7 +24,7 @@ const DataTable = (props: AnalysisDataProps) => {
     const rows = data!.data
 
     const columns: GridColDef[] = [
-        {field: 'id', headerName: 'ID', flex: 0.5},
+        {field: 'id', headerName: 'ID', flex: 0.3},
         {field: 'username', headerName: 'Username', flex: 0.6},
         {field: 'text', headerName: 'Text', flex: 1},
         {
@@ -181,7 +181,7 @@ const Preprocessing = (props: AnalysisProps) => {
         });
 
         setPreprocessedAnalyzedData(preprocessedData);
-    }, [analyzedData, preprocessors]);
+    }, [preprocessors]);
 
 
     return (
@@ -226,7 +226,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                         {preprocessors.map((preprocessor, index) => (
                                             <div key={index}
                                                  className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
-                                                     'cursor-pointer select-none ' +
+                                                     'cursor-pointer select-none  ' +
                                                      (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
                                                  onClick={() => {
                                                      handleEnablePreprocessors(index)
