@@ -9,10 +9,12 @@ import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
 import {
+    removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
     removeRepeatingCharactersFromAnalyzedData,
     removeStopwordsFromAnalyzedData, removeURLsFromAnalyzedData
 } from "@/utils/preprocessing";
+import FileExport from "@/components/FileExport";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -25,7 +27,7 @@ const DataTable = (props: AnalysisDataProps) => {
 
     const columns: GridColDef[] = [
         {field: 'id', headerName: 'ID', flex: 0.3},
-        {field: 'username', headerName: 'Username', flex: 0.6},
+        {field: 'username', headerName: 'Username', flex: 0.3},
         {field: 'text', headerName: 'Text', flex: 1},
         {
             field: 'lr_sentiment',
@@ -34,7 +36,7 @@ const DataTable = (props: AnalysisDataProps) => {
             valueGetter: (params) => {
                 return params.value == 1 ? "Positive" : "Negative"
             },
-            flex: 0.6,
+            flex: 0.3,
             cellClassName: (params) => {
                 if (params.value == null) {
                     return '';
@@ -50,18 +52,18 @@ const DataTable = (props: AnalysisDataProps) => {
             field: 'emotion_label',
             headerName: 'Emotion',
             description: '',
-            flex: 0.4,
+            flex: 0.3,
         },
         {
             field: 'created_at',
             headerName: 'Date Sent',
             description: 'YYYY-MM-DD',
-            flex: 0.4,
+            flex: 0.3,
         },
     ];
 
     return (
-        <div className='flex justify-center h-[1000px] w-full py-4'>
+        <div className='flex justify-center h-[900px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
@@ -133,6 +135,7 @@ const Preprocessing = (props: AnalysisProps) => {
         {name: "Punctuation", enabled: false},
         {name: "Repeating Characters", enabled: false},
         {name: "URLS", enabled: false},
+        {name: "Emojis", enabled: false},
     ]
 
     const initialSpecialFunctionsState = [
@@ -171,6 +174,7 @@ const Preprocessing = (props: AnalysisProps) => {
             removePunctuationFromAnalyzedData,
             removeRepeatingCharactersFromAnalyzedData,
             removeURLsFromAnalyzedData,
+            removeEmojisFromAnalyzedData
         ];
 
         // Loop through each preprocessing function and apply it to the data
@@ -187,7 +191,7 @@ const Preprocessing = (props: AnalysisProps) => {
     return (
         <div className=' w-full'>
             <div className='h-full flex justify-center items-center'>
-                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
+                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6 '>
                     <div className='flex flex-row-reverse justify-between'>
                         <motion.div
                             whileTap={{
@@ -215,17 +219,14 @@ const Preprocessing = (props: AnalysisProps) => {
                         }
                     </div>
                     {analyzedData && analyzedData.data.length ?
-                        (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center gap-4'>
-                            <div className='flex'>
-                                <div className='flex flex-col justify-start flex-wrap  pt-10 gap-8 w-full pr-20'>
-                                    <span className='text-xl text-violet-600 select-none pb-2'>Data Cleaning</span>
-                                    <span className='text-xl text-violet-600 select-none'>Special Functions</span>
-                                </div>
-                                <div className='w-full flex flex-col justify-start flex-wrap items-center pt-8 gap-8'>
-                                    <div className='flex w-full gap-10'>
+                        (<div className='lg:w-[1200px] w-[900px] flex mt-10 flex-col justify-center items-center gap-4'>
+                            <div className='flex justify-center flex-col items-center'>
+                                <div className='w-full flex justify-center items-center flex-col gap-8'>
+                                    <div className='flex flex-wrap w-full gap-10'>
+                                        <span className='text-xl text-violet-600 select-none '>Data Cleaning</span>
                                         {preprocessors.map((preprocessor, index) => (
                                             <div key={index}
-                                                 className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
+                                                 className={'px-4 py-2 flex justify-between items-center gap-2 rounded-lg ' +
                                                      'cursor-pointer select-none  ' +
                                                      (preprocessor.enabled ? " bg-violet-500 text-gray-50" : " bg-gray-300")}
                                                  onClick={() => {
@@ -241,6 +242,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                         ))}
                                     </div>
                                     <div className='flex w-full gap-10'>
+                                        <span className='text-xl text-violet-600 select-none'>Special Functions</span>
                                         {specialFunctions.map((specialFunction, index) => (
                                             <div key={index}
                                                  className={'px-3 py-2 flex justify-between items-center gap-2 rounded-lg ' +
@@ -261,6 +263,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                 </div>
                             </div>
                             <DataTable data={preprocessedAnalyzedData}/>
+                            <FileExport/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
