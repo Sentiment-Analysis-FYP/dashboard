@@ -7,6 +7,7 @@ import {
     cleaningURLs, cleanEmojis, lemmatizerOnText
 } from "@/utils/visualizations"
 import {saveAs} from "file-saver"
+import {WordTokenizer} from "natural";
 
 export const removeStopwordsFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
     const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
@@ -124,15 +125,16 @@ export function exportToCSV(analyzedData: AnalyzedData): void {
 
 export function getTokenizedTextFromAnalyzedData(analyzedData: AnalyzedData): AnalyzedData {
     const tokenize = (text: string): string[] => {
+        const tokenizer = new WordTokenizer()
         // Basic tokenization using space as the separator
-        return text.split(' ');
+        return tokenizer.tokenize(text)!
     };
 
     const tokenizedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
         const tokens = tokenize(item.text);
         return {
             ...item,
-            text: tokens.join(' '),
+            text: `${tokens}`,
         };
     });
 

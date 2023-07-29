@@ -140,8 +140,8 @@ const Preprocessing = (props: AnalysisProps) => {
     ]
 
     const initialSpecialFunctionsState = [
-        {name: "Tokenize", enabled: false},
         {name: "Lemmatize", enabled: false},
+        {name: "Tokenize", enabled: false},
     ]
 
     const [preprocessors, setPreprocessors] =
@@ -187,8 +187,8 @@ const Preprocessing = (props: AnalysisProps) => {
         // handle table data update
         let preprocessedDataForSpecialFunctions = preprocessedDataForPreprocessors;
         const specialFunctionsArray = [
-            getTokenizedTextFromAnalyzedData,
-            getLemmatizedTextFromAnalyzedData
+            getLemmatizedTextFromAnalyzedData,
+            getTokenizedTextFromAnalyzedData
         ];
 
         // Loop through each special function and apply it to the data
