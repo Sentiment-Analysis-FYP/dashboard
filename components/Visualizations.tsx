@@ -8,6 +8,8 @@ import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import Link from "next/link";
 import {motion} from "framer-motion";
+import {getAdvisoryRemark, getHighestOccurringSentiment} from "@/utils/sentiment";
+import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
 
 interface VisualizationsProps {
     // data: AnalyzedData
@@ -32,6 +34,20 @@ const Visualizations = (props: VisualizationsProps) => {
 
     analyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(analyzedData))
 
+    const [sentimentRemark, setSentimentRemark] = useState('');
+    const [emotionRemark, setEmotionRemark] = useState('');
+    const [advisoryRemark, setAdvisoryRemark] = useState('');
+
+    useEffect(() => {
+        setAdvisoryRemark(getAdvisoryRemark(sentimentRemark, getEmotionPolarity(emotionRemark)))
+    }, [sentimentRemark, emotionRemark]);
+
+    useEffect(() => {
+        setSentimentRemark(getHighestOccurringSentiment(analyzedData.data))
+        setEmotionRemark(getHighestOccurringEmotion(analyzedData.data))
+    }, []);
+
+
     const NoAnalyzedData = () => {
         return (
             <div className='flex flex-col text-2xl justify-center items-center p-16'>
@@ -54,13 +70,27 @@ const Visualizations = (props: VisualizationsProps) => {
                         <div
                             className='w-[1400px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-20 flex justify-center items-center'>
                             <div className='flex flex-col gap-5 justify-center items-center '>
-
+                                <div className='text-2xl'>
+                                    <div>
+                                        Sentiments over this period were generally <span
+                                        className={sentimentRemark == 'negative' ? "text-red-700" : "text-green-700"}>{sentimentRemark}</span>
+                                    </div>
+                                    <div>
+                                        The emotion expressed by users within this period is <span
+                                        className={getEmotionPolarity(emotionRemark) == 'negative' ? "text-red-700" : "text-green-700"}>
+                                         {emotionRemark}
+                                    </span>
+                                    </div>
+                                    <div>
+                                        <span className=''>{advisoryRemark}</span>
+                                    </div>
+                                </div>
                                 <div
                                     className='flex justify-center items-center gap-14 my-10 py-24 w-[1200px] bg-violet-50 shadow
                                     rounded-lg'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>
-                                    Variable Bar Chart
+                                    Variable Bar Chart Sentiments Over Time
                                 </span>
                                         <CustomBarChart data={analyzedData}/>
                                     </div>

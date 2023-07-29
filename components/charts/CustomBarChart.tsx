@@ -13,6 +13,8 @@ import {
     Brush
 } from 'recharts'
 import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
+import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
+import {getAdvisoryRemark, getHighestOccurringSentiment, SentimentType} from "@/utils/sentiment";
 
 interface CustomBarChartProps {
     data: AnalyzedData,
@@ -39,6 +41,9 @@ const CustomBarChart = (props: CustomBarChartProps) => {
                 break
         }
     }, [groupBy]);
+
+
+
 
     return (
         <div className='w-full h-[700px] flex flex-col justify-center items-center py-10'>
@@ -82,17 +87,6 @@ const CustomBarChart = (props: CustomBarChartProps) => {
                     <Bar dataKey="negativeCount" name="Negative" fill="#ff3333"/>
                 </BarChart>
             </ResponsiveContainer>
-            <div className='text-2xl mt-20'>
-                <div>
-                    Sentiments over this period were generally <span className={'text-green-700'}>TODO</span>
-                </div>
-                <div>
-                    The emotion expressed by users within this period is <span className='text-red-700'>TODO</span>
-                </div>
-                <div>
-                    It is advised that the situation is <span className='text-green-700'>TODO</span>
-                </div>
-            </div>
         </div>
     )
 }
