@@ -1,7 +1,7 @@
 import {AiOutlineCheck, AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React, {useEffect, useState} from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
-import {DataGrid, GridColDef} from '@mui/x-data-grid';
+import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
@@ -9,7 +9,7 @@ import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
 import {
-    exportToCSV, getLemmatizedTextFromAnalyzedData, getTokenizedTextFromAnalyzedData,
+    exportToCSV, getLemmatizedTextFromAnalyzedData, getStemmedTextFromAnalyzedData, getTokenizedTextFromAnalyzedData,
     removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
     removeRepeatingCharactersFromAnalyzedData,
@@ -63,11 +63,19 @@ const DataTable = (props: AnalysisDataProps) => {
         },
     ];
 
+    const defaultSortModel: GridSortModel = [
+        {
+            field: 'id',
+            sort: 'asc', // 'asc' for ascending order, 'desc' for descending order
+        },
+    ];
+
     return (
         <div className='flex justify-center h-[900px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
+                sortModel={defaultSortModel}
                 initialState={{
                     pagination: {
                         paginationModel: {page: 0, pageSize: 20},
@@ -142,6 +150,7 @@ const Preprocessing = (props: AnalysisProps) => {
     const initialSpecialFunctionsState = [
         {name: "Lemmatize", enabled: false},
         {name: "Tokenize", enabled: false},
+        {name: "Stem", enabled: false},
     ]
 
     const [preprocessors, setPreprocessors] =
@@ -174,7 +183,7 @@ const Preprocessing = (props: AnalysisProps) => {
             removeStopwordsFromAnalyzedData,
             removePunctuationFromAnalyzedData,
             removeRepeatingCharactersFromAnalyzedData,
-            removeEmojisFromAnalyzedData
+            removeEmojisFromAnalyzedData,
         ];
 
         // Loop through each preprocessing function and apply it to the data
@@ -188,7 +197,8 @@ const Preprocessing = (props: AnalysisProps) => {
         let preprocessedDataForSpecialFunctions = preprocessedDataForPreprocessors;
         const specialFunctionsArray = [
             getLemmatizedTextFromAnalyzedData,
-            getTokenizedTextFromAnalyzedData
+            getTokenizedTextFromAnalyzedData,
+            getStemmedTextFromAnalyzedData
         ];
 
         // Loop through each special function and apply it to the data
@@ -237,7 +247,7 @@ const Preprocessing = (props: AnalysisProps) => {
                     </div>
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex mt-10 flex-col justify-center items-center gap-4'>
-                            <div className='flex justify-center flex-col items-center'>
+                            <div className='flex w-full flex-col items-center'>
                                 <div className='w-full flex justify-center items-center flex-col gap-8'>
                                     <div className='flex flex-wrap w-full gap-10'>
                                         <span className='text-xl text-violet-600 select-none '>Data Cleaning</span>

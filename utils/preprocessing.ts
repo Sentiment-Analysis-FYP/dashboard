@@ -7,7 +7,7 @@ import {
     cleaningURLs, cleanEmojis, lemmatizerOnText
 } from "@/utils/visualizations"
 import {saveAs} from "file-saver"
-import {WordTokenizer} from "natural";
+import {PorterStemmer, WordTokenizer} from "natural";
 
 export const removeStopwordsFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
     const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
@@ -156,5 +156,25 @@ export function getLemmatizedTextFromAnalyzedData(analyzedData: AnalyzedData): A
     return {
         ...analyzedData,
         data: lemmatizedData,
+    };
+}
+
+export function getStemmedTextFromAnalyzedData(analyzedData: AnalyzedData): AnalyzedData {
+    const stemmer = PorterStemmer;
+
+    const stemmedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
+        const stemmedText = item.text
+            .split(' ')
+            .map((word) => stemmer.stem(word))
+            .join(' ');
+        return {
+            ...item,
+            text: stemmedText,
+        };
+    });
+
+    return {
+        ...analyzedData,
+        data: stemmedData,
     };
 }

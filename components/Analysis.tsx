@@ -2,7 +2,7 @@ import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
-import {DataGrid, GridCellParams, GridColDef} from '@mui/x-data-grid';
+import {DataGrid, GridCellParams, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
@@ -55,11 +55,19 @@ const DataTable = (props: AnalysisDataProps) => {
         },
     ];
 
+    const defaultSortModel: GridSortModel = [
+        {
+            field: 'id',
+            sort: 'asc', // 'asc' for ascending order, 'desc' for descending order
+        },
+    ];
+
     return (
         <div className='flex justify-center h-[1200px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
+                sortModel={defaultSortModel}
                 initialState={{
                     pagination: {
                         paginationModel: {page: 0, pageSize: 20},
