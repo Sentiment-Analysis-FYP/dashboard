@@ -13,6 +13,7 @@ import {
     YAxis
 } from "recharts";
 import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
+import EmotionRadarChart from "@/components/charts/EmotionRadarChart";
 
 interface SummaryGraphsProps {
     data: AnalyzedData
@@ -25,8 +26,8 @@ const SummaryGraphs = (props: SummaryGraphsProps) => {
 
     return (
         <div className='bg-white p-6 w-full rounded-lg flex justify-between items-center'>
-            <div>
-
+            <div className='w-1/2'>
+                <EmotionRadarChart data={}/>
             </div>
 
             <div className='w-1/2 h-[400px] flex flex-col justify-center items-center py-10'>
