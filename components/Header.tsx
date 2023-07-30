@@ -6,6 +6,7 @@ import {logout} from "@/utils/auth";
 import {DASHBOARD_PAGE} from "@/pages";
 import {useRouter} from "next/router";
 import {BiLockAlt} from "react-icons/bi";
+import {LuLogOut} from "react-icons/lu";
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -56,7 +57,7 @@ const Header = (props: HeaderProps) => {
         return (
             <Link href='/login'>
                 <div className=" h-10 text-violet-500 py-1 px-2 rounded-lg
-                    text-2xl flex justify-center items-center absolute right-40 bottom-5
+                    text-2xl flex justify-center items-center right-40 bottom-5
                     cursor-pointer hover:bg-violet-50 transition duration-300 ">
                     <div className='flex justify-center items-center gap-1 pb-[2px]'>
                         <BiLockAlt size={20}/>
@@ -97,17 +98,17 @@ const Header = (props: HeaderProps) => {
                             {/*</div>*/}
                         </div>
                     </div>
-                    {userEmail ? (<div className='flex justify-center items-center mr-14 mt-2'>
+                    {userEmail ? (<div className='flex w-full gap-4 justify-end items-center mr-8 mt-2'>
                         <UserProfile/>
                         <span
-                            className='w-20 flex justify-center items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
+                            className='w-32 flex justify-around items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
                         cursor-pointer hover:bg-violet-100 transition duration-200'
                             onClick={() => {
                                 setUserEmail('')
                                 router.replace(router.asPath)
                                 logout()
                             }}>
-                        Log out
+                        Log out <LuLogOut/>
                     </span>
                     </div>) : (<div
                         className='text-lg w-72 right-20 text-violet-600 flex justify-center items-center gap-5 '>
