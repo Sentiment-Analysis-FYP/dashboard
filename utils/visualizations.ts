@@ -197,27 +197,43 @@ export interface LineChartDataItem {
     negativeCount: number
 }
 
-export const getEmotionFrequency = (analyzedData: AnalyzedData, sentiment: SentimentType) => {
-    const emotionFrequency: { [key: string]: number } = {}; // Object to store the frequency of each emotion label
+export interface EmotionFrequencyData {
+    label: string;
+    positive: number;
+    negative: number;
+}
+
+export const getEmotionFrequency = (analyzedData: AnalyzedData): EmotionFrequencyData[] => {
+    const emotionFrequencyMap: { [emotionLabel: string]: { positive: number; negative: number } } = {};
 
     // Iterate through each item in the data array
     analyzedData.data.forEach((item: AnalyzedDataItem) => {
         const {emotion_label, lr_sentiment} = item;
+        const sentimentType: SentimentType = lr_sentiment == 1 ? SentimentType.Positive : SentimentType.Negative;
 
-        // If the sentiment parameter is provided and the item's sentiment does not match the provided sentiment, skip it
-        if (sentiment !== null && (sentiment === SentimentType.Negative && lr_sentiment == 0)
-            || (sentiment === SentimentType.Positive && lr_sentiment == 1)) {
-            return;
-        }
-
-        // If the emotion label exists in the emotionFrequency object, increment its count
-        if (emotion_label in emotionFrequency) {
-            emotionFrequency[emotion_label]++;
+        // If the emotion label exists in the emotionFrequencyMap object, increment its corresponding sentiment count
+        if (emotion_label in emotionFrequencyMap) {
+            sentimentType == SentimentType.Negative ? emotionFrequencyMap[emotion_label].negative++ : emotionFrequencyMap[emotion_label].negative++
         } else {
-            // If the emotion label is encountered for the first time, set its count to 1
-            emotionFrequency[emotion_label] = 1;
+            // If the emotion label is encountered for the first time, initialize its sentiment count
+            emotionFrequencyMap[emotion_label] = {
+                positive: sentimentType === SentimentType.Positive ? 1 : 0,
+                negative: sentimentType === SentimentType.Negative ? 1 : 0,
+            };
         }
     });
 
-    return emotionFrequency;
-};
+    // Convert the emotionFrequencyMap into an array of EmotionFrequencyData objects
+    return Object.keys(emotionFrequencyMap).map((emotionLabel) => {
+        const {positive, negative} = emotionFrequencyMap[emotionLabel]
+        return {label: emotionLabel, positive, negative}
+    })
+}
+
+export const getMaxEmotionFrequencyDataValue = (data: EmotionFrequencyData[]): number => {
+    return data.reduce((maxValue, item) => {
+        const maxFrequency = Math.max(item.positive, item.negative)
+        return Math.max(maxValue, maxFrequency)
+    }, 0)
+}
+
