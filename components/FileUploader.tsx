@@ -44,8 +44,8 @@ const FileUploader = (props: FileUploaderProps) => {
     }
 
     return (
-        <div className='flex flex-col gap-5 items-center pt-8 mt-1 mx-8 border-t-[2px] border-gray-300'>
-            <div className='text-violet-600 text-xl font-semibold'>
+        <div className='flex flex-col gap-10 items-center py-8 mt-1  border-t-[1px] border-gray-300'>
+            <div className='text-violet-600 text-2xl font-semibold'>
                 Upload Local File
             </div>
 

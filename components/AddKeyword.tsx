@@ -1,8 +1,10 @@
 import React, {useEffect} from "react";
 import {ReactDOM} from "react";
 import {useState} from "react";
-import {AiOutlinePlus} from "react-icons/ai";
+import {AiOutlineClose, AiOutlinePlus} from "react-icons/ai";
 import {BiLock} from "react-icons/bi";
+import {IoCloseOutline} from "react-icons/io5";
+import {GrClose} from "react-icons/gr";
 
 interface AddKeywordsProps {
     setKeywordsState: React.Dispatch<React.SetStateAction<string[]>>
@@ -83,7 +85,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
                                         }}
                                         className="w-40 text-gray-50 bg-violet-500 to-white p-2 px-4 rounded-md
                                          font-bold hover:bg-violet-700 flex gap-3 items-center justify-center">
-                                        <BiLock size={20}/>
+                                        <AiOutlineClose size={20}/>
                                         Delete
                                     </button>
                                 </div>

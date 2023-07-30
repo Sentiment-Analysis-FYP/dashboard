@@ -5,6 +5,7 @@ import {useAuth} from "@/hooks/auth";
 import {logout} from "@/utils/auth";
 import {DASHBOARD_PAGE} from "@/pages";
 import {useRouter} from "next/router";
+import {BiLockAlt} from "react-icons/bi";
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -54,10 +55,11 @@ const Header = (props: HeaderProps) => {
     const UserProfile = () => {
         return (
             <Link href='/login'>
-                <div className=" h-10 text-violet-500 uppercase
+                <div className=" h-10 text-violet-500 py-1 px-2 rounded-lg
                     text-2xl flex justify-center items-center absolute right-40 bottom-5
-                    cursor-pointer hover:bg-violet-600 transition duration-300 hover:shadow-lg">
-                    <div className='flex justify-center items-center pb-[2px]'>
+                    cursor-pointer hover:bg-violet-50 transition duration-300 ">
+                    <div className='flex justify-center items-center gap-1 pb-[2px]'>
+                        <BiLockAlt size={20}/>
                         {username}
                     </div>
                 </div>

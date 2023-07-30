@@ -7,6 +7,8 @@ import {requestScrape} from "@/utils/scraper";
 import WebSocketHandler from "@/components/WebSocketHandler";
 import {useAuth} from "@/hooks/auth";
 import FileUploader from "@/components/FileUploader";
+import {AiOutlineUpload} from "react-icons/ai";
+import {AnimatePresence, motion} from "framer-motion";
 
 interface ScraperProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -21,6 +23,39 @@ export const Scraper = (props: ScraperProps) => {
     const [showModal, setShowModal] = useState(false);
     const [enabled, setEnabled] = useState(false);
     const [email, token] = useAuth()
+    const [activeTab, setActiveTab] = useState(0);
+
+    const renderSlide = (position: number) => {
+        switch (position) {
+            case 0:
+                return <motion.div>
+                    <div className='pt-10'>
+                        <div className='flex gap-20'>
+                            <div className='flex flex-col  w-full'>
+                                <UserName setUsername={setUsername}/>
+                                <NewDatePicker setDates={setDates}/>
+                            </div>
+
+                            <div className='flex justify-between w-full'>
+                                <div className=''>
+                                    <AddKeyword setKeywordsState={setKeywordsState}/>
+                                    {/*<FileUploader showModal={showModal} setShowModal={setShowModal}/>*/}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='pt-5'>
+                            <BeginScrape runScrape={runScrape} setShowModal={setShowModal} enabled={enabled}/>
+                        </div>
+                    </div>
+                </motion.div>
+
+            case 1:
+                return <motion.div className='pt-14'>
+                    <FileUploader showModal={showModal} setShowModal={setShowModal}/>
+                </motion.div>
+        }
+    }
 
     const runScrape = async () => {
         console.log(username)
@@ -43,22 +78,45 @@ export const Scraper = (props: ScraperProps) => {
 
 
     return (
-        <div className='bg-white flex flex-col h-[800px] 3xl:w-[1300px] p-32 shadow-2xl rounded-lg'>
-            <div className='flex justify-between w-full'>
-                <UserName setUsername={setUsername}/>
-                <BeginScrape runScrape={runScrape} setShowModal={setShowModal} enabled={enabled}/>
-            </div>
+        <div className='bg-white flex flex-col h-[800px] w-[1300px] px-24 py-10 shadow-2xl rounded-lg'>
+            <div className=' justify-between flex gap-4'>
+                <div className='flex gap-4 text-lg select-none '>
+                    <span
+                        onClick={() => setActiveTab(0)}
+                        className={'  rounded-lg px-2 py-1 hover:shadow transition duration-200'
+                            + (!activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
+                        Twitter</span>
+                    <span
+                        className='bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                        TripAdvisor</span>
+                </div>
 
-            <div className='flex justify-between w-full'>
-                <AddKeyword setKeywordsState={setKeywordsState}/>
-                <div className=''>
-                    <NewDatePicker setDates={setDates}/>
-                    <FileUploader showModal={showModal} setShowModal={setShowModal}/>
+                <div
+                    onClick={() => setActiveTab(1)}
+                    className={' select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
+                        + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
+                    <AiOutlineUpload size={20}/>
+                    <span>File Upload</span>
                 </div>
             </div>
+            <motion.div
+                className=''>
+                <AnimatePresence mode='popLayout'>
+                    <motion.div
+                        key={activeTab}
+                        initial={{opacity: 0, x: "30%"}}
+                        animate={{opacity: 1, x: 0}}
+                        exit={{opacity: 0, x: "-20%"}}
+                        transition={{duration: .3, delay: 0}}
+                        className=''>
+                        {renderSlide(activeTab)}
+                    </motion.div>
+                </AnimatePresence>
+            </motion.div>
 
             {showModal &&
-                <WebSocketHandler showModal={showModal} setShowModal={setShowModal} setActivePage={setActivePage}/>}
+                <WebSocketHandler showModal={showModal} setShowModal={setShowModal}
+                                  setActivePage={setActivePage}/>}
         </div>
     )
 }
