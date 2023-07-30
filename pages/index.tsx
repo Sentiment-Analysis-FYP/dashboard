@@ -11,6 +11,7 @@ import HomePage from "@/components/HomePage";
 import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
 import Preprocessing from "@/components/Preprocessing";
+import {BiArrowBack} from "react-icons/bi";
 
 export const DASHBOARD_PAGE = 0
 export const SCRAPER_PAGE = 1
@@ -76,7 +77,7 @@ export default function Home() {
                                     toggleSidebar={handleViewSidebar}/>}
 
             {isLoggedIn ?
-                <div className='h-screen '>
+                <div className='h-screen flex flex-col'>
                     {/*<div className={'flex w-screen h-screen justify-center items-center transition duration-300 '*/}
                     {/*    + (sidebarOpen ? " pl-96" : "")}>*/}
                     {/*    <Dashboard setActivePage={setActivePage}/>*/}
@@ -85,7 +86,7 @@ export default function Home() {
 
 
                     <motion.div
-                        className='w-screen h-screen flex justify-center items-center '>
+                        className='w-screen h-screen flex flex-col justify-center items-center '>
                         <AnimatePresence mode='popLayout'>
                             <motion.div
                                 key={activePage}
@@ -94,6 +95,17 @@ export default function Home() {
                                 exit={{opacity: 0, x: "-100%"}}
                                 transition={{duration: .3, delay: 0}}
                                 className=''>
+                                <div className='h-16'>
+                                    {activePage > 0 && <div
+                                        onClick={() => setActivePage((prevState) => prevState - 1)}
+                                        className='px-4 py-2 text-violet-700 bg-white w-32 rounded-lg flex gap-2
+                                        justify-around items-center hover:bg-violet-600 hover:text-white transition
+                                        duration-200 hover:shadow cursor-pointer'>
+                                        <BiArrowBack size={20}/>
+                                        <span>Back</span>
+                                    </div>}
+                                </div>
+
                                 {renderSlide(activePage)}
                             </motion.div>
                         </AnimatePresence>
