@@ -67,3 +67,18 @@ export const logout = () => {
     window.sessionStorage.setItem('token', '')
     window.sessionStorage.setItem('name', '')
 }
+
+export const getUserScrapes = async (email: string) => {
+    const response = await fetch(`${EXPRESS_BASE_URL}/scrape/user`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            mode: 'cors',
+            body: JSON.stringify({
+                email: email
+            })
+        }
+    )
+}
