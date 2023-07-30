@@ -1,9 +1,10 @@
 require("dotenv").config()
 
 const EXPRESS_BASE_URL = process.env.NEXT_PUBLIC_EXPRESS_BASE_URL
-export const storeUserLogin = (email: string, token: string) => {
+export const storeUserLogin = (email: string, token: string, name: string) => {
     window.sessionStorage.setItem('email', email)
     window.sessionStorage.setItem('token', token)
+    window.sessionStorage.setItem('name', name)
 }
 export const signIn = async (email: string, password: string) => {
     let status = 400
@@ -24,7 +25,7 @@ export const signIn = async (email: string, password: string) => {
         return response.json()
     }).then(data => {
         console.log(data)
-        storeUserLogin(email, data.accessToken)
+        storeUserLogin(email, data.accessToken, data.username)
     }).catch(err => {
         console.log(err)
     })
@@ -45,7 +46,7 @@ export const signUp = async (firstName: string, lastName: string, email: string,
             firstName: firstName,
             lastName: lastName,
             email: email,
-            password: password
+            password: password,
         })
     }).then(response => {
         console.log(response)
@@ -54,7 +55,7 @@ export const signUp = async (firstName: string, lastName: string, email: string,
         return response.json()
     }).then(data => {
         console.log(data)
-        storeUserLogin(email, data.accessToken)
+        storeUserLogin(email, data.accessToken, data.firstName + ' ' + data.lastName)
     }).catch(err => {
         console.log(err)
     })
@@ -64,4 +65,5 @@ export const signUp = async (firstName: string, lastName: string, email: string,
 export const logout = () => {
     window.sessionStorage.setItem('email', '')
     window.sessionStorage.setItem('token', '')
+    window.sessionStorage.setItem('name', '')
 }

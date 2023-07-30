@@ -4,6 +4,7 @@ import {GrFormClose} from "react-icons/gr";
 import {useAuth} from "@/hooks/auth";
 import {logout} from "@/utils/auth";
 import {DASHBOARD_PAGE} from "@/pages";
+import {useRouter} from "next/router";
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -11,8 +12,9 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
     const [userEmail, setUserEmail] = useState('');
-    const [email, token] = useAuth()
+    const [email, token, username] = useAuth()
     const {setActivePage} = props
+    const router = useRouter()
     // let stockCategories = [
     //     {name: "Login", slug: "login"},
     //     {name: "Downloads", slug: "downloads"},
@@ -52,12 +54,11 @@ const Header = (props: HeaderProps) => {
     const UserProfile = () => {
         return (
             <Link href='/login'>
-                <div className="rounded-full w-10 h-10 text-white bg-violet-500 uppercase
-            text-2xl flex justify-center items-center absolute right-40 bottom-5 shadow-md
-            cursor-pointer hover:bg-violet-600 transition duration-300 hover:shadow-lg">
-
+                <div className=" h-10 text-violet-500 uppercase
+                    text-2xl flex justify-center items-center absolute right-40 bottom-5
+                    cursor-pointer hover:bg-violet-600 transition duration-300 hover:shadow-lg">
                     <div className='flex justify-center items-center pb-[2px]'>
-                        {userEmail.charAt(0)}
+                        {username}
                     </div>
                 </div>
             </Link>
@@ -101,6 +102,7 @@ const Header = (props: HeaderProps) => {
                         cursor-pointer hover:bg-violet-100 transition duration-200'
                             onClick={() => {
                                 setUserEmail('')
+                                router.replace(router.asPath)
                                 logout()
                             }}>
                         Log out

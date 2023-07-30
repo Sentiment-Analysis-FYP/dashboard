@@ -248,7 +248,8 @@ const Preprocessing = (props: AnalysisProps) => {
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex mt-10 flex-col justify-center items-center gap-4'>
                             <div className='flex w-full flex-col items-center'>
-                                <div className='w-full flex justify-center items-center flex-col gap-8 px-10 py-5 bg-violet-50 rounded-lg'>
+                                <div
+                                    className='w-full flex justify-center items-center flex-col gap-8 px-10 py-5 bg-violet-50 rounded-lg'>
                                     <div className='flex flex-wrap w-full gap-10'>
                                         <span className='text-xl text-violet-600 select-none '>Data Cleaning</span>
                                         {preprocessors.map((preprocessor, index) => (
