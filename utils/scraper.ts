@@ -1,5 +1,5 @@
 export const requestScrape =
-    async (username: string, keywords: string[], startDate: Date, endDate: Date, email: string) => {
+    async (username: string, keywords: string[], startDate: Date, endDate: Date, email: string, title: string) => {
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_EXPRESS_BASE_URL}/scrape/begin`, {
             method: 'POST',
@@ -13,7 +13,8 @@ export const requestScrape =
                 keywords: keywords,
                 start_date: startDate,
                 end_date: endDate,
-                email: email
+                email: email,
+                title: title
             })
         })
 

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 import {GrFormClose} from "react-icons/gr";
 import {useAuth} from "@/hooks/auth";
-import {logout} from "@/utils/auth";
+import {getUserScrapes, logout} from "@/utils/auth";
 import {DASHBOARD_PAGE} from "@/pages";
 import {useRouter} from "next/router";
 import {BiLockAlt} from "react-icons/bi";
@@ -17,32 +17,24 @@ const Header = (props: HeaderProps) => {
     const [email, token, username] = useAuth()
     const {setActivePage} = props
     const router = useRouter()
-    // let stockCategories = [
-    //     {name: "Login", slug: "login"},
-    //     {name: "Downloads", slug: "downloads"},
-    //     {name: "About", slug: "#about"},
-    //     {name: "Help", slug: "help"},
-    //     {name: "Contact", slug: "contact"},
-    // ]
+    const [userScrapes, setUserScrapes] = useState([{}]);
 
-    // const [categories, setCategories] = useState(stockCategories);
+    useEffect(() => {
+        const scrapes = async () => {
+            const resJson = await getUserScrapes(email!)
+            // return resJson
+            console.log(resJson)
+        }
+        if (email) {
+            const ss =  scrapes()
+            console.log(ss)
+        }
+    }, [email, setActivePage]);
+
 
     useEffect(() => {
         setUserEmail(email!)
     }, [email]);
-
-    // useEffect(() => {
-    //     if (userEmail) {
-    //         stockCategories.shift()
-    //         setCategories(stockCategories)
-    //     }
-    // }, [userEmail]);
-
-    // useEffect(() => {
-    //     // setUpdateHeader(false)
-    //     setUserEmail(checkUserLogin().email)
-    // }, [updateHeader]);
-
 
     const fadeInTopRight = "opacity-100 duration-150 scale-100 ease-in-out delay-75"
     const fadeOutTopRight = "opacity-0 invisible duration-100 scale-50 translate-x-40 -translate-y-32"
@@ -80,20 +72,6 @@ const Header = (props: HeaderProps) => {
                                     FeeBa
                                 </span>
                             </div>
-                            {/*<div className="flex items-center justify-center md:contents hidden float-right">*/}
-                            {/*    <div className="float-left flex mx-16 justify-center items-center p-1">*/}
-                            {/*        {categories.map((category) => (*/}
-                            {/*            <Link key={category.slug} href={`/${category.slug}`}>*/}
-                            {/*            <span*/}
-                            {/*                className='px-4 align-middle text-gray-800 ml-4 font-semibold*/}
-                            {/*                 cursor-pointer hover:text-gray-500 hover:translate-x-0.5 transform transition*/}
-                            {/*                  hover:duration-400 ease-in-out text-md'>*/}
-                            {/*                {category.name}*/}
-                            {/*            </span>*/}
-                            {/*            </Link>*/}
-                            {/*        ))}*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                     {userEmail ? (<div className='flex w-full gap-4 justify-end items-center mr-8 mt-2'>

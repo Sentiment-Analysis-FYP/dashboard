@@ -17,6 +17,7 @@ interface ScraperProps {
 export const Scraper = (props: ScraperProps) => {
     const {setActivePage} = props
     const [username, setUsername] = useState("");
+    const [title, setTitle] = useState('');
     const [keywordsState, setKeywordsState] = useState([""]);
     const [dates, setDates] = useState([new Date(), new Date()]);
     const [scrapeSuccess, setScrapeSuccess] = useState(false);
@@ -62,7 +63,11 @@ export const Scraper = (props: ScraperProps) => {
         console.log(keywordsState)
 
         if (username.trim().length > 0 || keywordsState.length > 0) {
-            const status = await requestScrape(username, keywordsState, dates[0], dates[1], email ? email : "guest")
+            const status = await requestScrape(username,
+                keywordsState,
+                dates[0], dates[1],
+                email ? email : "guest",
+                title)
             setScrapeSuccess(status == 200)
             return
         }
@@ -80,26 +85,34 @@ export const Scraper = (props: ScraperProps) => {
     return (
         <div className='bg-white flex flex-col h-[800px] w-[1300px] px-24 py-10 shadow-2xl rounded-lg'>
             <div className=' justify-between flex gap-4'>
-                <div className='flex gap-4 text-lg select-none '>
+                <div>
+                    <input
+                        type="text"
+                        placeholder='Scrape title'
+                        className='w-80 py-2 px-4 border-[1px] border-gray-300 rounded-md'/>
+                </div>
+                <div className='flex gap-4'>
+                    <div className='flex gap-4 text-lg select-none '>
                     <span
                         onClick={() => setActiveTab(0)}
                         className={'cursor-pointer rounded-lg px-2 py-1 hover:shadow transition duration-200'
                             + (!activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
                         Twitter</span>
-                    <span
-                        className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                        <span
+                            className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
                         TripAdvisor</span>
-                    <span
-                        className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                        <span
+                            className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
                         Yelp</span>
-                </div>
+                    </div>
 
-                <div
-                    onClick={() => setActiveTab(1)}
-                    className={'cursor-pointer select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
-                        + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
-                    <AiOutlineUpload size={20}/>
-                    <span>File Upload</span>
+                    <div
+                        onClick={() => setActiveTab(1)}
+                        className={'cursor-pointer select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
+                            + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
+                        <AiOutlineUpload size={20}/>
+                        <span>File Upload</span>
+                    </div>
                 </div>
             </div>
             <motion.div

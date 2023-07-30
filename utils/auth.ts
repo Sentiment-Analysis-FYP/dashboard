@@ -69,7 +69,8 @@ export const logout = () => {
 }
 
 export const getUserScrapes = async (email: string) => {
-    const response = await fetch(`${EXPRESS_BASE_URL}/scrape/user`, {
+    const response = await fetch(`${EXPRESS_BASE_URL}/scrape/user`,
+        {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -81,4 +82,6 @@ export const getUserScrapes = async (email: string) => {
             })
         }
     )
+
+    if (response.status == 200) return response.json()
 }
