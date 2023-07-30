@@ -205,7 +205,7 @@ export interface EmotionFrequencyData {
 
 export const getEmotionFrequency = (analyzedData: AnalyzedData): EmotionFrequencyData[] => {
     const emotionFrequencyMap: { [emotionLabel: string]: { positive: number; negative: number } } = {};
-    if (!analyzedData || !analyzedData.data)
+    if (analyzedData)
         // Iterate through each item in the data array
         analyzedData.data.forEach((item: AnalyzedDataItem) => {
             const {emotion_label, lr_sentiment} = item;

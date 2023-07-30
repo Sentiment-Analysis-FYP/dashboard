@@ -69,7 +69,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
 
             <div className='py-2'>
                 {keywords?.length > 0 ? (
-                    <div id='keyword-scroll' className='overflow-y-scroll h-[350px] snap-y py-2'>
+                    <div id='hide-scrollbar' className='overflow-y-scroll h-[350px] snap-y py-2'>
                         {keywords.map(
                             (keyword, index) => (
                                 <div
