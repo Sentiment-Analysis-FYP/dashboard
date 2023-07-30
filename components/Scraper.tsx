@@ -61,7 +61,7 @@ export const Scraper = (props: ScraperProps) => {
         console.log(username)
         console.log(keywordsState)
 
-        if (username || keywordsState.length > 0) {
+        if (username.trim().length > 0 || keywordsState.length > 0) {
             const status = await requestScrape(username, keywordsState, dates[0], dates[1], email ? email : "guest")
             setScrapeSuccess(status == 200)
             return
@@ -72,7 +72,7 @@ export const Scraper = (props: ScraperProps) => {
     }
 
     useEffect(() => {
-        if (username || keywordsState.length > 0) setEnabled(true)
+        if (username.trim().length > 0 || keywordsState.length > 0) setEnabled(true)
         else setEnabled(false)
     }, [username, keywordsState]);
 
@@ -83,17 +83,20 @@ export const Scraper = (props: ScraperProps) => {
                 <div className='flex gap-4 text-lg select-none '>
                     <span
                         onClick={() => setActiveTab(0)}
-                        className={'  rounded-lg px-2 py-1 hover:shadow transition duration-200'
+                        className={'cursor-pointer rounded-lg px-2 py-1 hover:shadow transition duration-200'
                             + (!activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
                         Twitter</span>
                     <span
-                        className='bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                        className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
                         TripAdvisor</span>
+                    <span
+                        className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                        Yelp</span>
                 </div>
 
                 <div
                     onClick={() => setActiveTab(1)}
-                    className={' select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
+                    className={'cursor-pointer select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
                         + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
                     <AiOutlineUpload size={20}/>
                     <span>File Upload</span>
@@ -104,9 +107,9 @@ export const Scraper = (props: ScraperProps) => {
                 <AnimatePresence mode='popLayout'>
                     <motion.div
                         key={activeTab}
-                        initial={{opacity: 0, x: "30%"}}
+                        initial={{opacity: 0, x: !activeTab ? "-30%" : "30%"}}
                         animate={{opacity: 1, x: 0}}
-                        exit={{opacity: 0, x: "-20%"}}
+                        exit={{opacity: 0, x: !activeTab ? "-20%" : "20%"}}
                         transition={{duration: .3, delay: 0}}
                         className=''>
                         {renderSlide(activeTab)}

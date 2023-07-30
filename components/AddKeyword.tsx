@@ -98,7 +98,7 @@ const AddKeyword = (props: AddKeywordsProps) => {
                     </div>
                 )}
 
-                <div className='w-full px-3 h-[2px] bg-gray-300'></div>
+                <div className='w-full px-3 h-[2px] bg-gray-200'></div>
             </div>
         </div>
     );

@@ -63,7 +63,7 @@
     }
 }
 
-#keyword-scroll::-webkit-scrollbar {
+#hide-scrollbar::-webkit-scrollbar {
     visibility: hidden;
     opacity: 0;
     width: 0;

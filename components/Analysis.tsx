@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {PREPROCESSING_PAGE, VISUALIZATIONS_PAGE} from "@/pages";
+import SummaryGraphs from "@/components/charts/SummaryGraphs";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -63,11 +64,11 @@ const DataTable = (props: AnalysisDataProps) => {
     ];
 
     return (
-        <div className='flex justify-center h-[1200px] w-full py-4'>
+        <div className='flex justify-center h-[700px] w-full py-4'>
             <DataGrid
                 rows={rows}
                 columns={columns}
-                sortModel={defaultSortModel}
+                // sortModel={defaultSortModel}
                 initialState={{
                     pagination: {
                         paginationModel: {page: 0, pageSize: 20},
@@ -132,9 +133,13 @@ const Analysis = (props: AnalysisProps) => {
 
 
     return (
-        <div className=' w-full'>
-            <div className='h-full flex justify-center items-center'>
-                <div className='w-full bg-white h-5/6 shadow-2xl rounded-lg p-6'>
+        <div id='' className=' w-full mt-16'>
+            <div className='h-full flex flex-col justify-center items-center'>
+                <div className='w-full flex justify-center items-center my-10'>
+                    <SummaryGraphs data={analyzedData}/>
+                </div>
+
+                <div className='w-full bg-white  shadow-2xl rounded-lg p-6'>
                     <div className='flex flex-row-reverse justify-between'>
                         <motion.div
                             whileTap={{
