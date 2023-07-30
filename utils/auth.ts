@@ -1,3 +1,5 @@
+import {Scrape} from "@/utils/scraper";
+
 require("dotenv").config()
 
 const EXPRESS_BASE_URL = process.env.NEXT_PUBLIC_EXPRESS_BASE_URL
@@ -69,7 +71,8 @@ export const logout = () => {
 }
 
 export const getUserScrapes = async (email: string) => {
-    const response = await fetch(`${EXPRESS_BASE_URL}/scrape/user`,
+    let scrapes: Scrape[] = []
+    await fetch(`${EXPRESS_BASE_URL}/scrape/user`,
         {
             method: 'POST',
             headers: {
@@ -81,7 +84,12 @@ export const getUserScrapes = async (email: string) => {
                 email: email
             })
         }
-    )
+    ).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log(data.scrapes[0].scrapes)
+        scrapes = data.scrapes[0].scrapes
+    })
+    return scrapes
 
-    if (response.status == 200) return response.json()
 }

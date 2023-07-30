@@ -89,27 +89,27 @@ export const Scraper = (props: ScraperProps) => {
                     <input
                         type="text"
                         placeholder='Scrape title'
-                        className='w-80 py-2 px-4 border-[1px] border-gray-300 rounded-md'/>
+                        className='w-[500px] py-2 px-4 border-[1px] border-violet-600 rounded-md text-lg'/>
                 </div>
-                <div className='flex gap-4'>
-                    <div className='flex gap-4 text-lg select-none '>
+                <div className='flex gap-4 w-full justify-end'>
+                    <div className='flex justify-center items-center gap-4 text-lg select-none '>
                     <span
                         onClick={() => setActiveTab(0)}
-                        className={'cursor-pointer rounded-lg px-2 py-1 hover:shadow transition duration-200'
-                            + (!activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
+                        className={'cursor-pointer rounded-lg px-3 py-2 hover:shadow transition duration-200'
+                            + (!activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50 border-[1px] border-violet-200')}>
                         Twitter</span>
                         <span
-                            className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                            className=' bg-gray-100 rounded-lg px-3 py-2 hover:text-gray-300 transition duration-200 text-gray-400'>
                         TripAdvisor</span>
                         <span
-                            className=' bg-gray-100 rounded-lg px-2 py-1 hover:text-gray-300 transition duration-200 text-gray-400'>
+                            className=' bg-gray-100 rounded-lg px-3 py-2 hover:text-gray-300 transition duration-200 text-gray-400'>
                         Yelp</span>
                     </div>
 
                     <div
                         onClick={() => setActiveTab(1)}
                         className={'cursor-pointer select-none hover:shadow transition duration-200 rounded-lg px-2 py-1 flex gap-2 text-lg justify-between items-center'
-                            + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50')}>
+                            + (activeTab ? ' text-gray-50 bg-violet-600' : ' text-violet-600 bg-violet-50 border-[1px] border-violet-200')}>
                         <AiOutlineUpload size={20}/>
                         <span>File Upload</span>
                     </div>

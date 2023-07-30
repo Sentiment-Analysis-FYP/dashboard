@@ -7,6 +7,7 @@ import {DASHBOARD_PAGE} from "@/pages";
 import {useRouter} from "next/router";
 import {BiLockAlt} from "react-icons/bi";
 import {LuLogOut} from "react-icons/lu";
+import {Scrape} from "@/utils/scraper";
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -17,19 +18,21 @@ const Header = (props: HeaderProps) => {
     const [email, token, username] = useAuth()
     const {setActivePage} = props
     const router = useRouter()
-    const [userScrapes, setUserScrapes] = useState([{}]);
+    const [userScrapes, setUserScrapes] = useState([{title: ''}]);
+    const [showUserScrapes, setShowUserScrapes] = useState(true);
 
     useEffect(() => {
         const scrapes = async () => {
-            const resJson = await getUserScrapes(email!)
+            const resJson:Scrape[] = await getUserScrapes(email!)
             // return resJson
             console.log(resJson)
+            setUserScrapes(resJson)
         }
         if (email) {
-            const ss =  scrapes()
+            const ss = scrapes()
             console.log(ss)
         }
-    }, [email, setActivePage]);
+    }, [email, setActivePage, showUserScrapes]);
 
 
     useEffect(() => {
@@ -49,11 +52,30 @@ const Header = (props: HeaderProps) => {
         return (
             <div className=" h-10 text-violet-500 py-1 px-2 rounded-lg
                     text-2xl flex justify-center items-center right-40 bottom-5
-                    cursor-pointer hover:bg-violet-50 transition duration-300 ">
+                    cursor-pointer hover:bg-violet-50 transition duration-300 "
+                 onClick={() => setShowUserScrapes((prevState) => !prevState)}>
                 <div className='flex justify-center items-center gap-1 pb-[2px]'>
                     <BiLockAlt size={20}/>
                     {username}
                 </div>
+                {showUserScrapes && <UserScrapes/>}
+            </div>
+        )
+    }
+
+    const UserScrapes = () => {
+        return (
+            <div className='absolute top-28 text-gray-600 right-8 w-96 rounded-lg px-10 py-5 bg-white'>
+                <span className='w-full flex justify-center items-center pb-1 text-violet-600'>Your scrapes</span>
+                <div className='w-full px-3 h-[2px] bg-violet-300'></div>
+                {userScrapes.length > 0 ? <div className='flex flex-col text-gray-600 items-center'>
+                    {userScrapes && userScrapes.map((scrape) => (
+                        <span key={scrape.toString()}
+                        className='py-1 bg-violet-50 rounded-md w-full flex justify-center items-center gap-1'>
+                            {scrape.title}
+                        </span>
+                    ))}
+                </div> : "No scrapes"}
             </div>
         )
     }

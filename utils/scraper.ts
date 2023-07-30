@@ -27,6 +27,12 @@ export interface AnalyzedData {
     data: AnalyzedDataItem[]
 }
 
+export interface Scrape {
+    id: string,
+    title: string,
+    created_at: Date
+}
+
 export interface AnalyzedDataItem {
     id: string,
     created_at: string,
