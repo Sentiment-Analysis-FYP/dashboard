@@ -27,7 +27,7 @@ const SummaryGraphs = (props: SummaryGraphsProps) => {
     return (
         <div className='bg-white p-6 w-full rounded-lg flex justify-between items-center'>
             <div className='w-1/2'>
-                <EmotionRadarChart data={}/>
+                <EmotionRadarChart data={data}/>
             </div>
 
             <div className='w-1/2 h-[400px] flex flex-col justify-center items-center py-10'>
@@ -35,7 +35,7 @@ const SummaryGraphs = (props: SummaryGraphsProps) => {
                     <BarChart data={chartData} barCategoryGap={2} barGap={0} margin={{
                         top: 5,
                         right: 20,
-                        left: 20,
+                        left: 0,
                         bottom: 5
                     }}>
                         <CartesianGrid strokeDasharray="10 10"/>
