@@ -1,6 +1,8 @@
 import {Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer} from "recharts";
 import React from "react";
 import {AnalyzedData} from "@/utils/scraper";
+import {getEmotionFrequency} from "@/utils/visualizations";
+import {SentimentType} from "@/utils/sentiment";
 
 interface EmotionRadarChartProps {
     data: AnalyzedData
@@ -18,10 +20,23 @@ const sampleData = [
 const EmotionRadarChart = (props: EmotionRadarChartProps) => {
     const {data} = props
 
+    const emotionDataPositive = getEmotionFrequency(data, SentimentType.Positive)
+    const emotionDataNegative = getEmotionFrequency(data, SentimentType.Negative)
+    // console.log(emotionDataPositive)
+    const emotionFrequencies = [
+        {sentiment: 'Positive', ...emotionDataPositive},
+        {sentiment: 'Negative', ...emotionDataNegative}
+    ]
+    console.log(emotionFrequencies)
+
     return (
         <div className='w-full flex justify-center items-center mb-3'>
             <ResponsiveContainer width="100%" height={400}>
-                <RadarChart cx='50%' cy='50%' outerRadius={150} width={450} height={450} data={sampleData}>
+                <RadarChart cx='50%' cy='50%'
+                            outerRadius={150}
+                            width={450}
+                            height={450}
+                            data={sampleData}>
                     <PolarGrid gridType='circle'/>
                     <PolarAngleAxis dataKey="subject"/>
                     <PolarRadiusAxis angle={30} domain={[0, 150]}/>

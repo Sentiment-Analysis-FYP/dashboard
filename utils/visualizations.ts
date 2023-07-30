@@ -1,6 +1,7 @@
 import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
 import {PorterStemmer} from "natural";
 import lemmatizer from "lemmatizer";
+import {SentimentType} from "@/utils/sentiment";
 
 export interface WordCloudItem {
     value: string,
@@ -195,3 +196,28 @@ export interface LineChartDataItem {
     positiveCount: number,
     negativeCount: number
 }
+
+export const getEmotionFrequency = (analyzedData: AnalyzedData, sentiment: SentimentType) => {
+    const emotionFrequency: { [key: string]: number } = {}; // Object to store the frequency of each emotion label
+
+    // Iterate through each item in the data array
+    analyzedData.data.forEach((item: AnalyzedDataItem) => {
+        const {emotion_label, lr_sentiment} = item;
+
+        // If the sentiment parameter is provided and the item's sentiment does not match the provided sentiment, skip it
+        if (sentiment !== null && (sentiment === SentimentType.Negative && lr_sentiment == 0)
+            || (sentiment === SentimentType.Positive && lr_sentiment == 1)) {
+            return;
+        }
+
+        // If the emotion label exists in the emotionFrequency object, increment its count
+        if (emotion_label in emotionFrequency) {
+            emotionFrequency[emotion_label]++;
+        } else {
+            // If the emotion label is encountered for the first time, set its count to 1
+            emotionFrequency[emotion_label] = 1;
+        }
+    });
+
+    return emotionFrequency;
+};
