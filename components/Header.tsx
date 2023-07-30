@@ -101,8 +101,8 @@ const Header = (props: HeaderProps) => {
                     {userEmail ? (<div className='flex w-full gap-4 justify-end items-center mr-8 mt-2'>
                         <UserProfile/>
                         <span
-                            className='w-32 flex justify-around items-center rounded-lg bg-gray-50 px-2 py-1 text-violet-500
-                        cursor-pointer hover:bg-violet-100 transition duration-200'
+                            className='w-32 flex justify-around items-center rounded-lg bg-gray-100 px-2 py-2 text-violet-500
+                            cursor-pointer hover:bg-violet-200 transition duration-200 hover:shadow'
                             onClick={() => {
                                 setUserEmail('')
                                 router.replace(router.asPath)

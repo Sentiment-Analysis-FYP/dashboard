@@ -213,7 +213,9 @@ export const getEmotionFrequency = (analyzedData: AnalyzedData): EmotionFrequenc
 
         // If the emotion label exists in the emotionFrequencyMap object, increment its corresponding sentiment count
         if (emotion_label in emotionFrequencyMap) {
-            sentimentType == SentimentType.Negative ? emotionFrequencyMap[emotion_label].negative++ : emotionFrequencyMap[emotion_label].negative++
+            sentimentType == SentimentType.Positive ?
+                emotionFrequencyMap[emotion_label].positive++
+                : emotionFrequencyMap[emotion_label].negative++
         } else {
             // If the emotion label is encountered for the first time, initialize its sentiment count
             emotionFrequencyMap[emotion_label] = {
