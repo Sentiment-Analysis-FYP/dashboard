@@ -9,7 +9,6 @@ import {useAuth} from "@/hooks/auth";
 import FileUploader from "@/components/FileUploader";
 import {AiOutlineUpload} from "react-icons/ai";
 import {AnimatePresence, motion} from "framer-motion";
-import SearchConfiguration from "@/components/SearchConfiguration";
 
 interface ScraperProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -26,6 +25,7 @@ export const Scraper = (props: ScraperProps) => {
     const [enabled, setEnabled] = useState(false);
     const [email, token] = useAuth()
     const [activeTab, setActiveTab] = useState(0);
+    const [maxTweets, setMaxTweets] = useState(20);
 
     const renderSlide = (position: number) => {
         switch (position) {
@@ -41,7 +41,11 @@ export const Scraper = (props: ScraperProps) => {
                                     <div className='text-violet-600 text-xl'>
                                         Maximum Number of tweets:
                                     </div>
-                                    <input type="number" className='py-2 border-[1px] border-gray-300 rounded-md'/>
+                                    <input type="number"
+                                           onChange={(e) =>
+                                               setMaxTweets(Number(e.target.value))}
+                                           placeholder='20'
+                                           className='px-4 w-32 py-1 text-lg border-[1px] border-gray-300 rounded-md'/>
                                 </div>
                             </div>
 
