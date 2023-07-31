@@ -39,20 +39,20 @@ export const removePunctuationFromAnalyzedData = (analyzedData: AnalyzedData): A
     }
 }
 
-export const removeRepeatingCharactersFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
-    const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
-        const cleanedText = cleaningRepeatingChar(item.text)
-        return {
-            ...item,
-            text: cleanedText,
-        }
-    })
-
-    return {
-        ...analyzedData,
-        data: cleanedData,
-    }
-}
+// export const removeDuplicateWordsFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
+//     const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
+//         const cleanedText = cleaningRepeatingChar(item.text)
+//         return {
+//             ...item,
+//             text: cleanedText,
+//         }
+//     })
+//
+//     return {
+//         ...analyzedData,
+//         data: cleanedData,
+//     }
+// }
 
 export const removeURLsFromAnalyzedData = (analyzedData: AnalyzedData): AnalyzedData => {
     const cleanedData: AnalyzedDataItem[] = analyzedData.data.map((item) => {
@@ -178,3 +178,31 @@ export function getStemmedTextFromAnalyzedData(analyzedData: AnalyzedData): Anal
         data: stemmedData,
     };
 }
+
+const removeDuplicateWords = (text: string): string => {
+    const words = text.split(' ');
+    const uniqueWords = Array.from(new Set(words));
+    return uniqueWords.join(' ');
+};
+
+export const removeDuplicateWordsFromAnalyzedData = (data: AnalyzedData): AnalyzedData => {
+    const newData: AnalyzedDataItem[] = data.data.map((item) => ({
+        ...item,
+        text: removeDuplicateWords(item.text),
+    }));
+
+    return {...data, data: newData};
+};
+
+const removeUsernames = (text: string): string => {
+    return text.replace(/@\w+/g, ''); // Removes all Twitter handles starting with '@'
+};
+
+export const removeUsernamesFromAnalyzedData = (data: AnalyzedData): AnalyzedData => {
+    const newData: AnalyzedDataItem[] = data.data.map((item) => ({
+        ...item,
+        text: removeUsernames(item.text),
+    }));
+
+    return {...data, data: newData};
+};

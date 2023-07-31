@@ -93,7 +93,7 @@ const Header = (props: HeaderProps) => {
                                 <span
                                     onClick={() => setActivePage(DASHBOARD_PAGE)}
                                     className="select-none cursor-pointer hover:text-violet-500 font-bold text-4xl text-violet-800 tracking-[10px]">
-                                    FeeBa
+                                    FeBa
                                 </span>
                             </div>
                         </div>

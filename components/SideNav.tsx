@@ -74,7 +74,7 @@ const SideNav = (props: HeaderProps) => {
                         <div className="flex w-full flex-col items-center justify-center">
                             <div className="flex flex-col  mt-40 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
-                                    <div key={category.slug} onClick={() => {
+                                    <div key={category.slug} title={category.name} onClick={() => {
                                         if (dataAvailable || !index)
                                             setActivePage(index + 1)
                                     }}>

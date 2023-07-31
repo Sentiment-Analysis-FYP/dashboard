@@ -43,7 +43,7 @@ const Dashboard = (props: DashboardProps) => {
                 {pages.map((page, index) => (
                     <div key={index}
                          onClick={() => {
-                             if (dataAvailable)
+                             if (dataAvailable || index == 0)
                                  setActivePage(index + 1)
                          }}
                          className={' transition duration-200 w-[400px] h-[400px] p-10  flex flex-col justify-between items-center rounded-lg '

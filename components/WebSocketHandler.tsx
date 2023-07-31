@@ -4,7 +4,7 @@ import {motion} from "framer-motion";
 import {useAuth} from "@/hooks/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
-import {scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
+import {scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {ANALYSIS_PAGE} from "@/pages";
 
 interface WebSocketComponentProps {
@@ -39,7 +39,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
                 // scramble IDs in case of duplicates
                 const scrambledAnalyzedData =
-                    scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(jsonAnalyzedData))
+                    scrambleAnalyzedDataIds(jsonAnalyzedData)
                 dispatch(setAnalyzedData(scrambledAnalyzedData))
                 setIsComplete(eventData.isComplete)
             } else {
@@ -82,7 +82,7 @@ const WebSocketComponent = (props: WebSocketComponentProps) => {
 
     return (
         <>
-            {showModal && <div className='absolute bg-violet-50 bg-opacity-50 backdrop-blur-sm top-0 right-0 left-0 bottom-0 m-auto
+            {showModal && <div className='absolute  bg-opacity-50  top-0 right-0 left-0 bottom-0 m-auto
                 w-full h-screen flex justify-center items-center '>
                 <div
                     className='w-[400px] h-[400px] flex flex-col justify-center items-center bg-white rounded-lg

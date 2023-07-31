@@ -1,6 +1,6 @@
 import {AiOutlineCheck, AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React, {useEffect, useState} from "react";
-import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
+import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
@@ -12,8 +12,8 @@ import {
     exportToCSV, getLemmatizedTextFromAnalyzedData, getStemmedTextFromAnalyzedData, getTokenizedTextFromAnalyzedData,
     removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
-    removeRepeatingCharactersFromAnalyzedData,
-    removeStopwordsFromAnalyzedData, removeURLsFromAnalyzedData
+    removeDuplicateWordsFromAnalyzedData,
+    removeStopwordsFromAnalyzedData, removeURLsFromAnalyzedData, removeUsernamesFromAnalyzedData
 } from "@/utils/preprocessing";
 import FileExport from "@/components/FileExport";
 
@@ -122,7 +122,7 @@ const Preprocessing = (props: AnalysisProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = updateScoresToTwoDecimalPlaces(scrambleAnalyzedDataIds(analyzedData))
+    analyzedData = scrambleAnalyzedDataIds(analyzedData)
     const [preprocessedAnalyzedData, setPreprocessedAnalyzedData] = useState(analyzedData);
 
     const NoAnalyzedData = () => {
@@ -140,9 +140,10 @@ const Preprocessing = (props: AnalysisProps) => {
 
     const initialPreprocessorState = [
         {name: "URLS", enabled: false},
+        {name: "Usernames", enabled: false},
         {name: "Stopwords", enabled: false},
         {name: "Punctuation", enabled: false},
-        {name: "Repeating Characters", enabled: false},
+        {name: "Repeating Words", enabled: false},
         {name: "Emojis", enabled: false},
     ]
 
@@ -179,9 +180,10 @@ const Preprocessing = (props: AnalysisProps) => {
         // Define an array of preprocessing functions
         const preprocessingFunctions = [
             removeURLsFromAnalyzedData,
+            removeUsernamesFromAnalyzedData,
             removeStopwordsFromAnalyzedData,
             removePunctuationFromAnalyzedData,
-            removeRepeatingCharactersFromAnalyzedData,
+            removeDuplicateWordsFromAnalyzedData,
             removeEmojisFromAnalyzedData,
         ];
 
