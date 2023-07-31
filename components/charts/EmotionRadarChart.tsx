@@ -35,7 +35,7 @@ const EmotionRadarChart = (props: EmotionRadarChartProps) => {
                     <Tooltip cursor={{
                         strokeDasharray: '10 10'
                     }}/>
-                    <PolarGrid gridType='circle'/>
+                    <PolarGrid gridType='polygon'/>
                     <PolarAngleAxis dataKey="label"/>
                     <PolarRadiusAxis angle={30} domain={['dataMin', 'dataMax+5']}/>
                     <Radar name="Positive" dataKey="positive" stroke="#33cc00" fill="#33cc00" fillOpacity={0.6}/>

@@ -11,6 +11,7 @@ import {
     ZAxis
 } from "recharts";
 import {AnalyzedData} from "@/utils/scraper";
+import {getAllNegativeSentimentAnalyzedData, getAllPositiveSentimentAnalyzedData} from "@/utils/visualizations";
 
 interface EmotionScatterChartProps {
     data: AnalyzedData
@@ -19,7 +20,8 @@ interface EmotionScatterChartProps {
 const EmotionScatterChart = (props: EmotionScatterChartProps) => {
     const {data} = props
 
-    const chartData = data.data
+    const chartDataPositive = getAllPositiveSentimentAnalyzedData(data)
+    const chartDataNegative = getAllNegativeSentimentAnalyzedData(data)
 
     const data01 = [{
         x: 100,
@@ -77,15 +79,15 @@ const EmotionScatterChart = (props: EmotionScatterChartProps) => {
             <ResponsiveContainer width="90%" height={400}>
                 <ScatterChart>
                     <CartesianGrid/>
-                    <XAxis type="number" dataKey="x" name="stature" unit="cm"/>
-                    <YAxis type="number" dataKey="y" name="weight" unit="kg"/>
-                    <ZAxis type="number" dataKey="z" range={[60, 400]} name="score" unit="km"/>
+                    <XAxis type="category" dataKey="created_at" name="Date"/>
+                    <YAxis type="category" dataKey="emotion_label" name="Emotion"/>
+                    <ZAxis type="number" dataKey="score" range={[500, 500]} name="Score"/>
                     <Tooltip cursor={{
                         strokeDasharray: '20 30'
                     }}/>
                     <Legend/>
-                    <Scatter name="A school" data={data01} fill="#8884d8" shape="circle"/>
-                    <Scatter name="B school" data={data02} fill="#82ca9d" shape="wye"/>
+                    <Scatter name="Positive" data={chartDataPositive} fill="#33cc00" shape="circle"/>
+                    <Scatter name="Negative" data={chartDataNegative} fill="#ff3333" shape="wye"/>
                 </ScatterChart>
             </ResponsiveContainer>
         </div>

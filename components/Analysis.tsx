@@ -1,8 +1,8 @@
 import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React from "react";
-import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
-import {DataGrid, GridCellParams, GridColDef, GridSortModel} from '@mui/x-data-grid';
+import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
+import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
@@ -116,7 +116,7 @@ const Analysis = (props: AnalysisProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = updateScoresToTwoDecimalPlaces(scrambleAnalyzedDataIds(analyzedData))
+    analyzedData = scrambleAnalyzedDataIds(analyzedData)
 
     const NoAnalyzedData = () => {
         return (

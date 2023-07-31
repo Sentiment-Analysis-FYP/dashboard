@@ -90,7 +90,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
                                 <div
-                                    className='flex justify-center items-center gap-14 my-10 py-24 w-[1200px] bg-violet-50 shadow
+                                    className='flex justify-center items-center gap-14 my-10 py-16 w-[1200px] bg-violet-50 shadow
                                     rounded-lg'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>
@@ -100,7 +100,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
                                 <div
-                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>
@@ -108,11 +108,11 @@ const Visualizations = (props: VisualizationsProps) => {
                                 </div>
 
                                 <div
-                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span
                                             className='text-2xl font-semibold text-violet-700'>Emotion Radar Chart</span>
-                                        <div className='w-1/2 flex justify-center gap-10'>
+                                        <div className='w-5/6 flex justify-center gap-10'>
                                             <EmotionRadarChart data={analyzedData}/>
                                             <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>
@@ -155,7 +155,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                 </div>
 
                                 <div
-                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col gap-10 justify-center items-center w-full'>
                                         <span
                                             className='text-2xl font-semibold text-violet-700'>
