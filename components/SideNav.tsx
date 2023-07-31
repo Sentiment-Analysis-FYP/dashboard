@@ -3,6 +3,8 @@ import {GiHamburgerMenu} from "react-icons/gi";
 import {AiOutlineCloudDownload, AiOutlineFunction} from "react-icons/ai";
 import {TbDeviceDesktopAnalytics} from "react-icons/tb";
 import {BsBarChartLine} from "react-icons/bs";
+import {useSelector} from "react-redux";
+import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 
 interface HeaderProps {
     activePage: number,
@@ -14,6 +16,13 @@ interface HeaderProps {
 const SideNav = (props: HeaderProps) => {
     const {activePage, setActivePage, isOpen, toggleSidebar} = props
     // const [activePage, setActivePage] = useState(0)
+    const [dataAvailable, setDataAvailable] = useState(false);
+    const storeAnalyzedData = useSelector(getAnalyzedData)
+
+    useEffect(() => {
+        setDataAvailable(storeAnalyzedData.payload.analyzedData.length > 0)
+    }, [storeAnalyzedData])
+
 
     let stockCategories = [
         {name: "Scraper", slug: "scraper"},
@@ -52,8 +61,9 @@ const SideNav = (props: HeaderProps) => {
     return (
         <div className={sidebarClass + ' mt-0 h-full'}>
             <div>
-                <div className='cursor-pointer sidebar-toggle text-violet-500 hover:text-violet-600 transition duration-100 '
-                     onClick={toggleSidebar}>
+                <div
+                    className='cursor-pointer sidebar-toggle text-violet-500 hover:text-violet-600 transition duration-100 '
+                    onClick={toggleSidebar}>
                     <GiHamburgerMenu size={40}/>
                 </div>
             </div>
@@ -64,13 +74,17 @@ const SideNav = (props: HeaderProps) => {
                         <div className="flex w-full flex-col items-center justify-center">
                             <div className="flex flex-col  mt-40 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
-                                    <div key={category.slug} onClick={() => setActivePage(index +1)}>
+                                    <div key={category.slug} onClick={() => {
+                                        if (dataAvailable)
+                                            setActivePage(index + 1)
+                                    }}>
                                         <div
-                                            className={'w-64 flex  items-center text-gray-800 ' +
-                                                'font-semibold py-14  group transform uppercase cursor-pointer ' +
+                                            className={'w-64 flex  items-center  ' +
+                                                'font-semibold py-14  group transform uppercase  ' +
                                                 ' ease-in-out text-xl transition duration-100 ' +
                                                 ((activePage == (index + 1)) ? " text-violet-600" :
-                                                    " hover:text-violet-400 duration-400 transition ")}>
+                                                    ((dataAvailable || index == 0) ? " cursor-pointer hover:text-violet-400 duration-400 transition "
+                                                        : " text-gray-400 "))}>
                                             <div className={!isOpen ? ' pl-[180px] ' : " pl-[25px]"}>
                                                 {renderIcon(index)}
                                             </div>
