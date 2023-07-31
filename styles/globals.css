@@ -110,3 +110,7 @@
 .content.open {
     left: 15vw;
 }
+
+.clip-path {
+    clip-path: circle(130% at -35% -0%);
+}

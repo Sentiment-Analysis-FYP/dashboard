@@ -9,110 +9,119 @@ import student from "@/public/img/students.png"
 const HomePage = () => {
     return (
         <div className=' h-screen w-screen flex justify-center items-center'>
-            <div className=" bg-white w-5/6 h-5/6 grid grid-cols-2 rounded-lg shadow-xl">
-                <div className="flex">
-                    <div className="ml-5 mb-5 mr-5 pl-5 pt-3 pb-3">
-                        <h1 className="text-2xl mb-2 font-extrabold text-violet-600">
-                            Uncover Insights from Students&apos; Tweets
+            <div className=" bg-white w-5/6 h-5/6 flex rounded-lg shadow-xl">
+                <div className="flex w-[1200px] bg-violet-100 clip-path p-16 rounded-lg ">
+                    <div className="w-[800px]">
+                        <h1 className="text-8xl font-semibold text-violet-600">
+                            Uncover Insights<br/> from Students&apos; Tweets
                         </h1>
-                        <p>
+                        <p className='text-3xl text-violet-500 mt-16 pr-32'>
                             Welcome to Sentinel, a powerful web application designed to analyze
                             students&apos; tweets and provide valuable psychological insights. With
-                            our sentiment analysis and natural language processing algorithms,
+                            our sentiment analysis and natural language <p className='pr-40'>processing algorithms,
                             educators, counselors and administration can gain a deeper
                             understanding of students&apos; emotional well-being, trends, and
                             sentiments on Twitter arising from subject matters concerning the
-                            school.
+                            school.</p>
                         </p>
-                        <h2 className="text-2xl mt-3 mb-2 font-extrabold text-violet-600">Key Features</h2>
-                        <ul className=" list-inside  list-disc marker:text-violet-600">
-                            <li> Ability to analyze tweets from any user or hashtag.</li>
-                            <li>
-                                Identification of keywords and phrases related to the school
-                                example: Knust, Tech, Kwame Tech.
-                            </li>
-                        </ul>
-                        <h2 className="text-2xl mb-2 mt-3 font-extrabold text-violet-600">Sentiment Analysis</h2>
-                        <p>
-                            <ul className="list-inside list-disc marker:text-violet-600">
-                                <li>
-                                    Our advanced sentiment analysis accurately assesses the
-                                    emotional tone of students&apos; tweets, identifying positive,
-                                    negative, or neutral sentiments.
-                                </li>
-                                <li>
-                                    Emotion Trends: Discover trends and patterns in students&apos;
-                                    emotions over time, helping educators, counselors and
-                                    administration to track students sentiments.
-                                </li>
-                            </ul>
-                        </p>
+                        {/*<h2 className="text-2xl mt-3 mb-2 font-extrabold text-violet-600">Key Features</h2>*/}
+                        {/*<ul className=" list-inside  list-disc marker:text-violet-600">*/}
+                        {/*    <li> Ability to analyze tweets from any user or hashtag.</li>*/}
+                        {/*    <li>*/}
+                        {/*        Identification of keywords and phrases related to the school*/}
+                        {/*        example: Knust, Tech, Kwame Tech.*/}
+                        {/*    </li>*/}
+                        {/*</ul>*/}
+                        {/*<h2 className="text-2xl mb-2 mt-3 font-extrabold text-violet-600">Sentiment Analysis</h2>*/}
+                        {/*<p>*/}
+                        {/*    <ul className="list-inside list-disc marker:text-violet-600">*/}
+                        {/*        <li>*/}
+                        {/*            Our advanced sentiment analysis accurately assesses the*/}
+                        {/*            emotional tone of students&apos; tweets, identifying positive,*/}
+                        {/*            negative, or neutral sentiments.*/}
+                        {/*        </li>*/}
+                        {/*        <li>*/}
+                        {/*            Emotion Trends: Discover trends and patterns in students&apos;*/}
+                        {/*            emotions over time, helping educators, counselors and*/}
+                        {/*            administration to track students sentiments.*/}
+                        {/*        </li>*/}
+                        {/*    </ul>*/}
+                        {/*</p>*/}
                     </div>
 
                 </div>
-                <Image className="shadow-lg mb-5" src={SA} alt="This is image"/>
+                {/*<div className='flex justify-center items-center'>*/}
+                {/*    <Image className="shadow-lg rounded-2xl" src={SA} alt="This is image"/>*/}
+                {/*</div>*/}
 
                 {/* second grid  */}
-                <Image className="shadow-lg mb-5" src={student} alt="This is image"/>
-                <div className="ml-5 mb-5 mr-5 pl-5 pt-3 pb-3">
-                    <h2 className="text-2xl mb-2 mt-3 font-extrabold text-violet-600">Benefits</h2>
-                    <p>
-                        <ul className="list-inside list-disc marker:text-violet-600">
-                            <li>
-                                Early Intervention: Detect signs of emotional distress early on,
-                                enabling timely intervention and support.
-                            </li>
-                            <li>
-                                Data-Driven Decisions: Make informed decisions based on
-                                data-driven insights into students&apos; sentiments.
-                            </li>
-                            <li>
-                                Student Engagement: Understand student interests and concerns
-                                better to foster meaningful engagement and management.
-                            </li>
-                        </ul>
-                    </p>
-                </div>
+                {/*<Image className="shadow-lg " src={student} alt="This is image"/>*/}
+                {/*<div className="">*/}
+                {/*    <h2 className="text-2xl  font-extrabold text-violet-600">Benefits</h2>*/}
+                {/*    <p>*/}
+                {/*        <ul className="list-inside list-disc marker:text-violet-600">*/}
+                {/*            <li>*/}
+                {/*                Early Intervention: Detect signs of emotional distress early on,*/}
+                {/*                enabling timely intervention and support.*/}
+                {/*            </li>*/}
+                {/*            <li>*/}
+                {/*                Data-Driven Decisions: Make informed decisions based on*/}
+                {/*                data-driven insights into students&apos; sentiments.*/}
+                {/*            </li>*/}
+                {/*            <li>*/}
+                {/*                Student Engagement: Understand student interests and concerns*/}
+                {/*                better to foster meaningful engagement and management.*/}
+                {/*            </li>*/}
+                {/*        </ul>*/}
+                {/*    </p>*/}
+                {/*</div>*/}
 
 
                 {/* third grid  */}
-                <div className="ml-5 mr-5 mb-10 pr-2 pl-5 pt-3 pb-3">
-                    <div>
-                        <h2 className="text-xl mb-2 font-extrabold text-violet-600">How It Works</h2>
-                        <ul className="list-inside list-disc marker:text-violet-600">
-                            <li>
-                                The <span className="font-semibold">scraper </span> allows you
-                                to access tweets from twitter by specifying key words, tags and
-                                username. There is a custom calender choose tweets in a specific
-                                time frame for analysis
-                            </li>
-                            <li>
-                                The <span className="font-semibold">analysis </span>
-                                shows what exists in the tweets being scraped from tweeter.
-                            </li>
-                            <li>
-                                The <span className="font-semibold">visualizations </span> shows
-                                the outcome of the analysis, there, insight is gained by
-                                receiving comprehensive reports and visualizations on sentiment,
-                                emotions and trending topics
-                            </li>
-                        </ul>
-                        <h2 className="text-2xl mb-2 mt-3 font-extrabold text-violet-600">Privacy & Security:</h2>
-                        <p>
-                            At sentinel, privacy and security are paramount. We adhere to
-                            strict data protection regulations and ensure that all data is
-                            encrypted and anonymized.
-                        </p>
-                        <button
-                            className="bg-violet-600 ml-64 mt-8 text-2xl font-extrabold text-white rounded-md h-16 w-52 hover:bg-indigo-300">
-                            Get Started
-                        </button>
+                {/*<div className="">*/}
+                {/*    <div>*/}
+                {/*        <h2 className="text-xl  font-extrabold text-violet-600">How It Works</h2>*/}
+                {/*        <ul className="list-inside list-disc marker:text-violet-600">*/}
+                {/*            <li>*/}
+                {/*                The <span className="font-semibold">scraper </span> allows you*/}
+                {/*                to access tweets from twitter by specifying key words, tags and*/}
+                {/*                username. There is a custom calender choose tweets in a specific*/}
+                {/*                time frame for analysis*/}
+                {/*            </li>*/}
+                {/*            <li>*/}
+                {/*                The <span className="font-semibold">analysis </span>*/}
+                {/*                shows what exists in the tweets being scraped from tweeter.*/}
+                {/*            </li>*/}
+                {/*            <li>*/}
+                {/*                The <span className="font-semibold">visualizations </span> shows*/}
+                {/*                the outcome of the analysis, there, insight is gained by*/}
+                {/*                receiving comprehensive reports and visualizations on sentiment,*/}
+                {/*                emotions and trending topics*/}
+                {/*            </li>*/}
+                {/*        </ul>*/}
+                {/*        <h2 className="text-2xl  font-extrabold text-violet-600">Privacy & Security:</h2>*/}
+                {/*        <p>*/}
+                {/*            At sentinel, privacy and security are paramount. We adhere to*/}
+                {/*            strict data protection regulations and ensure that all data is*/}
+                {/*            encrypted and anonymized.*/}
+                {/*        </p>*/}
+                {/*        <button*/}
+                {/*            className="bg-violet-600 text-2xl font-extrabold text-white rounded-md h-16 w-52 hover:bg-indigo-300">*/}
+                {/*            Get Started*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                {/*<div className="grid grid-cols-2 gap-4 pb-5">*/}
+                {/*    <Image className="shadow-lg h-[360px]" src={scraperImg} alt="Visuakization"/>*/}
+                {/*    <Image className="shadow-lg h-[360px]" src={visualizations} alt="Visuakization"/>*/}
+                {/*</div>*/}
+
+                <div className='h-full flex justify-center items-center w-[800px] '>
+                    <div className='flex justify-center items-center bg-violet-100 w-[700px] h-5/6 rounded-xl '>
+                        Image
                     </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 pb-5">
-                    <Image className="shadow-lg h-[360px]" src={scraperImg} alt="Visuakization"/>
-                    <Image className="shadow-lg h-[360px]" src={visualizations} alt="Visuakization"/>
-                </div>
+
             </div>
         </div>
     )
