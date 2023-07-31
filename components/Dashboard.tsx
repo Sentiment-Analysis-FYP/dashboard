@@ -2,10 +2,11 @@ import {AiFillPieChart} from "react-icons/ai";
 import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
-import {StaticImageData} from "next/image";
+import Image, {StaticImageData} from "next/image";
 import PreprocessImg from "@/public/PreprocessImg.jpg";
 import VisualizationImg from "@/public/VisualizationImg.jpeg";
 import AnalysisImg from "@/public/AnalysisImg.jpg";
+
 // import scrapedataImg from "@/public/ScrapeDataImg.jpg";
 
 interface DashboardProps {
@@ -49,10 +50,12 @@ const Dashboard = (props: DashboardProps) => {
                          className={' transition duration-200 w-[400px] h-[400px] p-10  flex flex-col justify-between items-center rounded-lg '
                              + (!(dataAvailable || index > 0) ? "cursor-pointer hover:bg-violet-200 bg-violet-50 shadow-md text-violet-500"
                                  : " text-gray-400 bg-gray-100 ")}>
-                        <div className='flex justify-center items-center'>
-                            <AiFillPieChart size={200}/>
+                        <div className={'flex justify-center items-center rounded-2xl overflow-hidden '+
+                            (!dataAvailable && " opacity-75")}>
+                            {/*<AiFillPieChart size={200}/>*/}
+                            <Image src={images[page]} alt="image"/>
                         </div>
-                        <span className='text-3xl justify-center items-center '>
+                        <span className='text-3xl justify-center items-center pt-2'>
                             {page}
                         </span>
                     </div>
