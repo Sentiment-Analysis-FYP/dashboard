@@ -75,7 +75,7 @@ const SideNav = (props: HeaderProps) => {
                             <div className="flex flex-col  mt-40 justify-center items-center  w-full">
                                 {categories.map((category, index) => (
                                     <div key={category.slug} onClick={() => {
-                                        if (dataAvailable)
+                                        if (dataAvailable || !index)
                                             setActivePage(index + 1)
                                     }}>
                                         <div
@@ -83,7 +83,7 @@ const SideNav = (props: HeaderProps) => {
                                                 'font-semibold py-14  group transform uppercase  ' +
                                                 ' ease-in-out text-xl transition duration-100 ' +
                                                 ((activePage == (index + 1)) ? " text-violet-600" :
-                                                    ((dataAvailable || !index ) ? " cursor-pointer hover:text-violet-400 duration-400 transition "
+                                                    ((dataAvailable || !index) ? " cursor-pointer hover:text-violet-400 duration-400 transition "
                                                         : " text-gray-400 "))}>
                                             <div className={!isOpen ? ' pl-[180px] ' : " pl-[25px]"}>
                                                 {renderIcon(index)}

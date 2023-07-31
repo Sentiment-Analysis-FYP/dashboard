@@ -47,7 +47,7 @@ const Dashboard = (props: DashboardProps) => {
                                  setActivePage(index + 1)
                          }}
                          className={' transition duration-200 w-[400px] h-[400px] p-10  flex flex-col justify-between items-center rounded-lg '
-                             + (!(dataAvailable || index > 0) ? "cursor-pointer hover:bg-violet-200 bg-violet-50 shadow-md text-violet-500"
+                             + (!(dataAvailable || index > 0) ? "cursor-pointer hover:bg-violet-500 hover:text-white bg-violet-50 shadow-md text-violet-500"
                                  : " text-gray-400 bg-gray-100 ")}>
                         <div className={'flex justify-center items-center rounded-2xl overflow-hidden ' +
                             (!dataAvailable && " opacity-75")}>
