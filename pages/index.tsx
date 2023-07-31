@@ -112,7 +112,7 @@ export default function Home() {
                     </motion.div>
                 </div>
                 :
-                <SignUp/>}
+                <HomePage/>}
         </main>
     )
 }
