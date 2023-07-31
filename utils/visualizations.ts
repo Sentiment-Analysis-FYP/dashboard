@@ -113,13 +113,14 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
     if (data.length)
         data.map((dataItem) =>
             tokenList.push(
-                lemmatizerOnText(
-                    tokenizeThenStem(
-                        cleaningNumbers(
-                            cleaningURLs(
-                                // cleaningRepeatingChar(
-                                cleaningPunctuations(
-                                    cleaning_stopwords(dataItem.text))))))))
+                // lemmatizerOnText(
+                tokenizeThenStem(
+                    cleaningNumbers(
+                        cleaningURLs(
+                            // cleaningRepeatingChar(
+                            cleaningPunctuations(
+                                cleaning_stopwords(dataItem.text)))))))
+// )
 // )
 
     const frequencyMap = getStringFrequency(tokenList)
@@ -208,8 +209,8 @@ export const getEmotionFrequency = (analyzedData: AnalyzedData): EmotionFrequenc
     if (analyzedData)
         // Iterate through each item in the data array
         analyzedData.data.forEach((item: AnalyzedDataItem) => {
-            const {emotion_label, lr_sentiment} = item;
-            const sentimentType: SentimentType = lr_sentiment == 1 ? SentimentType.Positive : SentimentType.Negative;
+            const {emotion_label, score} = item;
+            const sentimentType: SentimentType = Number(score) >= 0 ? SentimentType.Positive : SentimentType.Negative;
 
             // If the emotion label exists in the emotionFrequencyMap object, increment its corresponding sentiment count
             if (emotion_label in emotionFrequencyMap) {

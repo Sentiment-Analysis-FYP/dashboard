@@ -12,9 +12,9 @@ export function getHighestOccurringSentiment(dataItems: AnalyzedDataItem[]): str
     if (!dataItems.length) return 'negative'
 
     for (const dataItem of dataItems) {
-        if (dataItem.lr_sentiment === SentimentType.Negative) {
+        if (dataItem.score === SentimentType.Negative) {
             negativeCount++
-        } else if (dataItem.lr_sentiment === SentimentType.Positive) {
+        } else if (dataItem.score === SentimentType.Positive) {
             positiveCount++
         }
     }

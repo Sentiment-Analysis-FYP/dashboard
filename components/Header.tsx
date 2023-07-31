@@ -19,25 +19,27 @@ const Header = (props: HeaderProps) => {
     const {setActivePage} = props
     const router = useRouter()
     const [userScrapes, setUserScrapes] = useState([{title: ''}]);
-    const [showUserScrapes, setShowUserScrapes] = useState(true);
+    const [showUserScrapes, setShowUserScrapes] = useState(false);
+    const [usernameState, setUsernameState] = useState(username);
 
     useEffect(() => {
         const scrapes = async () => {
-            const resJson:Scrape[] = await getUserScrapes(email!)
+            const resJson: Scrape[] = await getUserScrapes(email!)
             // return resJson
             console.log(resJson)
             setUserScrapes(resJson)
         }
         if (email) {
-            const ss = scrapes()
-            console.log(ss)
+            scrapes()
+            // console.log(ss)
         }
     }, [email, setActivePage, showUserScrapes]);
 
 
     useEffect(() => {
         setUserEmail(email!)
-    }, [email]);
+        setUsernameState(username)
+    }, [email, username]);
 
     const fadeInTopRight = "opacity-100 duration-150 scale-100 ease-in-out delay-75"
     const fadeOutTopRight = "opacity-0 invisible duration-100 scale-50 translate-x-40 -translate-y-32"
@@ -56,7 +58,7 @@ const Header = (props: HeaderProps) => {
                  onClick={() => setShowUserScrapes((prevState) => !prevState)}>
                 <div className='flex justify-center items-center gap-1 pb-[2px]'>
                     <BiLockAlt size={20}/>
-                    {username}
+                    {usernameState}
                 </div>
                 {showUserScrapes && <UserScrapes/>}
             </div>
@@ -71,7 +73,7 @@ const Header = (props: HeaderProps) => {
                 {userScrapes.length > 0 ? <div className='flex flex-col text-gray-600 items-center'>
                     {userScrapes && userScrapes.map((scrape) => (
                         <span key={scrape.toString()}
-                        className='py-1 bg-violet-50 rounded-md w-full flex justify-center items-center gap-1'>
+                              className='py-1 bg-violet-50 rounded-md w-full flex justify-center items-center gap-1'>
                             {scrape.title}
                         </span>
                     ))}

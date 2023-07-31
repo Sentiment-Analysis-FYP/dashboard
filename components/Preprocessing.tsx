@@ -31,11 +31,11 @@ const DataTable = (props: AnalysisDataProps) => {
         {field: 'username', headerName: 'Username', flex: 0.3},
         {field: 'text', headerName: 'Text', flex: 1},
         {
-            field: 'lr_sentiment',
+            field: 'score',
             description: 'From -1 (negative) to 1 (positive)',
             headerName: 'Sentiment',
             valueGetter: (params) => {
-                return params.value == 1 ? "Positive" : "Negative"
+                return params.value >= 0 ? "Positive" : "Negative"
             },
             flex: 0.3,
             cellClassName: (params) => {
@@ -75,7 +75,6 @@ const DataTable = (props: AnalysisDataProps) => {
             <DataGrid
                 rows={rows}
                 columns={columns}
-                sortModel={defaultSortModel}
                 initialState={{
                     pagination: {
                         paginationModel: {page: 0, pageSize: 20},

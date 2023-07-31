@@ -27,7 +27,7 @@ export const signIn = async (email: string, password: string) => {
         return response.json()
     }).then(data => {
         console.log(data)
-        storeUserLogin(email, data.accessToken, data.username)
+        storeUserLogin(email, data.accessToken, data.firstName + ' ' + data.lastName)
     }).catch(err => {
         console.log(err)
     })

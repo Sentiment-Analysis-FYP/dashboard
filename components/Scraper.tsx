@@ -89,6 +89,7 @@ export const Scraper = (props: ScraperProps) => {
                     <input
                         type="text"
                         placeholder='Scrape title'
+                        onChange={(e) => setTitle(e.target.value)}
                         className='w-[500px] py-2 px-4 border-[1px] border-violet-600 rounded-md text-lg'/>
                 </div>
                 <div className='flex gap-4 w-full justify-end'>

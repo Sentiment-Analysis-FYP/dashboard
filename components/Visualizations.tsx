@@ -1,6 +1,6 @@
 import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
 import CustomWordCloud from "@/components/charts/CustomWordCloud";
-import {getSentimentList} from "@/utils/visualizations";
+import {getEmotionFrequency, getSentimentList} from "@/utils/visualizations";
 import CustomBarChart from "@/components/charts/CustomBarChart";
 import React, {useEffect, useState} from "react";
 import CustomLineChart from "@/components/charts/CustomLineChart";
@@ -10,6 +10,7 @@ import Link from "next/link";
 import {motion} from "framer-motion";
 import {getAdvisoryRemark, getHighestOccurringSentiment} from "@/utils/sentiment";
 import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
+import EmotionRadarChart from "@/components/charts/EmotionRadarChart";
 
 interface VisualizationsProps {
     // data: AnalyzedData
@@ -61,6 +62,8 @@ const Visualizations = (props: VisualizationsProps) => {
         )
     }
 
+    const emotionFrequencies = getEmotionFrequency(analyzedData)
+
     return (
         <div id='vis-content' className='h-screen overflow-y-scroll'>
             {analyzedData.data.length ?
@@ -100,6 +103,53 @@ const Visualizations = (props: VisualizationsProps) => {
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    <div className='flex flex-col justify-center items-center w-full'>
+                                        <span
+                                            className='text-2xl font-semibold text-violet-700'>Emotion Radar Chart</span>
+                                        <div className='w-1/2 flex justify-center gap-10'>
+                                            <EmotionRadarChart data={analyzedData}/>
+                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                                <span className='text-violet-500 border-b-[1px] border-gray-700'>
+                                                    Emotion
+                                                </span>
+                                                {emotionFrequencies.map((item, index) => (
+                                                    <div key={index} className='flex gap-4'>
+                                                        <span className='text-violet-500'>
+                                                            {item.label}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                                <span className='text-violet-500 border-b-[1px] border-gray-700'>
+                                                    Positive
+                                                </span>
+                                                {emotionFrequencies.map((item, index) => (
+                                                    <div key={index} className='flex gap-4 justify-end'>
+                                                        <span className='text-green-600'>
+                                                            {item.positive}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                                <span className='text-violet-500 border-b-[1px] border-gray-700'>
+                                                    Negative
+                                                </span>
+                                                {emotionFrequencies.map((item, index) => (
+                                                    <div key={index} className='flex gap-4 justify-end'>
+                                                        <span className='text-red-500'>
+                                                            {item.negative}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 

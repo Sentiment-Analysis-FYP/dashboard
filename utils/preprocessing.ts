@@ -107,12 +107,12 @@ function escapeCSVText(text: string): string {
 }
 
 export function exportToCSV(analyzedData: AnalyzedData): void {
-    let csvContent = 'id,created_at,text,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score\n';
+    let csvContent = 'id,created_at,text,username,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score\n';
 
     analyzedData.data.forEach((item: AnalyzedDataItem) => {
         // Escape each field before including it in the CSV row
         const escapedText = escapeCSVText(item.text);
-        const row = `${item.id},"${item.created_at}","${escapedText}",${item.v_sentiment_neg},${item.v_sentiment_pos},${item.v_sentiment_polarity},${item.t_sentiment_polarity},${item.t_sentiment_subjectivity},${item.lr_sentiment},"${item.score}"\n`;
+        const row = `${item.id},"${item.created_at}","${item.username}","${escapedText}",${item.v_sentiment_neg},${item.v_sentiment_pos},${item.v_sentiment_polarity},${item.t_sentiment_polarity},${item.t_sentiment_subjectivity},${item.lr_sentiment},"${item.score}"\n`;
         csvContent += row;
     });
 

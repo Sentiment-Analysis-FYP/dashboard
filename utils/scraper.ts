@@ -49,9 +49,9 @@ export interface AnalyzedDataItem {
     emotion_score: number
 }
 
-export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
-    return dataItem.lr_sentiment == 0 ? "Negative" : "Positive"
-}
+// export const getSentimentLabel = (dataItem: AnalyzedDataItem): string => {
+//     return dataItem.score == 0 ? "Negative" : "Positive"
+// }
 
 export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
     if (data && data.data && data.data.length)
