@@ -11,6 +11,7 @@ import {motion} from "framer-motion";
 import {getAdvisoryRemark, getHighestOccurringSentiment} from "@/utils/sentiment";
 import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
 import EmotionRadarChart from "@/components/charts/EmotionRadarChart";
+import EmotionScatterChart from "@/components/charts/EmotionScatterChart";
 
 interface VisualizationsProps {
     // data: AnalyzedData
@@ -150,6 +151,16 @@ const Visualizations = (props: VisualizationsProps) => {
                                                 ))}
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    className='flex justify-center items-center py-24 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    <div className='flex flex-col gap-10 justify-center items-center w-full'>
+                                        <span
+                                            className='text-2xl font-semibold text-violet-700'>
+                                            Emotion Scatter Chart</span>
+                                        <EmotionScatterChart data={analyzedData}/>
                                     </div>
                                 </div>
 
