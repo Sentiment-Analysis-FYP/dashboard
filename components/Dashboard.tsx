@@ -3,6 +3,10 @@ import React, {useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {StaticImageData} from "next/image";
+import PreprocessImg from "@/public/PreprocessImg.jpg";
+import VisualizationImg from "@/public/VisualizationImg.jpeg";
+import AnalysisImg from "@/public/AnalysisImg.jpg";
+// import scrapedataImg from "@/public/ScrapeDataImg.jpg";
 
 interface DashboardProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -20,7 +24,7 @@ const Dashboard = (props: DashboardProps) => {
     ]
 
     const images: Images = {
-        "Twitter Scraper": scrapedataImg,
+        // "Twitter Scraper": scrapedataImg,
         "Data Analysis": AnalysisImg,
         "Data Preprocessing": PreprocessImg,
         "Data Visualization": VisualizationImg,
