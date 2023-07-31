@@ -6,8 +6,7 @@ import Image, {StaticImageData} from "next/image";
 import PreprocessImg from "@/public/PreprocessImg.jpg";
 import VisualizationImg from "@/public/VisualizationImg.jpeg";
 import AnalysisImg from "@/public/AnalysisImg.jpg";
-
-// import scrapedataImg from "@/public/ScrapeDataImg.jpg";
+import scrapedataImg from "@/public/ScrapeDataImg.jpg";
 
 interface DashboardProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -25,7 +24,7 @@ const Dashboard = (props: DashboardProps) => {
     ]
 
     const images: Images = {
-        // "Twitter Scraper": scrapedataImg,
+        "Twitter Scraper": scrapedataImg,
         "Data Analysis": AnalysisImg,
         "Data Preprocessing": PreprocessImg,
         "Data Visualization": VisualizationImg,
@@ -50,7 +49,7 @@ const Dashboard = (props: DashboardProps) => {
                          className={' transition duration-200 w-[400px] h-[400px] p-10  flex flex-col justify-between items-center rounded-lg '
                              + (!(dataAvailable || index > 0) ? "cursor-pointer hover:bg-violet-200 bg-violet-50 shadow-md text-violet-500"
                                  : " text-gray-400 bg-gray-100 ")}>
-                        <div className={'flex justify-center items-center rounded-2xl overflow-hidden '+
+                        <div className={'flex justify-center items-center rounded-2xl overflow-hidden ' +
                             (!dataAvailable && " opacity-75")}>
                             {/*<AiFillPieChart size={200}/>*/}
                             <Image src={images[page]} alt="image"/>
