@@ -14,6 +14,13 @@ const Dashboard = (props: DashboardProps) => {
         'Twitter Scraper', 'Data Analysis', 'Data Preprocessing', 'Data Visualization'
     ]
 
+    const images: Images = {
+        "Twitter Scraper": scrapedataImg,
+        "Data Analysis": AnalysisImg,
+        "Data Preprocessing": PreprocessImg,
+        "Data Visualization": VisualizationImg,
+    };
+
     const storeAnalyzedData = useSelector(getAnalyzedData)
 
     useEffect(() => {
