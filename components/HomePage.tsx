@@ -1,4 +1,10 @@
 import Image from "next/image";
+import scraperImg from "@/public/img/Dashboard.png"
+import SA from "@/public/img/SA.png"
+import imgPeople from "@/public/img/People.png"
+import SaResult from "@/public/img/SA Results.png"
+import visualzation from "@/public/img/Visualizations.png"
+import student from "@/public/img/students.png"
 
 const HomePage = () => {
     return (
