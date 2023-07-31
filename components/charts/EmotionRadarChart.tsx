@@ -1,4 +1,13 @@
-import {Legend, PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer} from "recharts";
+import {
+    Legend,
+    PolarAngleAxis,
+    PolarGrid,
+    PolarRadiusAxis,
+    Radar,
+    RadarChart,
+    ResponsiveContainer,
+    Tooltip
+} from "recharts";
 import React from "react";
 import {AnalyzedData} from "@/utils/scraper";
 import {getEmotionFrequency, getMaxEmotionFrequencyDataValue} from "@/utils/visualizations";
@@ -23,6 +32,9 @@ const EmotionRadarChart = (props: EmotionRadarChartProps) => {
                     width={450}
                     height={450}
                     data={emotionFrequencies}>
+                    <Tooltip cursor={{
+                        strokeDasharray: '10 10'
+                    }}/>
                     <PolarGrid gridType='circle'/>
                     <PolarAngleAxis dataKey="label"/>
                     <PolarRadiusAxis angle={30} domain={['dataMin', 'dataMax+5']}/>

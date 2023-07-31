@@ -240,3 +240,11 @@ export const getMaxEmotionFrequencyDataValue = (data: EmotionFrequencyData[]): n
     }, 0)
 }
 
+export const getAllNegativeSentimentAnalyzedData = (data: AnalyzedData): AnalyzedDataItem[] => {
+    return data.data.filter((item) => item.score < 0);
+}
+
+export const getAllPositiveSentimentAnalyzedData = (data: AnalyzedData): AnalyzedDataItem[] => {
+    return data.data.filter((item) => item.score > 0);
+}
+

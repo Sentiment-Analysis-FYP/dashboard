@@ -19,6 +19,8 @@ interface EmotionScatterChartProps {
 const EmotionScatterChart = (props: EmotionScatterChartProps) => {
     const {data} = props
 
+    const chartData = data.data
+
     const data01 = [{
         x: 100,
         y: 200,
@@ -79,7 +81,7 @@ const EmotionScatterChart = (props: EmotionScatterChartProps) => {
                     <YAxis type="number" dataKey="y" name="weight" unit="kg"/>
                     <ZAxis type="number" dataKey="z" range={[60, 400]} name="score" unit="km"/>
                     <Tooltip cursor={{
-                        strokeDasharray: '3 3'
+                        strokeDasharray: '20 30'
                     }}/>
                     <Legend/>
                     <Scatter name="A school" data={data01} fill="#8884d8" shape="circle"/>

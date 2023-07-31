@@ -1,4 +1,4 @@
-import {AnalyzedData, scrambleAnalyzedDataIds, updateScoresToTwoDecimalPlaces} from "@/utils/scraper";
+import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import CustomWordCloud from "@/components/charts/CustomWordCloud";
 import {getEmotionFrequency, getSentimentList} from "@/utils/visualizations";
 import CustomBarChart from "@/components/charts/CustomBarChart";
@@ -34,7 +34,7 @@ const Visualizations = (props: VisualizationsProps) => {
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = scrambleAnalyzedDataIds(updateScoresToTwoDecimalPlaces(analyzedData))
+    analyzedData = scrambleAnalyzedDataIds((analyzedData))
 
     const [sentimentRemark, setSentimentRemark] = useState('');
     const [emotionRemark, setEmotionRemark] = useState('');

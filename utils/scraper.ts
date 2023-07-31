@@ -44,7 +44,7 @@ export interface AnalyzedDataItem {
     t_sentiment_polarity: number,
     t_sentiment_subjectivity: number,
     lr_sentiment: number,
-    score: string,
+    score: number,
     emotion_label: string,
     emotion_score: number
 }
@@ -53,18 +53,18 @@ export interface AnalyzedDataItem {
 //     return dataItem.score == 0 ? "Negative" : "Positive"
 // }
 
-export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
-    if (data && data.data && data.data.length)
-        return {
-            ...data,
-            data: data.data.map((item) => ({
-                ...item,
-                score: Number(item.score).toFixed(2),
-            })),
-        }
-
-    else return data
-}
+// export const updateScoresToTwoDecimalPlaces = (data: AnalyzedData): AnalyzedData => {
+//     if (data && data.data && data.data.length)
+//         return {
+//             ...data,
+//             data: data.data.map((item) => ({
+//                 ...item,
+//                 score: Number(item.score).toFixed(2),
+//             })),
+//         }
+//
+//     else return data
+// }
 
 export const scrambleAnalyzedDataIds = (data: AnalyzedData): AnalyzedData => {
     if (!data || !data.data || !data.data.length) return data
