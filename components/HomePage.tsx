@@ -5,12 +5,14 @@ import imgPeople from "@/public/img/People.png"
 import SaResult from "@/public/img/SA Results.png"
 import visualizations from "@/public/img/Visualizations.png"
 import student from "@/public/img/students.png"
+import home1 from "@/public/img/home1.jpg"
+import home2 from "@/public/img/home2.jpg"
 
 const HomePage = () => {
     return (
         <div className=' h-screen w-screen flex justify-center items-center'>
             <div className=" bg-white w-5/6 h-5/6 flex rounded-2xl shadow-xl">
-                <div className="flex w-[1200px] bg-violet-100 absolute h-5/6 clip-path p-16 rounded-lg ">
+                <div className="flex w-[1200px] bg-violet-100 absolute z-30 h-5/6 clip-path p-16 rounded-lg ">
                     <div className="w-[800px]">
                         <h1 className="text-8xl font-semibold text-violet-600">
                             Uncover Insights<br/> from Students&apos; Tweets
@@ -116,9 +118,9 @@ const HomePage = () => {
                 {/*    <Image className="shadow-lg h-[360px]" src={visualizations} alt="Visuakization"/>*/}
                 {/*</div>*/}
 
-                <div className='h-full flex justify-center items-center w-full '>
-                    <div className='flex justify-center items-center bg-red-700 w-full h-full rounded-2xl '>
-                        Image
+                <div className='h-full flex justify-end items-center w-full '>
+                    <div className='flex justify-end items-center bg-red-700  h-full rounded-2xl relative'>
+                        <Image src={home2} alt='home image'/>
                     </div>
                 </div>
 

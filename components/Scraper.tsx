@@ -9,6 +9,7 @@ import {useAuth} from "@/hooks/auth";
 import FileUploader from "@/components/FileUploader";
 import {AiOutlineUpload} from "react-icons/ai";
 import {AnimatePresence, motion} from "framer-motion";
+import SearchConfiguration from "@/components/SearchConfiguration";
 
 interface ScraperProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -35,6 +36,12 @@ export const Scraper = (props: ScraperProps) => {
                             <div className='flex flex-col  w-full'>
                                 <UserName setUsername={setUsername}/>
                                 <NewDatePicker setDates={setDates}/>
+                                <div className='w-[500px] h-20 flex justify-between items-center gap-2 bg-violet-50 my-2 px-4 rounded-md shadow'>
+                                    <div className='text-violet-600 text-xl'>
+                                        Maximum Number of tweets:
+                                    </div>
+                                    <input type="number" className='py-2 border-[1px] border-gray-300 rounded-md'/>
+                                </div>
                             </div>
 
                             <div className='flex justify-between w-full'>
