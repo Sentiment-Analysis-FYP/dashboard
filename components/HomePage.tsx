@@ -10,6 +10,7 @@ import home2 from "@/public/img/home2.jpg"
 import {Carousel} from "react-responsive-carousel";
 import Slider from "react-slick";
 import CustomCarousel from "@/components/CustomCarousel";
+import Link from "next/link";
 
 
 const HomePage = () => {
@@ -71,10 +72,17 @@ const HomePage = () => {
                     <span>With</span>
                     <span>Words</span>
                 </div>
+
+                <Link href='/register'>
+                    <div className='mt-24 text-5xl text-violet-700 flex justify-center items-center py-8 px-16 bg-white
+                rounded-lg'>
+                        Get Started
+                    </div>
+                </Link>
             </div>
 
             {/*Right Side*/}
-            <div className="flex flex-col justify-center items-center ">
+            <div className="flex flex-col justify-center items-center w-[1200px] h-[1200px]">
                 <CustomCarousel/>
             </div>
         </div>

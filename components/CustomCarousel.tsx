@@ -3,101 +3,66 @@ import {motion, AnimatePresence} from "framer-motion";
 import lady from "@/public/lady.jpg"
 import man1 from "@/public/man1.jpg"
 import man2 from "@/public/man2.jpg"
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+import {AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
+import CarouselItem from "./CarouselItem";
 
 const CustomCarousel = () => {
     const images = [
         lady, man1, man2
     ]
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [direction, setDirection] = useState(null);
-
-    useEffect(() => {
-        const id = setInterval(() =>
-                setCurrentIndex((oldCount) => (oldCount + 1) % images.length),
-            5000);
-
-        return () => {
-            clearInterval(id);
-        };
-    }, []);
-
-    const slideVariants = {
-        hiddenRight: {
-            x: "100%",
-            opacity: 0,
+    const responsive = {
+        superLargeDesktop: {
+            breakpoint: {max: 4000, min: 1024},
+            items: 1,
         },
-        hiddenLeft: {
-            x: "-100%",
-            opacity: 0,
+        desktop: {
+            breakpoint: {max: 1024, min: 768},
+            items: 1,
         },
-        visible: {
-            x: "0",
-            opacity: 1,
-            transition: {
-                duration: 1,
-            },
+        tablet: {
+            breakpoint: {max: 768, min: 640},
+            items: 1,
         },
-        exit: {
-            opacity: 0,
-            scale: 0.8,
-            transition: {
-                duration: 0.5,
-            },
+        mobile: {
+            breakpoint: {max: 640, min: 0},
+            items: 1,
         },
-    };
-    const slidersVariants = {
-        hover: {
-            scale: 1.2,
-            backgroundColor: "#ff00008e",
-        },
-    };
-    const dotsVariants = {
-        initial: {
-            y: 0,
-        },
-        animate: {
-            y: -10,
-            scale: 1.2,
-            transition: {type: "spring", stiffness: 1000, damping: "10"},
-        },
-        hover: {
-            scale: 1.1,
-            transition: {duration: 0.2},
-        },
-    };
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex + 1 === images.length ? 0 : prevIndex + 1
-        );
-    };
-    const handlePrevious = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
-        );
-    };
-    const handleDotClick = (index: number) => {
-        setCurrentIndex(index);
     };
 
+    const carouselData = [
+        {
+            imageUrl: lady.src,
+            title: 'We built some cool thing',
+            background: 'gray-200',
+            slug: 'lorem_ipsum'
+        },
+        {
+            imageUrl: man1.src,
+            title: 'We built some cool thing',
+            background: 'gray-200',
+            slug: 'lorem_ipsum'
+        },
+        {
+            imageUrl: man2.src,
+            title: 'We built some cool thing',
+            background: 'gray-200',
+            slug: 'lorem_ipsum'
+        },
+    ]
     return (
-        <div className="carousel w-full">
-            <div className="carousel-images">
-                <AnimatePresence>
-                    <motion.img
-                        key={currentIndex}
-                        src={images[currentIndex].src}
-                        // src={images[currentIndex]}
-                        initial={direction === "right" ? "hiddenRight" : "hiddenLeft"}
-                        animate="visible"
-                        exit="exit"
-                        width="1000px"
-                        height="1000px"
-                        variants={slideVariants}
-                    />
-                </AnimatePresence>
-
-            </div>
-        </div>
+        <Carousel infinite
+                  containerClass='w-full'
+                  ssr={true}
+                  autoPlay={true}
+                  autoPlaySpeed={7000}
+                  transitionDuration={1000}
+                  itemClass="px-4" responsive={responsive}>
+            {carouselData.map(item => (
+                <CarouselItem {...item} key={item.slug}/>
+            ))}
+        </Carousel>
     )
 }
 
