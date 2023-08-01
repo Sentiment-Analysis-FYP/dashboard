@@ -24,7 +24,7 @@ const EmotionRadarChart = (props: EmotionRadarChartProps) => {
     console.log(emotionFrequencies)
 
     return (
-        <div className='w-full flex justify-center items-center mb-3'>
+        <div className='w-[400px] flex justify-center items-center mb-3'>
             <ResponsiveContainer width="100%" height={400}>
                 <RadarChart
                     cx='50%' cy='50%'

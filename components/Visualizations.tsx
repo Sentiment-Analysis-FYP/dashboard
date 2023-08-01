@@ -68,7 +68,7 @@ const Visualizations = (props: VisualizationsProps) => {
     const emotionFrequencies = getEmotionFrequency(analyzedData)
 
     const printDocument = () => {
-        const input = document.getElementById('vis-content')
+        const input = document.getElementById('download-div')
         if (!input) return
         html2canvas(input).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
@@ -80,16 +80,24 @@ const Visualizations = (props: VisualizationsProps) => {
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
             pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('download.pdf');
+            pdf.save('visualization' + new Date().toISOString() + '.pdf');
         });
     }
 
     return (
         <div id='vis-content' className=' '>
             {analyzedData.data.length ?
-                <div className='w-full '>
-                    <div
-                        className='  w-full flex justify-center items-center'>
+                <div className='w-full flex flex-col justify-center items-center'>
+                    <div className='w-5/6 flex  items-center'>
+                        <span
+                            onClick={() => printDocument()}
+                            className='bg-white text-violet-700 font-semibold cursor-pointer py-2 px-4 mb-3
+                            rounded-lg shadow-2xl text-lg hover:bg-violet-700 hover:text-white transition duration-200'>
+                            Download Report
+                        </span>
+                    </div>
+                    <div id='download-div'
+                         className='  w-full flex justify-center items-center'>
                         <div
                             className='px-10 w-5/6 bg-white  shadow-2xl rounded-lg py-10 flex justify-center items-center'>
                             <div className='flex flex-wrap gap-5 w-full  '>
@@ -133,7 +141,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                             className='text-2xl font-semibold text-violet-700'>
                                             Emotion Radar Chart
                                         </span>
-                                        <div className='w-[600px] flex justify-center gap-10'>
+                                        <div className='w-[600px] flex justify-center gap-5'>
                                             <EmotionRadarChart data={analyzedData}/>
                                             <div className=' flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>
