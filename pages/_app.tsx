@@ -4,6 +4,7 @@ import {Nunito} from "next/font/google";
 import store from "@/utils/store/store";
 import {Provider} from 'react-redux'
 
+
 const nunito = Nunito({
     weight: ["400"],
     subsets: ["latin"],

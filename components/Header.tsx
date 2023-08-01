@@ -8,6 +8,8 @@ import {useRouter} from "next/router";
 import {BiLockAlt} from "react-icons/bi";
 import {LuLogOut} from "react-icons/lu";
 import {Scrape} from "@/utils/scraper";
+import Image from 'next/image';
+import logo from '@/public/logo.png'
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -89,7 +91,8 @@ const Header = (props: HeaderProps) => {
                 <div className=' w-full flex items-center'>
                     <div className="px-6 w-full">
                         <div className=" w-full border-gray-300 py-6 items-center px-10 flex">
-                            <div className="float-left">
+                            <div className="flex float-left">
+                            <Image className='w-14 cursor-pointer' src={logo} alt=''/>
                                 <span
                                     onClick={() => setActivePage(DASHBOARD_PAGE)}
                                     className="select-none cursor-pointer hover:text-violet-500 font-bold text-5xl text-violet-800 tracking-wider">
