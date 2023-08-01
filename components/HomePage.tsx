@@ -14,16 +14,17 @@ const HomePage = () => {
             <div className=" bg-violet-100 w-5/6 h-5/6 flex rounded-2xl shadow-xl">
                 <div className="flex w-[1200px] bg-violet-200 absolute z-30 h-5/6 clip-path p-16 rounded-2xl ">
                     <div className="pl-16 pt-4 w-[800px]">
-                        <h1 className="text-8xl font-semibold text-violet-600">
+                        <h1 className="text-8xl font-semibold text-violet-800">
                             Uncover Insights<br/> from Students&apos; Tweets
                         </h1>
                         <p className='text-3xl text-gray-800 mt-16 pr-32'>
-                            Welcome to <span className='font-semibold tracking-wide'>FeBa</span>, a powerful web application designed to analyze
+                            Welcome to <span className='font-semibold text-violet-700 tracking-wide'>FeBa</span>, a
+                            powerful web application designed to analyze
                             students&apos; tweets and provide valuable psychological insights. With
                             our sentiment analysis and natural language <p className='pr-40'>processing algorithms,
                             educators, counselors and administration can gain a deeper
                             understanding of students&apos; emotional well-being, trends, and
-                            sentiments on <p className='pr-44'>Twitter arising from subject matters concerning the
+                            sentiments <p className='pr-40'>on Twitter arising from subject matters concerning the
                                 school.</p></p>
                         </p>
                         {/*<h2 className="text-2xl mt-3 mb-2 font-extrabold text-violet-600">Key Features</h2>*/}
