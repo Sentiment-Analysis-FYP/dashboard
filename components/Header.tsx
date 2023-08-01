@@ -92,7 +92,7 @@ const Header = (props: HeaderProps) => {
                             <div className="float-left">
                                 <span
                                     onClick={() => setActivePage(DASHBOARD_PAGE)}
-                                    className="select-none cursor-pointer hover:text-violet-500 font-bold text-4xl text-violet-800 tracking-[10px]">
+                                    className="select-none cursor-pointer hover:text-violet-500 font-bold text-5xl text-violet-800 tracking-wider">
                                     FeBa
                                 </span>
                             </div>

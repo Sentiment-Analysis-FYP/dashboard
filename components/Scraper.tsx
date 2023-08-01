@@ -72,14 +72,15 @@ export const Scraper = (props: ScraperProps) => {
 
     const runScrape = async () => {
         console.log(username)
-        console.log(keywordsState)
+        console.log(maxTweets)
 
         if (username.trim().length > 0 || keywordsState.length > 0) {
             const status = await requestScrape(username,
                 keywordsState,
                 dates[0], dates[1],
                 email ? email : "guest",
-                title)
+                title,
+                maxTweets)
             setScrapeSuccess(status == 200)
             return
         }

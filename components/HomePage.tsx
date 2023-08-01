@@ -12,13 +12,13 @@ const HomePage = () => {
     return (
         <div className=' h-screen w-screen flex justify-center items-center'>
             <div className=" bg-white w-5/6 h-5/6 flex rounded-2xl shadow-xl">
-                <div className="flex w-[1200px] bg-violet-100 absolute z-30 h-5/6 clip-path p-16 rounded-lg ">
-                    <div className="w-[800px]">
+                <div className="flex w-[1200px] bg-violet-200 absolute z-30 h-5/6 clip-path p-16 rounded-2xl ">
+                    <div className="pl-16 pt-4 w-[800px]">
                         <h1 className="text-8xl font-semibold text-violet-600">
                             Uncover Insights<br/> from Students&apos; Tweets
                         </h1>
                         <p className='text-3xl text-violet-500 mt-16 pr-32'>
-                            Welcome to Sentinel, a powerful web application designed to analyze
+                            Welcome to FeBa, a powerful web application designed to analyze
                             students&apos; tweets and provide valuable psychological insights. With
                             our sentiment analysis and natural language <p className='pr-40'>processing algorithms,
                             educators, counselors and administration can gain a deeper
@@ -118,9 +118,14 @@ const HomePage = () => {
                 {/*    <Image className="shadow-lg h-[360px]" src={visualizations} alt="Visuakization"/>*/}
                 {/*</div>*/}
 
-                <div className='h-full flex justify-end items-center w-full '>
+                <div className='h-full flex justify-end items-center w-full rounded-2xl'>
                     <div className='flex justify-end items-center bg-red-700  h-full rounded-2xl relative'>
-                        <Image src={home2} alt='home image'/>
+                        <Image src={home2}
+                               alt='home image'
+                               width={0}
+                               height={0}
+                               // sizes="100vw"
+                               style={{width: '100%', height: '100%'}}/>
                     </div>
                 </div>
 
