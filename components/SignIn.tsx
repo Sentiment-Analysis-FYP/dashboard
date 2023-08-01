@@ -36,8 +36,8 @@ export const SignIn = () => {
     }, [loginStatus]);
 
     return (
-        <div className="absolute top-0 left-0 right-0 bottom-0 m-auto pattern">
-            <div className='pattern fixed top-0 left-0 right-0 bottom-0 opacity-[10%] bg-black'/>
+        <div className="absolute top-0 left-0 right-0 bottom-0 m-auto bg-pattern">
+            <div className='bg-pattern fixed top-0 left-0 right-0 bottom-0 opacity-[10%] bg-black'/>
             <div className="absolute top-0 left-0 right-0 bottom-0 m-auto overflow-hidden flex justify-center
                 items-center opacity-100">
                 <Image
@@ -46,7 +46,7 @@ export const SignIn = () => {
                     width={1200}
                     height={1200}
                     alt="loginimg"
-                    style={{objectFit: "cover"}}
+                    style={{objectFit: "cover", borderRadius: '1%'}}
                 />
             </div>
 
