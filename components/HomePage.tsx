@@ -18,13 +18,13 @@ const HomePage = () => {
                             Uncover Insights<br/> from Students&apos; Tweets
                         </h1>
                         <p className='text-3xl text-violet-500 mt-16 pr-32'>
-                            Welcome to FeBa, a powerful web application designed to analyze
+                            Welcome to <span className='font-semibold tracking-wide'>FeBa</span>, a powerful web application designed to analyze
                             students&apos; tweets and provide valuable psychological insights. With
                             our sentiment analysis and natural language <p className='pr-40'>processing algorithms,
                             educators, counselors and administration can gain a deeper
                             understanding of students&apos; emotional well-being, trends, and
-                            sentiments on Twitter arising from subject matters concerning the
-                            school.</p>
+                            sentiments on <p className='pr-44'>Twitter arising from subject matters concerning the
+                                school.</p></p>
                         </p>
                         {/*<h2 className="text-2xl mt-3 mb-2 font-extrabold text-violet-600">Key Features</h2>*/}
                         {/*<ul className=" list-inside  list-disc marker:text-violet-600">*/}
@@ -124,8 +124,9 @@ const HomePage = () => {
                                alt='home image'
                                width={0}
                                height={0}
-                               // sizes="100vw"
-                               style={{width: '100%', height: '100%'}}/>
+                            // sizes="100vw"
+                               style={{width: '100%', height: '100%'}}
+                        />
                     </div>
                 </div>
 
