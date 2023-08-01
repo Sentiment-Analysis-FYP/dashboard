@@ -12,6 +12,8 @@ import {getAdvisoryRemark, getHighestOccurringSentiment} from "@/utils/sentiment
 import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
 import EmotionRadarChart from "@/components/charts/EmotionRadarChart";
 import EmotionScatterChart from "@/components/charts/EmotionScatterChart";
+import html2canvas from "html2canvas";
+import {jsPDF} from "jspdf";
 
 interface VisualizationsProps {
     // data: AnalyzedData
@@ -64,6 +66,23 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     const emotionFrequencies = getEmotionFrequency(analyzedData)
+
+    const printDocument = () => {
+        const input = document.getElementById('vis-content')
+        if (!input) return
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+                orientation: 'landscape',
+            });
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save('download.pdf');
+        });
+    }
 
     return (
         <div id='vis-content' className='h-screen overflow-y-scroll'>
