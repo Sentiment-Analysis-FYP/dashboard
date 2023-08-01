@@ -1,14 +1,16 @@
 import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
-import {useSelector} from "react-redux";
-import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {PREPROCESSING_PAGE, VISUALIZATIONS_PAGE} from "@/pages";
 import SummaryGraphs from "@/components/charts/SummaryGraphs";
+import {useAuth} from "@/hooks/auth";
+import {useRouter} from "next/router";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -106,17 +108,80 @@ interface AnalysisProps {
 const Analysis = (props: AnalysisProps) => {
     // const {data} = props
     const {setActivePage} = props
-
+    const dispatch = useDispatch()
+    const [email, token] = useAuth()
+    const [change, setChange] = useState(false);
     const storeAnalyzedData = useSelector(getAnalyzedData)
+
+
     console.log(`analyzed data from store:`)
     console.log(storeAnalyzedData)
 
-    let analyzedData: AnalyzedData = {
+    useEffect(() => {
+    }, [storeAnalyzedData]);
+
+
+    const analyzedData: AnalyzedData = {
         scrapeId: storeAnalyzedData.payload.scrapeId,
         data: storeAnalyzedData.payload.analyzedData
     }
 
-    analyzedData = scrambleAnalyzedDataIds(analyzedData)
+    // analyzedData = scrambleAnalyzedDataIds(storeAnalyzedData.payload.analyzedData as unknown as AnalyzedData)
+
+    // useEffect(() => {
+    //     analyzedData = {
+    //         scrapeId: storeAnalyzedData.payload.scrapeId,
+    //         data: storeAnalyzedData.payload.analyzedData
+    //     }
+    // }, [change, storeAnalyzedData]);
+
+    const router = useRouter()
+
+    // useEffect(() => {
+    //     const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
+    //
+    //     ws.onopen = () => {
+    //         console.log('Emotion WebSocket connection established')
+    //         if (email) ws.send(JSON.stringify({
+    //             // email: `${email}`
+    //             email: `emotion`
+    //         }))
+    //     }
+    //
+    //     ws.onmessage = (event) => {
+    //         console.log('emotion ws')
+    //         const eventData = JSON.parse(event.data)
+    //         const analyzedData = eventData.data
+    //         // console.log(analyzedData)
+    //
+    //         if (analyzedData && analyzedData.length) {
+    //             const jsonAnalyzedData = JSON.parse(analyzedData)
+    //             console.log(jsonAnalyzedData)
+    //             // scramble IDs in case of duplicates
+    //             const scrambledAnalyzedData =
+    //                 scrambleAnalyzedDataIds(jsonAnalyzedData)
+    //
+    //             console.log(scrambledAnalyzedData)
+    //
+    //             dispatch(setAnalyzedData(scrambledAnalyzedData))
+    //             console.log(scrambledAnalyzedData)
+    //             // setIsComplete(eventData.isComplete)
+    //             // router.reload()
+    //             // setChange((prevState) => !prevState)
+    //         } else {
+    //             console.log('No analyzed data')
+    //         }
+    //     }
+    //
+    //     ws.onclose = () => {
+    //         console.log('WebSocket connection closed')
+    //     }
+    //
+    //     return () => {
+    //         // Clean up the WebSocket connection when the component unmounts
+    //         ws.close()
+    //     }
+    // },)
 
     const NoAnalyzedData = () => {
         return (

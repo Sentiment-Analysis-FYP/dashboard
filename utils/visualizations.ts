@@ -137,7 +137,7 @@ export interface GroupedDataItem {
 export const getDataItemsCountGroupedBy = (data: AnalyzedDataItem[], groupBy: string): GroupedDataItem[] => {
     const groupedData: { [key: string]: GroupedDataItem } = {};
 
-    if (data.length)
+    if (data && data.length)
         data.forEach((item) => {
             let dateGroup;
             switch (groupBy) {

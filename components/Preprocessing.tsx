@@ -230,7 +230,7 @@ const Preprocessing = (props: AnalysisProps) => {
                                     hover:shadow-lg cursor-pointer'
                             onClick={() => setActivePage(1)}>
                             <AiOutlinePlus size={20}/>
-                            <span>New Search</span>
+                            <span>New Scrape</span>
                         </motion.div>
 
                         {analyzedData && analyzedData.data.length &&
@@ -251,7 +251,7 @@ const Preprocessing = (props: AnalysisProps) => {
                             <div className='flex w-full flex-col items-center'>
                                 <div
                                     className='w-full flex justify-center items-center flex-col gap-8 px-10 py-5 bg-violet-50 rounded-lg'>
-                                    <div className='flex flex-wrap w-full gap-10'>
+                                    <div className='flex flex-wrap w-full gap-7'>
                                         <span className='text-xl text-violet-600 select-none '>Data Cleaning</span>
                                         {preprocessors.map((preprocessor, index) => (
                                             <div key={index}

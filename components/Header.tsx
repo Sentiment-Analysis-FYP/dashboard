@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import {BiLockAlt} from "react-icons/bi";
 import {LuLogOut} from "react-icons/lu";
 import {Scrape} from "@/utils/scraper";
+import {clearAnalyzedData} from "@/utils/store/analyzedDataSlice";
 
 interface HeaderProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
@@ -106,6 +107,7 @@ const Header = (props: HeaderProps) => {
                             onClick={() => {
                                 setUserEmail('')
                                 router.replace(router.asPath)
+                                clearAnalyzedData()
                                 logout()
                             }}>
                         Log out <LuLogOut/>

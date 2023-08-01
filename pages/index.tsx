@@ -12,6 +12,10 @@ import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
 import Preprocessing from "@/components/Preprocessing";
 import {BiArrowBack} from "react-icons/bi";
+import {scrambleAnalyzedDataIds} from "@/utils/scraper";
+import {setAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {useDispatch} from "react-redux";
+
 
 export const DASHBOARD_PAGE = 0
 export const SCRAPER_PAGE = 1
@@ -98,7 +102,7 @@ export default function Home() {
                                 <div className='h-16'>
                                     {activePage > 0 && <div
                                         onClick={() => setActivePage((prevState) => prevState - 1)}
-                                        className='px-4 py-2 text-violet-700 bg-white w-32 rounded-lg flex gap-2
+                                        className='px-4 py-3 text-violet-700 bg-white w-32 rounded-lg flex gap-2
                                         justify-around items-center hover:bg-violet-600 hover:text-white transition
                                         duration-200 hover:shadow cursor-pointer'>
                                         <BiArrowBack size={20}/>

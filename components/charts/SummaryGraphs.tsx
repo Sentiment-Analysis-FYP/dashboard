@@ -21,14 +21,15 @@ interface SummaryGraphsProps {
 
 const SummaryGraphs = (props: SummaryGraphsProps) => {
     const {data} = props
-    const chartData = getDataItemsCountGroupedBy(data.data, 'year')
+    const chartData = getDataItemsCountGroupedBy(data.data, 'day')
 
 
     return (
         <div className='bg-white p-6 w-full rounded-lg flex justify-between items-center'>
-            <div className='w-1/2'>
+
+            {data.data && data.data.length > 0 && data.data[0].emotion_score > 0 && <div className='w-1/2'>
                 <EmotionRadarChart data={data}/>
-            </div>
+            </div>}
 
             <div className='w-1/2 h-[400px] flex flex-col justify-center items-center py-10'>
                 <ResponsiveContainer width="100%" height="100%">
