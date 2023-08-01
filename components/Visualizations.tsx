@@ -85,31 +85,31 @@ const Visualizations = (props: VisualizationsProps) => {
     }
 
     return (
-        <div id='vis-content' className='h-screen overflow-y-scroll'>
+        <div id='vis-content' className=' '>
             {analyzedData.data.length ?
                 <div className='w-full '>
                     <div
-                        className=' py-32 w-full flex justify-center items-center'>
+                        className='  w-full flex justify-center items-center'>
                         <div
-                            className='w-[1400px] lg:w[1000px] bg-white  shadow-2xl rounded-lg py-20 flex justify-center items-center'>
-                            <div className='flex flex-col gap-5 justify-center items-center '>
-                                <div className='text-2xl'>
-                                    <div>
-                                        Sentiments over this period were generally <span
-                                        className={sentimentRemark == 'negative' ? "text-red-700" : "text-green-700"}>{sentimentRemark}</span>
-                                    </div>
-                                    <div>
-                                        The emotion expressed by users within this period is <span
-                                        className={getEmotionPolarity(emotionRemark) == 'negative' ? "text-red-700" : "text-green-700"}>
-                                         {emotionRemark}
-                                    </span>
-                                    </div>
-                                    <div>
-                                        <span className=''>{advisoryRemark}</span>
-                                    </div>
-                                </div>
+                            className='px-10 w-5/6 bg-white  shadow-2xl rounded-lg py-10 flex justify-center items-center'>
+                            <div className='flex flex-wrap gap-5 w-full  '>
+                                {/*<div className='text-2xl w-72'>*/}
+                                {/*    <div>*/}
+                                {/*        Sentiments over this period were generally <span*/}
+                                {/*        className={sentimentRemark == 'negative' ? "text-red-700" : "text-green-700"}>{sentimentRemark}</span>*/}
+                                {/*    </div>*/}
+                                {/*    <div>*/}
+                                {/*        The emotion expressed by users within this period is <span*/}
+                                {/*        className={getEmotionPolarity(emotionRemark) == 'negative' ? "text-red-700" : "text-green-700"}>*/}
+                                {/*         {emotionRemark}*/}
+                                {/*    </span>*/}
+                                {/*    </div>*/}
+                                {/*    <div>*/}
+                                {/*        <span className=''>{advisoryRemark}</span>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                                 <div
-                                    className='flex justify-center items-center gap-14 my-10 py-16 w-[1200px] bg-violet-50 shadow
+                                    className='flex justify-center items-center gap-14 w-[600px] h-[600px] bg-violet-50 shadow
                                     rounded-lg'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                 <span className='text-2xl font-semibold text-violet-700'>
@@ -119,21 +119,23 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
                                 <div
-                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
-                                    <div className='flex flex-col justify-center items-center w-full'>
+                                    className='flex justify-center items-center py-16 w-[600px] h-[600px] bg-violet-50 rounded-lg shadow'>
+                                    <div className='flex flex-col justify-center items-center'>
                                         <span className='text-2xl font-semibold text-violet-700'>Line Chart</span>
                                         <CustomLineChart data={analyzedData}/>
                                     </div>
                                 </div>
 
                                 <div
-                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-16 w-[810px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col justify-center items-center w-full'>
                                         <span
-                                            className='text-2xl font-semibold text-violet-700'>Emotion Radar Chart</span>
-                                        <div className='w-5/6 flex justify-center gap-10'>
+                                            className='text-2xl font-semibold text-violet-700'>
+                                            Emotion Radar Chart
+                                        </span>
+                                        <div className='w-[600px] flex justify-center gap-10'>
                                             <EmotionRadarChart data={analyzedData}/>
-                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                            <div className=' flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>
                                                     Emotion
                                                 </span>
@@ -145,7 +147,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                            <div className=' flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>
                                                     Positive
                                                 </span>
@@ -157,7 +159,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <div className='w-96 flex flex-col h-96 justify-evenly text-xl'>
+                                            <div className=' flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>
                                                     Negative
                                                 </span>
@@ -174,7 +176,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                 </div>
 
                                 <div
-                                    className='flex justify-center items-center py-16 w-[1200px] bg-violet-50 rounded-lg shadow'>
+                                    className='flex justify-center items-center py-16 w-[600px] h-[600px] bg-violet-50 rounded-lg shadow'>
                                     <div className='flex flex-col gap-10 justify-center items-center w-full'>
                                         <span
                                             className='text-2xl font-semibold text-violet-700'>
@@ -183,18 +185,23 @@ const Visualizations = (props: VisualizationsProps) => {
                                     </div>
                                 </div>
 
-                                <div className='flex w-[1200px] justify-between items-center'>
+                                <div
+                                    className='flex justify-center items-center py-16 w-[700px] h-[600px] bg-violet-50 rounded-lg '>
                                     <div
-                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8 rounded-lg shadow'>
-                                        <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                        className='flex flex-col justify-center items-center bg-violet-50 px-10  rounded-lg '>
+                                        <span className='text-2xl font-semibold text-violet-700 '>
                                             Negative Word Cloud
                                         </span>
                                         <CustomWordCloud sentimentList={getSentimentList(analyzedData, NEGATIVE)}/>
                                     </div>
+                                </div>
+
+                                <div
+                                    className='flex justify-center items-center py-16 w-[700px] h-[600px] bg-violet-50 rounded-lg '>
                                     <div
-                                        className='flex flex-col justify-center items-center bg-violet-50 px-10 py-14 gap-8
-                                        rounded-lg shadow'>
-                                    <span className='text-2xl font-semibold text-violet-700 mb-8'>
+                                        className='flex flex-col justify-center items-center bg-violet-50 px-10
+                                        rounded-lg '>
+                                    <span className='text-2xl font-semibold text-violet-700 '>
                                         Positive Word Cloud
                                     </span>
                                         <CustomWordCloud sentimentList={getSentimentList(analyzedData, POSITIVE)}/>

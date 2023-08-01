@@ -301,15 +301,15 @@ const CustomLineChart = (props: CustomLineChartProps) => {
     } = zoomGraph;
 
     return (
-        <div className='w-full flex flex-col justify-center items-center py-10 select-none gap-6'>
+        <div className='w-[600px] h-[500px] flex flex-col justify-center items-center  select-none pr-4'>
             <button type="button"
-                    className="px-10 py-2 bg-violet-500 hover:bg-violet-700 -mt-2 transition duration-500
+                    className="px-10 py-1 bg-violet-500 hover:bg-violet-700  transition duration-500
                         rounded-lg text-gray-50"
                     onClick={() => zoomOut()}>
                 Zoom Out
             </button>
 
-            <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
+            <div className="flex justify-between items-center w-72  text-gray-800 select-none">
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('day')}>
                     <input readOnly type='radio' value='day' checked={groupByRadios[0]}
@@ -330,17 +330,18 @@ const CustomLineChart = (props: CustomLineChartProps) => {
                 </div>
             </div>
 
-            <ResponsiveContainer minHeight={500}>
-                <LineChart data={lineChartData} width={1200}
-                           onMouseDown={e => setZoomGraph(prev => ({
-                               ...prev,
-                               refAreaLeft: e.activeLabel!
-                           }))}
-                           onMouseMove={e => zoomGraph.refAreaLeft && setZoomGraph(prev => ({
-                               ...prev,
-                               refAreaRight: e.activeLabel!
-                           }))}
-                           onMouseUp={() => zoom()}>
+            <ResponsiveContainer>
+                <LineChart
+                    data={lineChartData} width={250}
+                    onMouseDown={e => setZoomGraph(prev => ({
+                        ...prev,
+                        refAreaLeft: e.activeLabel!
+                    }))}
+                    onMouseMove={e => zoomGraph.refAreaLeft && setZoomGraph(prev => ({
+                        ...prev,
+                        refAreaRight: e.activeLabel!
+                    }))}
+                    onMouseUp={() => zoom()}>
                     <CartesianGrid strokeDasharray="10 10"/>
                     <XAxis allowDataOverflow dataKey="date" domain={left && right ? [left, right] : undefined}
                            type="number"

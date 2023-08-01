@@ -46,8 +46,8 @@ const CustomBarChart = (props: CustomBarChartProps) => {
 
 
     return (
-        <div className='w-full h-[700px] flex flex-col justify-center items-center py-10'>
-            <div className="flex justify-between items-center w-80 pt-5 text-gray-800 select-none">
+        <div className='w-[500px] h-[500px] flex flex-col justify-center items-center '>
+            <div className="flex justify-between items-center w-72  text-gray-800 select-none">
                 <div className='flex gap-2'
                      onClick={() => setGroupBy('day')}>
                     <input readOnly type='radio' value='day' checked={groupByRadios[0]}
