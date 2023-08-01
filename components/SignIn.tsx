@@ -51,7 +51,7 @@ export const SignIn = () => {
             </div>
 
             <div className="w-[500px] h-[500px] flex justify-center items-center absolute top-0 left-0 right-0 bottom-0
-                            m-auto bg-white rounded-xl">
+                            m-auto bg-white rounded-xl shadow-xl">
                 <div className="flex flex-col justify-center items-center gap-8">
                     <div className="flex flex-col text-sm w-96">
                         <span className="text-gray-900 text-2xl pb-4">Sign In</span>
