@@ -7,6 +7,9 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import {AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
 import CarouselItem from "./CarouselItem";
+import scrapershot from "@/public/scrapershot.png"
+import visshot from '@/public/visshot.png'
+import dashshot from '@/public/dashshot.png'
 
 const CustomCarousel = () => {
     const images = [
@@ -33,19 +36,19 @@ const CustomCarousel = () => {
 
     const carouselData = [
         {
-            imageUrl: lady.src,
+            imageUrl: scrapershot.src,
             title: 'We built some cool thing',
             background: 'gray-200',
             slug: 'lorem_ipsum'
         },
         {
-            imageUrl: man1.src,
+            imageUrl: dashshot.src,
             title: 'We built some cool thing',
             background: 'gray-200',
             slug: 'lorem_ipsum'
         },
         {
-            imageUrl: man2.src,
+            imageUrl: visshot.src,
             title: 'We built some cool thing',
             background: 'gray-200',
             slug: 'lorem_ipsum'
