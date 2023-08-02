@@ -15,7 +15,7 @@ const CustomWordCloud = (props: CustomWordCloudProps) => {
         <div className='w-[600px] h-[550px] flex justify-center items-center overflow-y-scroll'>
             {wordList.length ?
                 <TagCloud minSize={5}
-                          maxSize={150}
+                          maxSize={100}
                           tags={wordList}
                           className="simple-cloud"
                 /> :
