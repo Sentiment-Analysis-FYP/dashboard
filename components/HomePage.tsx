@@ -1,14 +1,3 @@
-import Image from "next/image";
-import scraperImg from "@/public/img/Dashboard.png"
-import SA from "@/public/img/SA.png"
-import imgPeople from "@/public/img/People.png"
-import SaResult from "@/public/img/SA Results.png"
-import visualizations from "@/public/img/Visualizations.png"
-import student from "@/public/img/students.png"
-import home1 from "@/public/img/home1.jpg"
-import home2 from "@/public/img/home2.jpg"
-import {Carousel} from "react-responsive-carousel";
-import Slider from "react-slick";
 import CustomCarousel from "@/components/CustomCarousel";
 import Link from "next/link";
 
