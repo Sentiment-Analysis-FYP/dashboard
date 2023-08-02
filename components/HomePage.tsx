@@ -72,7 +72,12 @@ const HomePage = () => {
                     <span>With</span>
                     <span>Words</span>
                 </div>
-
+                <div className='text-4xl mt-24 text-gray-300 w-[450px] pl-10 flex justify-center items-center'>
+                    <div>Welcome to <span className='font-semibold text-gray-200 tracking-wide'>FeBa</span>, a*
+                        powerful web application designed to analyze
+                        gathered and provide valuable psychological insights.
+                    </div>
+                </div>
                 <Link href='/register'>
                     <div className='mt-24 text-5xl text-violet-700 flex justify-center items-center py-8 px-16 bg-white
                         rounded-lg hover:shadow-2xl transition duration-300 hover:translate-x-1 hover:bg-gray-300 hover:text-violet-500'>
