@@ -59,8 +59,8 @@ const CustomCarousel = () => {
                   containerClass='w-full'
                   ssr={true}
                   autoPlay={true}
-                  autoPlaySpeed={9000}
-                  transitionDuration={1000}
+                  autoPlaySpeed={4000}
+                  transitionDuration={1500}
                   itemClass="px-4" responsive={responsive}>
             {carouselData.map(item => (
                 <CarouselItem {...item} key={item.slug}/>
