@@ -56,15 +56,15 @@ const HomePage = () => {
             {/*</div>*/}
             {/*Left side*/}
             <div className="flex flex-col justify-center items-center px-40">
-                <div className='text-9xl text-white flex justify-center items-center flex-col tracking-wide'>
+                <div className='text-9xl text-white font-extrabold flex justify-center items-center flex-col tracking-wide'>
                     <span>Wisdom</span>
                     <span>With</span>
                     <span>Words</span>
                 </div>
-                <div className='text-4xl mt-24 text-gray-300 w-[450px] pl-10 flex justify-center items-center'>
-                    <div>Welcome to <span className='font-semibold text-gray-200 tracking-wide'>FeBa</span>, a*
-                        powerful web application designed to analyze
-                        gathered and provide valuable psychological insights.
+                <div className='text-5xl mt-24 text-gray-300 w-[500px] pl-10 flex justify-center items-center'>
+                    <div>Welcome to <span className='font-semibold text-gray-200 tracking-wide'>FeBa</span><br/>
+                        A powerful web application designed to gather and analyze
+                        data and provide valuable psychological insights.
                     </div>
                 </div>
                 <Link href='/register'>
