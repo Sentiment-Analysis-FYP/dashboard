@@ -75,7 +75,7 @@ const HomePage = () => {
 
                 <Link href='/register'>
                     <div className='mt-24 text-5xl text-violet-700 flex justify-center items-center py-8 px-16 bg-white
-                rounded-lg'>
+                        rounded-lg hover:shadow-2xl transition duration-300 hover:translate-x-1 hover:bg-gray-300 hover:text-violet-500'>
                         Get Started
                     </div>
                 </Link>

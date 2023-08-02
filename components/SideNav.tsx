@@ -59,7 +59,7 @@ const SideNav = (props: HeaderProps) => {
     }
 
     return (
-        <div className={sidebarClass + ' mt-0 h-full'}>
+        <div className={sidebarClass + ' mt-0 z-40 h-full'}>
             <div>
                 <div
                     className='cursor-pointer sidebar-toggle text-violet-500 hover:text-violet-600 transition duration-100 '
@@ -82,8 +82,8 @@ const SideNav = (props: HeaderProps) => {
                                             className={'w-64 flex  items-center  ' +
                                                 'font-semibold py-14  group transform uppercase  ' +
                                                 ' ease-in-out text-xl transition duration-100 ' +
-                                                ((activePage == (index + 1)) ? " text-violet-600" :
-                                                    ((dataAvailable || !index) ? " cursor-pointer hover:text-violet-400 duration-400 transition "
+                                                ((activePage == (index + 1)) ? " text-violet-700 font-semibold" :
+                                                    ((dataAvailable || !index) ? " cursor-pointer text-violet-300 hover:text-violet-400 duration-400 transition "
                                                         : " text-gray-400 "))}>
                                             <div className={!isOpen ? ' pl-[180px] ' : " pl-[25px]"}>
                                                 {renderIcon(index)}

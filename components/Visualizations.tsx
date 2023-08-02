@@ -141,7 +141,7 @@ const Visualizations = (props: VisualizationsProps) => {
                                             className='text-2xl font-semibold text-violet-700'>
                                             Emotion Radar Chart
                                         </span>
-                                        <div className='w-[600px] flex justify-center gap-5'>
+                                        <div className='w-[600px] flex justify-end gap-5'>
                                             <EmotionRadarChart data={analyzedData}/>
                                             <div className=' flex flex-col h-96 justify-evenly text-xl'>
                                                 <span className='text-violet-500 border-b-[1px] border-gray-700'>

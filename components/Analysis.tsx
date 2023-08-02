@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
@@ -10,7 +10,6 @@ import {motion} from "framer-motion";
 import {PREPROCESSING_PAGE, VISUALIZATIONS_PAGE} from "@/pages";
 import SummaryGraphs from "@/components/charts/SummaryGraphs";
 import {useAuth} from "@/hooks/auth";
-import {useRouter} from "next/router";
 
 interface AnalysisDataProps {
     data?: AnalyzedData,
@@ -113,75 +112,114 @@ const Analysis = (props: AnalysisProps) => {
     const [change, setChange] = useState(false);
     const storeAnalyzedData = useSelector(getAnalyzedData)
 
-
     console.log(`analyzed data from store:`)
     console.log(storeAnalyzedData)
 
+    // useEffect(() => {
+    //     setAnalysisAnalyzedData(storeAnalyzedData.payload)
+    //     console.log('update to analysis analyzed data')
+    // }, [storeAnalyzedData]);
+
+
+    const analyzedData: AnalyzedData = useMemo(() => {
+        const si = storeAnalyzedData.payload.scrapeId
+        const da = storeAnalyzedData.payload.analyzedData
+        const ad: AnalyzedData = {
+            scrapeId: si,
+            data: da
+        }
+        return ad
+    }, [storeAnalyzedData])
+    const [analysisAnalyzedData, setAnalysisAnalyzedData] = useState(analyzedData);
+    //     {
+    //     scrapeId: storeAnalyzedData.payload.scrapeId,
+    //     data: storeAnalyzedData.payload.analyzedData
+    // }
     useEffect(() => {
-    }, [storeAnalyzedData]);
+        setAnalysisAnalyzedData(analyzedData)
+    }, [analyzedData]);
 
 
-    const analyzedData: AnalyzedData = {
-        scrapeId: storeAnalyzedData.payload.scrapeId,
-        data: storeAnalyzedData.payload.analyzedData
-    }
+    useEffect(() => {
+        const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
 
-    // analyzedData = scrambleAnalyzedDataIds(storeAnalyzedData.payload.analyzedData as unknown as AnalyzedData)
+        ws.onopen = () => {
+            console.log('Emotion WebSocket connection established')
+            if (email) ws.send(JSON.stringify({
+                // email: `${email}`
+                email: `emotion`
+            }))
+        }
 
-    // useEffect(() => {
-    //     analyzedData = {
-    //         scrapeId: storeAnalyzedData.payload.scrapeId,
-    //         data: storeAnalyzedData.payload.analyzedData
-    //     }
-    // }, [change, storeAnalyzedData]);
+        // ws.onmessage = (event) => {
+        //     console.log('emotion ws')
+        //     const eventData = JSON.parse(event.data)
+        //     console.log(eventData.data.emotion.scrape_id)
+        //
+        //     const temp: AnalyzedData = {
+        //         scrapeId: eventData.data.emotion.scrape_id,
+        //         data: eventData.data.emotion.data
+        //     }
+        //
+        //     console.log('temp is')
+        //     console.log(temp)
+        //     const scrambledAnalyzedData =
+        //         scrambleAnalyzedDataIds(temp)
+        //     setAnalysisAnalyzedData(scrambledAnalyzedData)
+        //     setAnalyzedData(scrambledAnalyzedData)
+        //     // dispatch(clearAnalyzedData())
+        //     // dispatch(setAnalyzedData(scrambledAnalyzedData))
+        //
+        //     // if (eventData) {
+        //     //     console.log(eventData.data)
+        //     //     const tempData = JSON.parse(eventData.data)
+        //     //
+        //     //     if (tempData) {
+        //     //         console.log('FROM SOCKET:')
+        //     //         console.log(tempData.emotion)
+        //     //         const endData = tempData.emotion
+        //     //
+        //     //         const scrapeid = endData.scrape_id
+        //     //         const adata = endData.data
+        //     //
+        //     //         const dataToStore: AnalyzedData = {
+        //     //             scrapeId: scrapeid,
+        //     //             data: adata
+        //     //         }
+        //     //         console.log('IN HERER')
+        //     //         console.log(dataToStore)
+        //     //
+        //     //         // setAnalysisAnalyzedData(dataToStore)
+        //     //         // dispatch(setAnalyzedData(dataToStore))
+        //     //         // console.log('stored in store')
+        //     //         // const jsonAnalyzedData = JSON.parse(analyzedData)
+        //     //         // console.log(jsonAnalyzedData)
+        //     //         // // scramble IDs in case of duplicates
+        //     //         // const scrambledAnalyzedData =
+        //     //         //     scrambleAnalyzedDataIds(jsonAnalyzedData.data)
+        //     //         //
+        //     //         // // console.log(scrambledAnalyzedData)
+        //     //         //
+        //     //         // dispatch(setAnalyzedData(scrambledAnalyzedData))
+        //     //         // console.log(scrambledAnalyzedData)
+        //     //         // setIsComplete(eventData.isComplete)
+        //     //         // router.reload()
+        //     //         // setChange((prevState) => !prevState)
+        //     //     } else {
+        //     //         console.log('No analyzed data')
+        //     //     }
+        //     // }
+        // }
 
-    const router = useRouter()
+        ws.onclose = () => {
+            console.log('WebSocket connection closed')
+        }
 
-    // useEffect(() => {
-    //     const ws = new WebSocket(process.env.NEXT_PUBLIC_EXPRESS_WS_BASE_URL!) // Replace with your backend URL
-    //
-    //     ws.onopen = () => {
-    //         console.log('Emotion WebSocket connection established')
-    //         if (email) ws.send(JSON.stringify({
-    //             // email: `${email}`
-    //             email: `emotion`
-    //         }))
-    //     }
-    //
-    //     ws.onmessage = (event) => {
-    //         console.log('emotion ws')
-    //         const eventData = JSON.parse(event.data)
-    //         const analyzedData = eventData.data
-    //         // console.log(analyzedData)
-    //
-    //         if (analyzedData && analyzedData.length) {
-    //             const jsonAnalyzedData = JSON.parse(analyzedData)
-    //             console.log(jsonAnalyzedData)
-    //             // scramble IDs in case of duplicates
-    //             const scrambledAnalyzedData =
-    //                 scrambleAnalyzedDataIds(jsonAnalyzedData)
-    //
-    //             console.log(scrambledAnalyzedData)
-    //
-    //             dispatch(setAnalyzedData(scrambledAnalyzedData))
-    //             console.log(scrambledAnalyzedData)
-    //             // setIsComplete(eventData.isComplete)
-    //             // router.reload()
-    //             // setChange((prevState) => !prevState)
-    //         } else {
-    //             console.log('No analyzed data')
-    //         }
-    //     }
-    //
-    //     ws.onclose = () => {
-    //         console.log('WebSocket connection closed')
-    //     }
-    //
-    //     return () => {
-    //         // Clean up the WebSocket connection when the component unmounts
-    //         ws.close()
-    //     }
-    // },)
+        // return () => {
+        //     // Clean up the WebSocket connection when the component unmounts
+        //     ws.close()
+        // }
+    },)
 
     const NoAnalyzedData = () => {
         return (
@@ -196,12 +234,16 @@ const Analysis = (props: AnalysisProps) => {
         )
     }
 
+    useEffect(() => {
+        console.log('ANALYZED DATA CHANGED')
+    }, [analyzedData]);
+
 
     return (
         <div id='' className=' w-full mt-16'>
             <div className='h-full flex flex-col justify-center items-center'>
                 <div className='w-full flex justify-center items-center my-10'>
-                    <SummaryGraphs data={analyzedData}/>
+                    <SummaryGraphs data={analysisAnalyzedData}/>
                 </div>
 
                 <div className='w-full bg-white  shadow-2xl rounded-lg p-6'>
@@ -225,7 +267,9 @@ const Analysis = (props: AnalysisProps) => {
                                 }}
                                 className={'flex justify-center items-center gap-3 bg-violet-500 hover:bg-violet-700' +
                                     ' w-40 text-gray-50 h-10 rounded-lg transition duration-500 shadow-xl cursor-pointer'}
-                                onClick={() => setActivePage(VISUALIZATIONS_PAGE)}>
+                                onClick={() => {
+                                    setActivePage(VISUALIZATIONS_PAGE)
+                                }}>
                                 <AiOutlineLineChart size={20}/>
                                 <span>Visualize</span>
                             </motion.div>
@@ -246,7 +290,7 @@ const Analysis = (props: AnalysisProps) => {
                     </div>
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center'>
-                            <DataTable data={analyzedData}/>
+                            <DataTable data={analysisAnalyzedData}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>

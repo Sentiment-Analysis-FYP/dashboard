@@ -1,5 +1,5 @@
 import {AnalyzedData, AnalyzedDataItem} from "@/utils/scraper";
-import {PorterStemmer} from "natural";
+import {PorterStemmer, WordTokenizer} from "natural";
 import lemmatizer from "lemmatizer";
 import {SentimentType} from "@/utils/sentiment";
 
@@ -81,6 +81,14 @@ export function tokenizeThenStem(inputText: string) {
     return PorterStemmer.tokenizeAndStem(inputText)
 }
 
+export function tokenize(inputText: string): string[] {
+    // Create a word tokenizer
+    const tokenizer = new WordTokenizer();
+
+    // Tokenize the input text
+    return tokenizer.tokenize(inputText)!;
+}
+
 
 export function lemmatizerOnText(data: string[]): string[] {
     return data.map(word => lemmatizer(word));
@@ -114,7 +122,8 @@ export const generateWordCloudItemList = (data: AnalyzedDataItem[]): WordCloudIt
         data.map((dataItem) =>
             tokenList.push(
                 // lemmatizerOnText(
-                tokenizeThenStem(
+                // tokenizeThenStem(
+                tokenize(
                     cleaningNumbers(
                         cleaningURLs(
                             // cleaningRepeatingChar(
@@ -248,3 +257,25 @@ export const getAllPositiveSentimentAnalyzedData = (data: AnalyzedData): Analyze
     return data.data.filter((item) => item.score > 0);
 }
 
+export const getDatesAsNumbers = (analyzedData: AnalyzedData): AnalyzedData => {
+    return {
+        scrapeId: analyzedData.scrapeId,
+        data: analyzedData.data.map((item: AnalyzedDataItem) => {
+            return {
+                ...item,
+                created_at: Date.parse(item.created_at).toString(),
+            };
+        }),
+    };
+};
+
+export const getItemsByEmotionLabel = (analyzedData: AnalyzedData, emotionLabel: string): AnalyzedData => {
+    const filteredData: AnalyzedDataItem[] = analyzedData.data.filter((item: AnalyzedDataItem) => {
+        return item.emotion_label === emotionLabel;
+    });
+
+    return {
+        scrapeId: analyzedData.scrapeId,
+        data: filteredData,
+    };
+};

@@ -86,7 +86,7 @@ const Header = (props: HeaderProps) => {
     return (
         <>
             <div className='absolute top-0 left-0 right-0 bg-white h-20 w-screen shadow-xl'/>
-            <div className="fixed top-0 left-0 bg-white z-40 h-22 w-full ">
+            <div className="fixed top-0 left-0 bg-white z-50 h-22 w-full ">
                 <div className=' w-full flex items-center'>
                     <div className="px-6 w-full">
                         <div className=" w-full border-gray-300 py-6 items-center px-10 flex">

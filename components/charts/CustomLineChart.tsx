@@ -257,7 +257,7 @@ const CustomLineChart = (props: CustomLineChartProps) => {
         const [bottom, top] =
             getAxisYDomain(refAreaLeft, refAreaRight, 'negativeCount', 1);
         const [bottom2, top2] =
-            getAxisYDomain(refAreaLeft, refAreaRight, 'positiveCount', 50);
+            getAxisYDomain(refAreaLeft, refAreaRight, 'positiveCount', 1);
         setZoomGraph(prev => ({
             ...prev,
             refAreaLeft: '',

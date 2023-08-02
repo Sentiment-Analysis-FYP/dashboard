@@ -33,7 +33,7 @@ const SummaryGraphs = (props: SummaryGraphsProps) => {
 
             <div className='w-1/2 h-[400px] flex flex-col justify-center items-center py-10'>
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={chartData} barCategoryGap={2} barGap={0} margin={{
+                    <BarChart data={chartData} barCategoryGap={0} barGap={0} margin={{
                         top: 5,
                         right: 20,
                         left: 0,

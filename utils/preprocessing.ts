@@ -107,7 +107,7 @@ function escapeCSVText(text: string): string {
 }
 
 export function exportToCSV(analyzedData: AnalyzedData): void {
-    let csvContent = 'id,created_at,text,username,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score\n';
+    let csvContent = 'id,created_at,text,username,v_sentiment_neg,v_sentiment_pos,v_sentiment_polarity,t_sentiment_polarity,t_sentiment_subjectivity,lr_sentiment,score,emotion_label,emotion_score\n';
 
     analyzedData.data.forEach((item: AnalyzedDataItem) => {
         // Escape each field before including it in the CSV row
