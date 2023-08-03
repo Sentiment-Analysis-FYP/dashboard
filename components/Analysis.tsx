@@ -290,7 +290,7 @@ const Analysis = (props: AnalysisProps) => {
                     </div>
                     {analyzedData && analyzedData.data.length ?
                         (<div className='lg:w-[1200px] w-[900px] flex flex-col justify-center items-center'>
-                            <DataTable data={analysisAnalyzedData}/>
+                            <DataTable data={scrambleAnalyzedDataIds(analysisAnalyzedData)}/>
                         </div>) :
                         (<div className='w-full h-full flex justify-center items-center'>
                             <NoAnalyzedData/>
