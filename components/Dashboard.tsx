@@ -5,7 +5,7 @@ import Image, {StaticImageData} from "next/image";
 import PreprocessImg from "@/public/PreprocessImg.jpg";
 import VisualizationImg from "@/public/VisualizationImg.jpeg";
 import AnalysisImg from "@/public/AnalysisImg.jpg";
-import scrapedataImg from "@/public/ScrapeDataImg.jpg";
+import scrapedataImg from "@/public/scrapedataImg.jpg";
 
 interface DashboardProps {
     setActivePage: React.Dispatch<React.SetStateAction<number>>
