@@ -1,11 +1,8 @@
-import {useEffect, useState} from "react";
-import {motion, AnimatePresence} from "framer-motion";
 import lady from "@/public/lady.jpg"
 import man1 from "@/public/man1.jpg"
 import man2 from "@/public/man2.jpg"
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
-import {AiOutlineArrowLeft, AiOutlineArrowRight} from "react-icons/ai";
 import CarouselItem from "./CarouselItem";
 import scrapershot from "@/public/scrapershot.png"
 import visshot from '@/public/visshot.png'

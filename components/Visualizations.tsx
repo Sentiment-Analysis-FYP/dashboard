@@ -6,8 +6,6 @@ import React, {useEffect, useState} from "react";
 import CustomLineChart from "@/components/charts/CustomLineChart";
 import {useSelector} from "react-redux";
 import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
-import Link from "next/link";
-import {motion} from "framer-motion";
 import {getAdvisoryRemark, getHighestOccurringSentiment} from "@/utils/sentiment";
 import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
 import EmotionRadarChart from "@/components/charts/EmotionRadarChart";

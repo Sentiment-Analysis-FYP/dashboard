@@ -1,20 +1,18 @@
 import {AnalyzedData} from "@/utils/scraper";
 import React, {useEffect, useState} from "react";
 import {
-    ResponsiveContainer,
     Bar,
     BarChart,
+    Brush,
     CartesianGrid,
-    XAxis,
-    YAxis,
-    Tooltip,
     Legend,
     ReferenceLine,
-    Brush
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
 } from 'recharts'
 import {getDataItemsCountGroupedBy} from "@/utils/visualizations";
-import {getEmotionPolarity, getHighestOccurringEmotion} from "@/utils/emotion";
-import {getAdvisoryRemark, getHighestOccurringSentiment, SentimentType} from "@/utils/sentiment";
 
 interface CustomBarChartProps {
     data: AnalyzedData,

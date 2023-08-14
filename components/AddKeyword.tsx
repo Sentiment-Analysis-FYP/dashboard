@@ -1,10 +1,5 @@
-import React, {useEffect} from "react";
-import {ReactDOM} from "react";
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {AiOutlineClose, AiOutlinePlus} from "react-icons/ai";
-import {BiLock} from "react-icons/bi";
-import {IoCloseOutline} from "react-icons/io5";
-import {GrClose} from "react-icons/gr";
 
 interface AddKeywordsProps {
     setKeywordsState: React.Dispatch<React.SetStateAction<string[]>>

@@ -1,20 +1,11 @@
-import {
-    Brush,
-    CartesianGrid,
-    Line,
-    LineChart,
-    ReferenceArea,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis
-} from 'recharts'
+import {CartesianGrid, Line, LineChart, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts'
 import React, {useEffect, useState} from "react";
 import {AnalyzedData} from "@/utils/scraper";
 import {
     convertDatesToNumberDates,
     getDataItemsCountGroupedBy,
-    GroupedDataItem, LineChartDataItem,
+    GroupedDataItem,
+    LineChartDataItem,
     makeNegativeCountsPositive
 } from "@/utils/visualizations";
 

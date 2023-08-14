@@ -1,20 +1,11 @@
 import React from "react";
-import {
-    CartesianGrid,
-    Legend,
-    ResponsiveContainer,
-    Scatter,
-    ScatterChart,
-    Tooltip,
-    XAxis,
-    YAxis,
-    ZAxis
-} from "recharts";
+import {CartesianGrid, Legend, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis} from "recharts";
 import {AnalyzedData} from "@/utils/scraper";
 import {
     getAllNegativeSentimentAnalyzedData,
     getAllPositiveSentimentAnalyzedData,
-    getDatesAsNumbers, getItemsByEmotionLabel
+    getDatesAsNumbers,
+    getItemsByEmotionLabel
 } from "@/utils/visualizations";
 
 interface EmotionScatterChartProps {

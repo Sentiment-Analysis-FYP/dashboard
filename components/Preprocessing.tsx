@@ -4,16 +4,21 @@ import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useSelector} from "react-redux";
-import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {VISUALIZATIONS_PAGE} from "@/pages";
 import {GrClose} from "react-icons/gr";
 import {
-    exportToCSV, getLemmatizedTextFromAnalyzedData, getStemmedTextFromAnalyzedData, getTokenizedTextFromAnalyzedData,
+    exportToCSV,
+    getLemmatizedTextFromAnalyzedData,
+    getStemmedTextFromAnalyzedData,
+    getTokenizedTextFromAnalyzedData,
+    removeDuplicateWordsFromAnalyzedData,
     removeEmojisFromAnalyzedData,
     removePunctuationFromAnalyzedData,
-    removeDuplicateWordsFromAnalyzedData,
-    removeStopwordsFromAnalyzedData, removeURLsFromAnalyzedData, removeUsernamesFromAnalyzedData
+    removeStopwordsFromAnalyzedData,
+    removeURLsFromAnalyzedData,
+    removeUsernamesFromAnalyzedData
 } from "@/utils/preprocessing";
 import FileExport from "@/components/FileExport";
 

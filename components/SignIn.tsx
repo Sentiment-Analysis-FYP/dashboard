@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Image from "next/image";
 import Link from "next/link";
-import {CgRename} from "react-icons/cg";
 import {AiOutlineMail} from "react-icons/ai";
 import {BiLock} from "react-icons/bi";
 import {motion} from "framer-motion";
-import {signIn, signUp} from "@/utils/auth";
+import {signIn} from "@/utils/auth";
 import {useRouter} from "next/router";
 
 export const SignIn = () => {

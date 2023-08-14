@@ -1,6 +1,4 @@
-import {truncate} from "fs";
 import React, {useState} from "react";
-import Datepicker from "react-tailwindcss-datepicker";
 
 const DatePicker = () => {
     const [value, setValue] = useState({

@@ -1,11 +1,10 @@
-import Link from "next/link";
 import {AiOutlineLineChart, AiOutlinePlus} from "react-icons/ai";
 import React, {useEffect, useMemo, useState} from "react";
 import {AnalyzedData, scrambleAnalyzedDataIds} from "@/utils/scraper";
 import {DataGrid, GridColDef, GridSortModel} from '@mui/x-data-grid';
 import clsx from "clsx";
 import {useDispatch, useSelector} from "react-redux";
-import {getAnalyzedData, setAnalyzedData} from "@/utils/store/analyzedDataSlice";
+import {getAnalyzedData} from "@/utils/store/analyzedDataSlice";
 import {motion} from "framer-motion";
 import {PREPROCESSING_PAGE, VISUALIZATIONS_PAGE} from "@/pages";
 import SummaryGraphs from "@/components/charts/SummaryGraphs";

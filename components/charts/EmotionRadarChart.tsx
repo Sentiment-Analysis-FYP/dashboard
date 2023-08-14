@@ -10,8 +10,7 @@ import {
 } from "recharts";
 import React from "react";
 import {AnalyzedData} from "@/utils/scraper";
-import {getEmotionFrequency, getMaxEmotionFrequencyDataValue} from "@/utils/visualizations";
-import {SentimentType} from "@/utils/sentiment";
+import {getEmotionFrequency} from "@/utils/visualizations";
 
 interface EmotionRadarChartProps {
     data: AnalyzedData
