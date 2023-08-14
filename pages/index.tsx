@@ -28,7 +28,8 @@ export default function Home() {
     const [sidebarOpen, setSideBarOpen] = useState(false);
 
     useEffect(() => {
-        setIsLoggedIn(!!email)
+        // setIsLoggedIn(!!email)
+        setIsLoggedIn(true)
     }, [email]);
 
     const handleViewSidebar = () => {
