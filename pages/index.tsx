@@ -1,4 +1,3 @@
-import {SignUp} from "@/components/SignUp";
 import SideNav from "@/components/SideNav";
 import {useAuth} from "@/hooks/auth";
 import {useEffect, useState} from "react";
@@ -12,9 +11,6 @@ import Header from "@/components/Header";
 import Dashboard from "@/components/Dashboard";
 import Preprocessing from "@/components/Preprocessing";
 import {BiArrowBack} from "react-icons/bi";
-import {scrambleAnalyzedDataIds} from "@/utils/scraper";
-import {setAnalyzedData} from "@/utils/store/analyzedDataSlice";
-import {useDispatch} from "react-redux";
 
 
 export const DASHBOARD_PAGE = 0
