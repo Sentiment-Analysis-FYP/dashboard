@@ -4,7 +4,7 @@ export default function Document() {
     return (
         <Html lang="en">
             <Head>
-                <title>Sentinel - Large Data Analysis</title>
+                <title>FeBa - Large Data Analysis</title>
             </Head>
             <body>
             <Main/>
