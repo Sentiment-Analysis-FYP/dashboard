@@ -37,8 +37,11 @@ function generateRandomData(): AnalyzedDataItem {
         v_sentiment_polarity: randomFloatInRange(-1, 1),
         t_sentiment_polarity: randomFloatInRange(-1, 1),
         t_sentiment_subjectivity: randomFloatInRange(0, 1),
-        score: randomZeroOrOne(),
-        score: randomFloatInRange(-1, 1).toFixed(2)
+        // score: randomZeroOrOne(),
+        score: Number(randomFloatInRange(-1, 1).toFixed(2)),
+        emotion_label: "",
+        emotion_score: 0,
+        lr_sentiment: 0
     };
 }
 
